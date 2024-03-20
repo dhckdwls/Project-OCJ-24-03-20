@@ -11,7 +11,7 @@
     //const serviceKey = '7gBxrsj7WSHvOZjYdEQXGXuT9pq9L8NMGDZ9hzG7VnyftpPH7IIKkWxq2HkS94X9AsKLEzXCkaOZeH94lv28Bg%3D%3D'; // 귀하의 실제 인증 키로 대체하세요
     const serviceKey = '7gBxrsj7WSHvOZjYdEQXGXuT9pq9L8NMGDZ9hzG7VnyftpPH7IIKkWxq2HkS94X9AsKLEzXCkaOZeH94lv28Bg=='; // 귀하의 실제 인증 키로 대체하세요
     const pageNo = 1;
-    const numOfRows = 20000;
+    const numOfRows = 5;
     const arrange = 'A';//(A=제목순, C=수정일순, D=생성일순)
     const areaCode = ''; // 필요에 따라 변경하세요
     const contentTypeId = 12; // 관광 명소에 해당하는 contentTypeId

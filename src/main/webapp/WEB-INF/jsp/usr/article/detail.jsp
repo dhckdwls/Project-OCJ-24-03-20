@@ -25,14 +25,14 @@
 <main class="flex flex-col items-center" style="text-align: center;">
 	<div style="width: 100%; text-align: center;">
 		<div>
-			<h1 style="font-size: 3rem;'">${aPIarticle.title }</h1>
+			<h1 style="font-size: 3rem;'">${article.title }</h1>
 		</div>
 		<div class="line"></div>
 		<div class="flex justify-center items-center img-box" style="height: 350px;">
 			<button>
 				<i class="fa-solid fa-caret-left fa-3x"></i>
 			</button>
-			<img src="${aPIarticle.firstimage }" alt="" />
+			<img src="${article.firstImage }" alt="" />
 			<button>
 				<i class="fa-solid fa-caret-right fa-3x"></i>
 			</button>
@@ -42,31 +42,21 @@
 
 		<div>
 			<h1>여행지 정보</h1>
-			<div>주소 : ${aPIarticle.addr1 }${aPIarticle.addr2 }</div>
-			<div>우편번호 : ${aPIarticle.zipcode }</div>
-
-			<c:choose>
-				<c:when test="${empty aPIarticle.tel}">
-					<div>전화번호: 아무것도 없음</div>
-				</c:when>
-				<c:otherwise>
-					<div>전화번호: ${aPIarticle.tel}</div>
-				</c:otherwise>
-			</c:choose>
+			<div>주소 : ${article.address1 }${article.address2 }</div>
 
 		</div>
 		<div>
 			<h1>여행지 설명</h1>
-			<div>${aPIarticle.body }</div>
+			<div>${article.body }</div>
 		</div>
 		<div>
 			<h1>여행지 태그</h1>
 		</div>
 		<div>
-			<c:if test="${aPIarticle.userCanModify }">
+			<c:if test="${article.userCanModify }">
 				<a class="btn btn-outline btn-sm" href="../article/modify?id=${article.id }">수정</a>
 			</c:if>
-			<c:if test="${aPIarticle.userCanDelete }">
+			<c:if test="${article.userCanDelete }">
 				<a class="btn btn-outline btn-sm" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
 					href="../article/doDelete?id=${article.id }">삭제</a>
 			</c:if>
@@ -78,8 +68,8 @@
 		<div id="map" style="width: 100%; height: 350px;"></div>
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4e61cb52e3e91adc0353005a87c20fd2"></script>
 		<script>
-		var mapx = ${aPIarticle.mapx};
-		var mapy = ${aPIarticle.mapy};
+		var mapx = ${article.mapX};
+		var mapy = ${article.mapY};
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			mapOption = {
 				center : new kakao.maps.LatLng(mapy, mapx), // 지도의 중심좌표
@@ -120,8 +110,8 @@
 				<tr>
 					<td>작성자</td>
 					<td>나쁜곳인데요</td>
-					<td><a href="/usr/article/modify?id=${aPIarticle.id }" class="edit-btn">수정</a></td>
-					<td><a href="/usr/article/doDelete?id=${aPIarticle.id }" class="delete-btn">삭제</a></td>
+					<td><a href="/usr/article/modify?id=${article.id }" class="edit-btn">수정</a></td>
+					<td><a href="/usr/article/doDelete?id=${article.id }" class="delete-btn">삭제</a></td>
 				</tr>
 				<!-- Add more rows as needed -->
 			</tbody>
@@ -181,19 +171,19 @@
 	</div>
 	<div class="detail_list">
 		<ul class="cards">
-			<c:forEach var="APIarticle" items="${APIarticles }">
+			<c:forEach var="article" items="${articles }">
 					<li class="cards_item">
 						<div class="card">
 							<div class="card_image">
-								<img src="${APIarticle.firstimage }">
+								<img src="${article.firstImage }">
 							</div>
 							<div class="card_content">
-								<h2 class="card_title">${APIarticle.title }</h2>
+								<h2 class="card_title">${article.title }</h2>
 								<p class="card_text">
 									<i class="fa-solid fa-heart fa-xl"></i>0 <i class="fa-solid fa-eye fa-xl"></i>0
 								</p>
 								<button class="btn1 card_btn">
-									<a href="/usr/home/testdetail?id=${APIarticle.id}">더보기</a>
+									<a href="/usr/home/testdetail?id=${article.id}">더보기</a>
 								</button>
 							</div>
 						</div>

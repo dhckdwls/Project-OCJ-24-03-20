@@ -1,60 +1,44 @@
 package com.example.demo.repository;
 
-import com.example.demo.vo.APIarticle;
-import com.example.demo.vo.Article;
-
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import com.example.demo.vo.Article;
+
 @Mapper
 public interface APITestRepository {
 	
 	@Insert("""
-			INSERT INTO APIarticle
-			SET regdate = NOW(),
+			INSERT INTO article
+			SET regDate = NOW(),
 			updateDate = NOW(),
 			memberId = 1,
+			boardId = 1,
 			
 			title = #{title},
 			`body` = '준비된 내용이 없습니다',
-			areacode = #{areacode},
-			contenttypeid = #{contenttypeid},
-			addr1 = #{addr1},
-			addr2 = #{addr2},
-			mapx = #{mapx},
-			mapy = #{mapy},
-			firstimage = #{firstimage},
-			firstimage2 = #{firstimage2},
-			mlevel = #{mlevel},
-			tel = #{tel},
-			zipcode = #{zipcode},
-			hitcount = 0
-			""")
-	public void saveData(String title, int areacode, int contenttypeid, String addr1, String addr2, String mapx,
-			String mapy, String firstimage, String firstimage2, int mlevel, String tel, int zipcode);
-
-	@Select("""
-			SELECT * FROM apiarticle
+			areaCode = #{areaCode},
+			contentTypeId = #{contentTypeId},
+			contentId = #{contentId},
 			
+			address1 = #{address1},
+			address2 = #{address2},
+			mapX = #{mapX},
+			mapY = #{mapY},
+			firstImage = #{firstImage},
+			firstImage2 = #{firstImage2},
+			
+			tag = '#여행#테스트#케이스#서울',
+			
+			hitcount = 0,
+			goodReactionPoint = 0
 			""")
-	public List<APIarticle> getForPrintAPITestArticles();
+	public void saveData(String title, int areaCode, int contentTypeId, String address1, String address2, String mapX,
+			String mapY, String firstImage, String firstImage2, String contentId);
 
-	
-	
-	@Select("""
-			<script>
-				SELECT A.*, M.nickname AS extra__writer
-				FROM APIarticle AS A
-				INNER JOIN `member` AS M
-				ON A.memberId = M.id
-				WHERE A.id = #{id}
-				GROUP BY A.id
-			</script>
-				""")
-	public APIarticle getForPrintAPIarticle(int id);
 	
 
 }

@@ -8,19 +8,35 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Article {
-	private int id;
-	private String regDate;
-	private String updateDate;
-	private int memberId;
-	private String title;
-	private String body;
-	private int hitCount;
-	private int goodReactionPoint;
-	private int badReactionPoint;
-
-	private int extra__repliesCnt;
+    private int id;
+    private String regDate; // regDate 필드 추가
+    private String updateDate;
+    private int memberId;
+    private int boardId;
+    
+    private String title;
+    private String body;
+    
+    private int areaCode;
+    private int contentTypeId;
+    private int contentId;
+    
+    private String address1;
+    private String address2;
+    private String mapX;
+    private String mapY;
+    
+    private String firstImage;
+    private String firstImage2;
+    
+    private String tag;
+    
+    private int hitCount;
+    private int goodReactionPoint;
+    
+    private int extra__repliesCnt;
 	private String extra__writer;
-
-	private boolean userCanModify;
+	
+    private boolean userCanModify;
 	private boolean userCanDelete;
 }

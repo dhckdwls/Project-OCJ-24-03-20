@@ -9,13 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.demo.service.APITestService;
 import com.example.demo.service.ArticleService;
 import com.example.demo.service.BoardService;
 import com.example.demo.service.ReactionPointService;
 import com.example.demo.service.ReplyService;
 import com.example.demo.util.Ut;
-import com.example.demo.vo.APIarticle;
 import com.example.demo.vo.Article;
 import com.example.demo.vo.Board;
 import com.example.demo.vo.Reply;
@@ -33,9 +31,6 @@ public class UsrArticleController {
 	@Autowired
 	private ArticleService articleService;
 	
-	@Autowired
-	private APITestService aPITestService; 
-
 	@Autowired
 	private BoardService boardService;
 
@@ -77,7 +72,6 @@ public class UsrArticleController {
 		List<Article> articles = articleService.getForPrintArticles(boardId, itemsInAPage, page, searchKeywordTypeCode,
 				searchKeyword);
 		
-		List<APIarticle> APIarticles = aPITestService.getForPrintAPITestArticles();
 		
 		
 		model.addAttribute("board", board);
@@ -88,7 +82,6 @@ public class UsrArticleController {
 		model.addAttribute("searchKeyword", searchKeyword);
 		model.addAttribute("articlesCount", articlesCount);
 		model.addAttribute("articles", articles);
-		model.addAttribute("apiarticles" , APIarticles);
 		return "usr/article/list";
 	}
 
@@ -97,41 +90,27 @@ public class UsrArticleController {
 		Rq rq = (Rq) req.getAttribute("rq");
 
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
-		APIarticle aPIarticle = aPITestService.getForPrintAPIArticle(rq.getLoginedMemberId() , id);
-		List<APIarticle> APIarticles = aPITestService.getForPrintAPITestArticles();
 		ResultData usersReactionRd = reactionPointService.usersReaction(rq.getLoginedMemberId(), "article", id);
-		ResultData usersReactionRd2 = reactionPointService.usersReaction(rq.getLoginedMemberId(), "aPIarticle", id);
 
 		if (usersReactionRd.isSuccess()) {
 			model.addAttribute("userCanMakeReaction", usersReactionRd.isSuccess());
 		}
-		
-		if (usersReactionRd2.isSuccess()) {
-			model.addAttribute("userCanMakeReaction2", usersReactionRd.isSuccess());
-		}
 
 		List<Reply> replies = replyService.getForPrintReplies(rq.getLoginedMemberId(), "article", id);
-		List<Reply> replies2 = replyService.getForPrintReplies(rq.getLoginedMemberId(), "aPIarticle", id);
 
 		int repliesCount = replies.size();
+		
+		List<Article> articles = articleService.getArticles();
 
 		model.addAttribute("article", article);
+		model.addAttribute("articles", articles);
 		model.addAttribute("replies", replies);
 		model.addAttribute("repliesCount", repliesCount);
 		model.addAttribute("isAlreadyAddGoodRp",
 				reactionPointService.isAlreadyAddGoodRp(rq.getLoginedMemberId(), id, "article"));
 		model.addAttribute("isAlreadyAddBadRp",
 				reactionPointService.isAlreadyAddBadRp(rq.getLoginedMemberId(), id, "article"));
-		model.addAttribute("APIarticles", APIarticles);
 		
-		
-		model.addAttribute("aPIarticle", aPIarticle);
-		model.addAttribute("replies", replies);
-		model.addAttribute("repliesCount", repliesCount);
-		model.addAttribute("isAlreadyAddGoodRp",
-				reactionPointService.isAlreadyAddGoodRp(rq.getLoginedMemberId(), id, "aPIarticle"));
-		model.addAttribute("isAlreadyAddBadRp",
-				reactionPointService.isAlreadyAddBadRp(rq.getLoginedMemberId(), id, "aPIarticle"));
 
 		return "usr/article/detail";
 	}

@@ -41,7 +41,7 @@
 					<li class="cards_item">
 						<div class="card">
 							<div class="card_image">
-								<img src="${APIarticle.firstimage }">
+								<img src="${APIarticle.firstImage }">
 							</div>
 							<div class="card_content">
 								<h2 class="card_title">${APIarticle.title }</h2>
