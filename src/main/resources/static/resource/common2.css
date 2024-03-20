@@ -1,0 +1,230 @@
+/* 폰트 */
+@font-face {
+	font-family: 'KOTRAHOPE';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/KOTRAHOPE.woff2')
+		format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* 리스트 페이지 카드 디자인 */
+/* Design */
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+h1 {
+	font-size: 24px;
+	font-weight: 400;
+	text-align: center;
+}
+
+ img {
+	height: auto;
+	max-width: 100%;
+	vertical-align: middle;
+} 
+
+/* 사진아래더보기버튼 */
+.btn1 {
+	color: #ffffff;
+	/* padding: 0.8rem; */
+	font-size: 14px;
+	text-transform: uppercase;
+	border-radius: 4px;
+	font-weight: 400;
+	display: block;
+	width: 100%;
+	cursor: pointer;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	background: transparent;
+}
+
+.btn1 > a{
+	display : block;
+	padding: 0.8rem;
+}
+
+/* 더보기 버튼 호버 했을때 */
+.btn1:hover {
+	background-color: rgba(255, 255, 255, 0.12);
+}
+
+.cards {
+	display: flex;
+	flex-wrap: wrap;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+.cards_item {
+	display: flex;
+	padding: 1rem;
+	flex-direction: column; /*여기*/
+}
+
+@media ( min-width : 40rem) {
+	.cards_item {
+		width: 50%;
+	}
+}
+
+@media ( min-width : 56rem) {
+	.cards_item {
+		width: 33.3333%;
+	}
+}
+
+.card {
+	background-color: white;
+	border-radius: 0.25rem;
+	box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	border: 2px solid black;
+}
+
+.card_content {
+	padding: 1rem;
+	background: linear-gradient(to bottom left, skyblue 40%, deepskyblue 100%);
+	/* 	background: linear-gradient(to bottom left, #EF8D9C 40%, #FFC39E 100%); */
+}
+
+.card_title {
+	color: #ffffff;
+	font-size: 2rem;
+	font-weight: 700;
+	letter-spacing: 1px;
+	text-transform: capitalize;
+	margin: 0px;
+}
+
+.card_text {
+	color: #ffffff;
+	font-size: 1rem;
+	line-height: 1.5;
+	margin-bottom: 1.25rem;
+	font-weight: 400;
+}
+
+.card_image img {
+	width: 100%;
+	height: 200px;
+}
+
+.pageBtn>.btn {
+	display: inline-block;
+}
+/* --------------------------화면구성---------------------------------------- */
+/* 화면구성 */
+
+/* 노말라이즈 */
+body, h1 {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+/* 커스텀 */
+body {
+	font-size: 2rem;
+	background-color: white;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	min-width: 100%;
+	height: 100vh;
+	font-family: KOTRAHOPE;
+}
+
+/* 상단 */
+.header {
+	
+}
+
+.header>.menu-button {
+	
+}
+
+.header>.menu-button:hover {
+	cursor: pointer;
+}
+
+.header>.header-center {
+	
+}
+
+.header>.header-right {
+	
+}
+
+.header>.header-right>div {
+}
+
+.header>.header-right>div>a {
+	display: block;
+}
+
+/* 중단 */
+.container>.content {
+	display: flex;
+	flex-direction: row;
+	flex-grow: 1;
+}
+
+/* 중단 왼편 */
+.container>.content>nav {
+	flex-basis: 150px;
+	flex-shrink: 0;
+	min-width: 10%;
+	position: relative;
+}
+
+.side-menu {
+	position: fixed;
+	left: -300px;
+}
+
+.side-menu > ul > li:hover > a{
+	text-decoration: underline;
+} 
+
+/* 중단 메인 */
+.container>.content>main {
+	flex-grow: 1;
+	flex-shrink: 1;
+}
+
+/* 중단 오른편 */
+.container>.content>aside {
+	flex-basis: 120px;
+	flex-shrink: 0;
+	min-width: 15%;
+}
+
+/* 하단 */
+.container>footer {
+	flex-grow: 0;
+	display: flex;
+	justify-content: center;
+	font-size: 1rem;
+}
+
+/* 밑줄 */
+.line {
+	height: 1px; /* 라인의 높이 */
+	background-color: black; /* 라인의 색상 */
+	width: 100%; /* 라인의 너비 */
+	margin: 10px 0; /* 라인의 위아래 여백 조절 */
+}

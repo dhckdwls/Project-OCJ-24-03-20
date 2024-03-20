@@ -1,0 +1,64 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>${pageTitle }</title>
+<link rel="stylesheet" href="/resource/common2.css" />
+</head>
+<body>
+	<script src="/resource/common2.js" defer="defer"></script>
+	<!-- 테일윈드 불러오기 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+
+	<!-- daisy ui 불러오기 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/daisyui/4.6.1/full.css" />
+
+	<!-- 폰트어썸 불러오기 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+	<!-- 제이쿼리 불러오기 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+	<div class="container">
+		<div class="header flex justify-between" style="text-align: center;">
+			<div class="menu-button" style="width: 15%">메뉴 보기</div>
+			<div class="header-center" style="flex-grow: 1;">
+				<a href="/usr/article/list">사이트로고</a>
+			</div>
+			<div class="flex header-right justify-around" style="width: 15%;">
+				<c:if test="${!rq.isLogined() }">
+					<div>
+						<a href="/usr/member/login">LOGIN</a>
+					</div>
+					<div>
+						<a href="/usr/member/join">JOIN</a>
+					</div>
+				</c:if>
+				<c:if test="${rq.isLogined() }">
+					<div>
+					<a href="/usr/article/write">WRITE</a>
+					</div>
+					<div>
+						<a href="/usr/member/myPage">MYPAGE</a>
+					</div>
+					<div>
+						<a href="${rq.logoutUri }">LOGOUT</a>
+					</div>
+				</c:if>
+			</div>
+		</div>
+		<section class="content">
+			<nav class="leftside flex items-center" style="min-width: 15%;">
+				<div class="side-menu"
+					style="border-radius: 20px; background-color: skyblue; width: 15%; height: 500px; text-align: center; top: 200px; border:2px solid red;">
+					<ul class="flex items-center justify-center flex-col mt-10">
+						<li><a href="/usr/home/testrandom">여행지추천기</a></li>
+						<li><a href="/usr/home/testtest">여행지</a></li>
+						<li><a href="/usr/home/testmap">지도</a></li>
+					</ul>
+
+					<div>날씨 정보</div>
+				</div>
+			</nav>
