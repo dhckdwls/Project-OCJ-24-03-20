@@ -39,7 +39,7 @@
 			</table>
 		</div>
 		<div>
-			<a class="btn btn-sm btn-outline" href="/usr/member/modify">회원정보 수정</a> <a class="btn btn-sm btn-outline" href="/usr/member/doDelete">회원탈퇴</a>
+			<a class="btn btn-sm btn-outline" href="../member/checkPw"">회원정보 수정</a> <a class="btn btn-sm btn-outline" href="/usr/member/doDelete">회원탈퇴</a>
 		</div>
 	</div>
 

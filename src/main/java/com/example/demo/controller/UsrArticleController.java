@@ -65,7 +65,7 @@ public class UsrArticleController {
 		// 한페이지에 글 10개씩이야
 		// 글 20개 -> 2 page
 		// 글 24개 -> 3 page
-		int itemsInAPage = 10;
+		int itemsInAPage = 9;
 
 		int pagesCount = (int) Math.ceil(articlesCount / (double) itemsInAPage);
 
@@ -100,10 +100,16 @@ public class UsrArticleController {
 
 		int repliesCount = replies.size();
 		
-		List<Article> articles = articleService.getArticles();
+		
+		// 상세보기 밑에 리스트
+		
+		//
+		
+		String[] tags = article.getTag().split("#");
+		
+		model.addAttribute("tags", tags);
 
 		model.addAttribute("article", article);
-		model.addAttribute("articles", articles);
 		model.addAttribute("replies", replies);
 		model.addAttribute("repliesCount", repliesCount);
 		model.addAttribute("isAlreadyAddGoodRp",

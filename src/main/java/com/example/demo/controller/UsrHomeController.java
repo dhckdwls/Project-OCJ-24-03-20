@@ -1,11 +1,18 @@
 package com.example.demo.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.service.ArticleService;
+
 @Controller
 public class UsrHomeController {
+	
+	@Autowired
+	private ArticleService articleService;
 
 	@RequestMapping("/usr/home/main")
 	public String showMain() {
@@ -18,6 +25,14 @@ public class UsrHomeController {
 
 		return "redirect:/usr/home/main";
 	}
+	
+	@RequestMapping("/usr/home/map")
+	public String showMap() {
+
+		return "/usr/home/map";
+	}
+	
+	
 	
 //	 테스트용
 	@RequestMapping("/usr/home/APITest")
@@ -68,17 +83,6 @@ public class UsrHomeController {
 
 		return "/usr/home/testjoin";
 	}
-	
-//	@RequestMapping("/usr/home/testdetail")
-//	public String testdetail(int id) {
-//
-//		return "/usr/home/testdetail";
-//	}
-	
-
-	
-
-	
 	
 	
 	@RequestMapping("/usr/home/testrandom")

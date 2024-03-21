@@ -63,5 +63,11 @@ public class MemberService {
 		memberRepository.modifyWithoutPw(loginedMemberId, name, nickname, cellphoneNum, email);
 		return ResultData.from("S-1", "회원정보 수정 완료");
 	}
+	
+	
+	public void delete(int id) {
+		memberRepository.delete(id);
+		
+	}
 
 }

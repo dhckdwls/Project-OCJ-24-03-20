@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="MEMBER MODIFY"></c:set>
-<%@ include file="../common/head.jspf"%>
+<%@ include file="../common/head2.jspf"%>
 <!-- Member modify 관련 -->
 
 <script type="text/javascript">
@@ -34,6 +34,7 @@
 	}
 </script>
 
+<main>
 <section class="mt-8 text-xl px-4">
 	<div class="mx-auto">
 		<form action="../member/doModify" method="POST" onsubmit="MemberModify__submit(this); return false;">
@@ -104,7 +105,8 @@
 		</div>
 	</div>
 </section>
+</main>
 
 
 
-<%@ include file="../common/foot.jspf"%>
+<%@ include file="../common/foot2.jspf"%>

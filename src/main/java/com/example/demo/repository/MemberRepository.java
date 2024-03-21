@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -93,5 +94,11 @@ public interface MemberRepository {
 			</script>
 			""")
 	public void modifyWithoutPw(int loginedMemberId, String name, String nickname, String cellphoneNum, String email);
+	
+	@Delete("""
+			DELETE `member`
+			
+			""")
+	public void delete(int id);
 
 }

@@ -12,8 +12,6 @@
 
 <!-- 지도 관련 스크립트 -->
 <script>
-	
-
 	//버튼 클릭에 따라 지도 확대, 축소 기능을 막거나 풀고 싶은 경우에는 map.setZoomable 함수를 사용합니다
 	function setZoomable(zoomable) {
 		// 마우스 휠로 지도 확대,축소 가능여부를 설정합니다
@@ -50,7 +48,11 @@
 			<div>${article.body }</div>
 		</div>
 		<div>
-			<h1>여행지 태그</h1>
+			<c:forEach var="tag" items="${tags}">
+				<c:if test="${tag.length() != 0}">
+					<button class="btn btn-sm btn-outline">${tag}</button>
+				</c:if>
+			</c:forEach>
 		</div>
 		<div>
 			<c:if test="${article.userCanModify }">
@@ -68,8 +70,14 @@
 		<div id="map" style="width: 100%; height: 350px;"></div>
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4e61cb52e3e91adc0353005a87c20fd2"></script>
 		<script>
-		var mapx = ${article.mapX};
-		var mapy = ${article.mapY};
+			var mapx = $
+			{
+				article.mapX
+			};
+			var mapy = $
+			{
+				article.mapY
+			};
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			mapOption = {
 				center : new kakao.maps.LatLng(mapy, mapx), // 지도의 중심좌표
@@ -78,9 +86,9 @@
 			};
 			// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 			var map = new kakao.maps.Map(mapContainer, mapOption);
-			
+
 			//마커가 표시될 위치입니다 
-			var markerPosition = new kakao.maps.LatLng(mapy,mapx);
+			var markerPosition = new kakao.maps.LatLng(mapy, mapx);
 
 			// 마커를 생성합니다
 			var marker = new kakao.maps.Marker({
@@ -89,31 +97,39 @@
 
 			// 마커가 지도 위에 표시되도록 설정합니다
 			marker.setMap(map);
-			
 		</script>
 
 	</div>
-	<div class="line"></div>
 	<p>
 		<button onclick="setZoomable(false)" class="btn btn-sm btn-outline">지도 확대/축소 끄기</button>
 		<button onclick="setZoomable(true)" class="btn btn-sm btn-outline">지도 확대/축소 켜기</button>
 	</p>
-	<div class="reply-box" style="font-size:20px;">
+
+	<div class="line"></div>
+	<div class="reply-box" style="font-size: 20px;">
 		<table class="styled-table" style="width: 1300px;">
 			<tbody>
 				<tr>
 					<td>작성자</td>
-					<td style="max-width: 300px;">좋은곳이네요</td>
+					<td style="width: 1000px;">내용</td>
 					<td><a href="#" class="edit-btn">수정</a></td>
 					<td><a href="#" class="delete-btn">삭제</a></td>
 				</tr>
 				<tr>
-					<td>작성자</td>
-					<td>나쁜곳인데요</td>
-					<td><a href="/usr/article/modify?id=${article.id }" class="edit-btn">수정</a></td>
-					<td><a href="/usr/article/doDelete?id=${article.id }" class="delete-btn">삭제</a></td>
+					<td>홍길동</td>
+					<td>좋은곳이네요</td>
+					<td><a class="btn btn-outline" href="/usr/article/modify?id=${article.id }" class="edit-btn">수정</a></td>
+					<td><a class="btn btn-outline" href="/usr/article/doDelete?id=${article.id }" class="delete-btn">삭제</a></td>
 				</tr>
-				<!-- Add more rows as needed -->
+				<tr>
+					<td></td>
+					<td><form action="">
+							<input type="text" placeholder="댓글 작성" />
+							<button type="submit" class="btn btn-sm btn-outline">댓글작성</button>
+						</form></td>
+					<td></td>
+					<td></td>
+				</tr>
 			</tbody>
 		</table>
 
@@ -147,6 +163,8 @@
 			<a href="#" class="btn btn-sm btn-outline"><i class="fa-solid fa-forward"></i></a>
 		</button>
 	</div>
+
+	<button class="btn btn-outline">좋아요!</button>
 	<div class="line"></div>
 	<div>
 		<form action="">
@@ -172,23 +190,23 @@
 	<div class="detail_list">
 		<ul class="cards">
 			<c:forEach var="article" items="${articles }">
-					<li class="cards_item">
-						<div class="card">
-							<div class="card_image">
-								<img src="${article.firstImage }">
-							</div>
-							<div class="card_content">
-								<h2 class="card_title">${article.title }</h2>
-								<p class="card_text">
-									<i class="fa-solid fa-heart fa-xl"></i>0 <i class="fa-solid fa-eye fa-xl"></i>0
-								</p>
-								<button class="btn1 card_btn">
-									<a href="/usr/home/testdetail?id=${article.id}">더보기</a>
-								</button>
-							</div>
+				<li class="cards_item">
+					<div class="card">
+						<div class="card_image">
+							<img src="${article.firstImage }">
 						</div>
-					</li>
-				</c:forEach>
+						<div class="card_content">
+							<h2 class="card_title">${article.title }</h2>
+							<p class="card_text">
+								<i class="fa-solid fa-heart fa-xl"></i>0 <i class="fa-solid fa-eye fa-xl"></i>0
+							</p>
+							<button class="btn1 card_btn">
+								<a href="/usr/home/testdetail?id=${article.id}">더보기</a>
+							</button>
+						</div>
+					</div>
+				</li>
+			</c:forEach>
 	</div>
 	<div>
 		<button>

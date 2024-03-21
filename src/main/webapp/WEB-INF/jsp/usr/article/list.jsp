@@ -31,25 +31,25 @@
 		<button class="btn btn-sm btn-outline">
 			<a href="#">인기순</a>
 		</button>
-		<div class="badge badge-outline badge-lg" style="font-size: 15px;">123456개</div>
+		<div class="badge badge-outline badge-lg" style="font-size: 15px;">${articlesCount }개</div>
 	</div>
 	<div class="line"></div>
 	<div class="main">
 		<div>
 			<ul class="cards">
-				<c:forEach var="APIarticle" items="${apiarticles }">
+				<c:forEach var="article" items="${articles }">
 					<li class="cards_item">
 						<div class="card">
 							<div class="card_image">
-								<img src="${APIarticle.firstImage }">
+								<img src="${article.firstImage }">
 							</div>
 							<div class="card_content">
-								<h2 class="card_title">${APIarticle.title }</h2>
+								<h2 class="card_title">${article.title }</h2>
 								<p class="card_text">
 									<i class="fa-solid fa-heart fa-xl"></i>0 <i class="fa-solid fa-eye fa-xl"></i>0
 								</p>
 								<button class="btn1 card_btn">
-									<a href="/usr/article/detail?id=${APIarticle.id}">더보기</a>
+									<a href="/usr/article/detail?id=${article.id}">더보기</a>
 								</button>
 							</div>
 						</div>
@@ -60,34 +60,20 @@
 	</div>
 	<div class="pageBtn" style="margin-bottom: 20px; text-align: center;">
 		<div class="line"></div>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline"><i class="fa-solid fa-backward"></i></a>
-		</button>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline"><i class="fa-solid fa-caret-left"></i></a>
-		</button>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline">1</a>
-		</button>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline">2</a>
-		</button>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline">3</a>
-		</button>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline">4</a>
-		</button>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline">5</a>
-		</button>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline"><i class="fa-solid fa-caret-right"></i></a>
-		</button>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline"><i class="fa-solid fa-forward"></i></a>
-		</button>
+
+		<div class="btn-group">
+			<c:forEach begin="1" end="${pagesCount }" var="i">
+				<button>
+					<a class="btn btn-sm btn-outline ${param.page == i ? 'btn-active' : '' }"
+						href="?page=${i }&boardId=${param.boardId}">${i }</a>
+				</button>
+			</c:forEach>
+		</div>
+
 	</div>
+
+
+
 </main>
 
 <%@ include file="../common/foot2.jspf"%>

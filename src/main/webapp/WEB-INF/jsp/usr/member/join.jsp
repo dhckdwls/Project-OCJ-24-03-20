@@ -86,6 +86,26 @@
 			}
 		}, 'json');
 	}
+	
+	function checkLoginPw(el) {
+		$('.checkPw-msg').empty();
+		const form = $(el).closest('form').get(0);
+		if (form.loginId.value.length == 0) {
+			validLoginId = '';
+			return;
+		}
+		$.get('../member/getLoginIdDup', {
+			isAjax : 'Y',
+			loginId : form.loginId.value
+		}, function(data) {
+			$('.checkDup-msg').html('<div class="mt-2">' + data.msg + '</div>')
+			if (data.success) {
+				validLoginId = data.data1;
+			} else {
+				validLoginId = '';
+			}
+		}, 'json');
+	}
 
 	const checkLoginIdDupDebounced = _.debounce(checkLoginIdDup, 600);
 </script>
@@ -172,9 +192,8 @@
 						<i class="fa-solid fa-toggle-off"></i>
 					</button>
 				</div>
-				<div class="resultPw">일치하지 않습니다</div>
 			</div>
-
+			<div class="checkPw-msg" style="font-size:20px; margin-bottom:15px;">영어,숫자,!@#$%&* 포함 16글자</div>
 
 			<div class="group">
 				<input type="text" name="name"><span class="highlight" autocomplete="off"></span><span class="bar"></span> <label>이름</label>
@@ -230,7 +249,7 @@ form {
 
 .group {
 	position: relative;
-	margin-bottom: 30px; /* 임시처리  */
+	margin-bottom: 20px; /* 임시처리  */
 }
 
 input {

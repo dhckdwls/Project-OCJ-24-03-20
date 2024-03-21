@@ -25,7 +25,7 @@
 				</div>
 			</button>
 			<div class="select-box" style="font-size:1rem;">
-				<a href="">아이디찾기</a> <a href="">비밀번호찾기</a> <a href="/usr/home/testjoin">회원가입</a>
+				<a href="">아이디찾기</a> <a href="">비밀번호찾기</a> <a href="/usr/member/join">회원가입</a>
 			</div>
 		</form>
 	</div>

@@ -207,4 +207,14 @@ public class UsrMemberController {
 
 		return Ut.jsReplace(modifyRd.getResultCode(), modifyRd.getMsg(), "../member/myPage");
 	}
+	
+	@RequestMapping("/usr/member/doDelete")
+	public String doCheckPw(int id) {
+		
+		memberService.delete(id);
+
+		return null;
+	}
+	
+	
 }
