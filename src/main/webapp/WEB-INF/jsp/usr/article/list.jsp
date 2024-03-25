@@ -17,6 +17,8 @@
 						<option value="body">내용</option>
 						<option value="title,body">제목+내용</option>
 						<option value="tag">#태그</option>
+						<option value="address">주소</option>
+						
 					</select> <input value="${param.searchKeyword }" name="searchKeyword" type="text" placeholder="searchKeyword?"
 						class="input-sm input input-bordered w-48 max-w-xs" />
 					<button class="btn btn-sm btn-outline" type="submit">검색</button>
@@ -46,7 +48,7 @@
 							<div class="card_content">
 								<h2 class="card_title">${article.title }</h2>
 								<p class="card_text">
-									<i class="fa-solid fa-heart fa-xl"></i>0 <i class="fa-solid fa-eye fa-xl"></i>0
+									<i class="fa-solid fa-heart fa-xl"></i>${article.goodReactionPoint } <i class="fa-solid fa-eye fa-xl"></i>${article.hitCount }<i class="fa-solid fa-comment-dots fa-xl"></i>${article.extra__repliesCnt }
 								</p>
 								<button class="btn1 card_btn">
 									<a href="/usr/article/detail?id=${article.id}">더보기</a>

@@ -55,8 +55,8 @@
 					style="border-radius: 20px; background-color: skyblue; width: 15%; height: 500px; text-align: center; top: 200px; border:2px solid red;">
 					<ul class="flex items-center justify-center flex-col mt-10">
 						<li><a href="/usr/home/testrandom">여행지추천기</a></li>
-						<li><a href="/usr/home/map">여행지</a></li>
-						<li><a href="/usr/home/testmap">지도</a></li>
+						<li><a href="/usr/article/list">여행지</a></li>
+						<li><a href="/usr/home/map">지도</a></li>
 					</ul>
 
 					<div>날씨 정보</div>

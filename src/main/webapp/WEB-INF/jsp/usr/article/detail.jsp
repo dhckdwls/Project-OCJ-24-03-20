@@ -54,6 +54,7 @@
 				</c:if>
 			</c:forEach>
 		</div>
+		<button class="btn btn-outline" style="width:100px;">${article.goodReactionPoint }</button>
 		<div>
 			<c:if test="${article.userCanModify }">
 				<a class="btn btn-outline btn-sm" href="../article/modify?id=${article.id }">수정</a>
@@ -70,14 +71,8 @@
 		<div id="map" style="width: 100%; height: 350px;"></div>
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4e61cb52e3e91adc0353005a87c20fd2"></script>
 		<script>
-			var mapx = $
-			{
-				article.mapX
-			};
-			var mapy = $
-			{
-				article.mapY
-			};
+			var mapx = ${article.mapX};
+			var mapy = ${article.mapY};
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			mapOption = {
 				center : new kakao.maps.LatLng(mapy, mapx), // 지도의 중심좌표
@@ -112,21 +107,40 @@
 				<tr>
 					<td>작성자</td>
 					<td style="width: 1000px;">내용</td>
+					<td>좋아요</td>
 					<td><a href="#" class="edit-btn">수정</a></td>
 					<td><a href="#" class="delete-btn">삭제</a></td>
 				</tr>
+				<c:forEach var="reply" items="${replies }">
 				<tr>
-					<td>홍길동</td>
-					<td>좋은곳이네요</td>
-					<td><a class="btn btn-outline" href="/usr/article/modify?id=${article.id }" class="edit-btn">수정</a></td>
-					<td><a class="btn btn-outline" href="/usr/article/doDelete?id=${article.id }" class="delete-btn">삭제</a></td>
+					<td>${reply.extra__writer }</td>
+					<td>${reply.body }</td>
+					<td>${repls.goodReactionPoint }</td>
+					<c:if test="${reply.userCanModify }">
+					<td><a class="btn btn-outline" href="/usr/reply/doModify?id=${reply.id }" class="edit-btn">수정</a></td>
+					</c:if>
+					<c:if test="${reply.userCanDelete }">
+					<td><a class="btn btn-outline" href="/usr/reply/doDelete?id=${reply.id }" class="delete-btn">삭제</a></td>
+					</c:if>
 				</tr>
+				</c:forEach>
 				<tr>
 					<td></td>
-					<td><form action="">
-							<input type="text" placeholder="댓글 작성" />
-							<button type="submit" class="btn btn-sm btn-outline">댓글작성</button>
-						</form></td>
+					<c:if test="${!rq.isLogined() }">
+						<td><form action="">
+								<input style="border: 1px solid black;" type="text" placeholder="로그인 후 댓글작성 이용가능" disabled /> <a
+									href="/usr/member/login" class="btn btn-sm btn-outline">로그인</a>
+							</form></td>
+					</c:if>
+					<c:if test="${rq.isLogined() }">
+						<td><form action="/usr/reply/doWrite" method="POST">
+								<input type="hidden" name="relTypeCode" value="article" />
+								<input type="hidden" name="relId" value="${article.id }" />
+								<input style="border: 1px solid black;" type="text" placeholder="내용을 입력해주세요" name="body" />
+								<button type="submit" class="btn btn-sm btn-outline">댓글작성</button>
+							</form></td>
+					</c:if>
+
 					<td></td>
 					<td></td>
 				</tr>
@@ -164,7 +178,7 @@
 		</button>
 	</div>
 
-	<button class="btn btn-outline">좋아요!</button>
+
 	<div class="line"></div>
 	<div>
 		<form action="">

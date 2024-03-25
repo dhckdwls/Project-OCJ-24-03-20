@@ -176,4 +176,9 @@ public class ArticleService {
 		
 		return ResultData.from("S-1", Ut.f("%d번 글이 생성되었습니다", id), "id", id);
 	}
+
+	public void getArticleByAddress() {
+		articleRepository.getArticleByAddress();
+		
+	}
 }

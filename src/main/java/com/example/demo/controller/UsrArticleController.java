@@ -147,12 +147,30 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public String doWrite(HttpServletRequest req, String title, String body, int boardId) {
+	public String doWrite(HttpServletRequest req, String title, String body, int boardId, String tag, String firstImage, String firstImage2, String address1, String address2, String mapX, String mapY) {
 
 		Rq rq = (Rq) req.getAttribute("rq");
 
 		if (Ut.isNullOrEmpty(title)) {
 			return Ut.jsHistoryBack("F-1", "제목을 입력해주세요");
+		}
+		if (Ut.isNullOrEmpty(body)) {
+			return Ut.jsHistoryBack("F-2", "내용을 입력해주세요");
+		}
+		if (Ut.isNullOrEmpty(firstImage)) {
+			return Ut.jsHistoryBack("F-2", "내용을 입력해주세요");
+		}
+		if (Ut.isNullOrEmpty(body)) {
+			return Ut.jsHistoryBack("F-2", "내용을 입력해주세요");
+		}
+		if (Ut.isNullOrEmpty(body)) {
+			return Ut.jsHistoryBack("F-2", "내용을 입력해주세요");
+		}
+		if (Ut.isNullOrEmpty(body)) {
+			return Ut.jsHistoryBack("F-2", "내용을 입력해주세요");
+		}
+		if (Ut.isNullOrEmpty(body)) {
+			return Ut.jsHistoryBack("F-2", "내용을 입력해주세요");
 		}
 		if (Ut.isNullOrEmpty(body)) {
 			return Ut.jsHistoryBack("F-2", "내용을 입력해주세요");

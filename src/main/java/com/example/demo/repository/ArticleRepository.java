@@ -93,9 +93,17 @@ public interface ArticleRepository {
 					<when test="searchKeywordTypeCode == 'body'">
 						AND A.body LIKE CONCAT('%',#{searchKeyword},'%')
 					</when>
+					<when test="searchKeywordTypeCode == 'tag'">
+						AND A.tag LIKE CONCAT('%',#{searchKeyword},'%')
+					</when>
+					<when test="searchKeywordTypeCode == 'address'">
+						AND A.address1 LIKE CONCAT('%',#{searchKeyword},'%')
+					</when>
 					<otherwise>
 						AND A.title LIKE CONCAT('%',#{searchKeyword},'%')
 						OR A.body LIKE CONCAT('%',#{searchKeyword},'%')
+						OR A.tag LIKE CONCAT('%',#{searchKeyword},'%')
+						OR A.address1 LIKE CONCAT('%',#{searchKeyword},'%')
 					</otherwise>
 				</choose>
 			</if>
@@ -138,9 +146,17 @@ public interface ArticleRepository {
 					<when test="searchKeywordTypeCode == 'body'">
 						AND A.body LIKE CONCAT('%',#{searchKeyword},'%')
 					</when>
+					<when test="searchKeywordTypeCode == 'tag'">
+						AND A.tag LIKE CONCAT('%',#{searchKeyword},'%')
+					</when>
+					<when test="searchKeywordTypeCode == 'address'">
+						AND A.address1 LIKE CONCAT('%',#{searchKeyword},'%')
+					</when>
 					<otherwise>
 						AND A.title LIKE CONCAT('%',#{searchKeyword},'%')
 						OR A.body LIKE CONCAT('%',#{searchKeyword},'%')
+						OR A.tag LIKE CONCAT('%',#{searchKeyword},'%')
+						OR A.address1 LIKE CONCAT('%',#{searchKeyword},'%')
 					</otherwise>
 				</choose>
 			</if>
@@ -231,5 +247,10 @@ public interface ArticleRepository {
 	public void writeAPIArticle(int loginedMemberId, String title, String body, String areacode, String contenttypeid,
 			String addr1, String addr2, String mapx, String mapy, String firstimage, String firstimage2, String mlevel,
 			String tel, String zipcode);
+
+	@Select("""
+			SELECT address1 FROM article ORDER BY id DESC
+			""")
+	public void getArticleByAddress();
 
 }

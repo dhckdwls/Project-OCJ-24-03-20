@@ -2,13 +2,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
- <aside style="min-width: 15%;">
-	<!-- <div class="fixed"
-		style="border-radius: 20px; background-color: #afafaf; width: 13%; text-align: center; top: 20%; height: 40%;">
-		<div>
-			<div class="mt-3 mb-3">날씨</div>
-		</div>
-	</div> -->
+ <aside style="width: 15%;">
+	<div style="height:100%; position:relative;">
+	<div class="right-menu-box" style="background-color: #afafaf; height:70%;">
+	지역
+	
+	
+	
+	</div>
+	</div>
 </aside>
 </section>
 <footer>
