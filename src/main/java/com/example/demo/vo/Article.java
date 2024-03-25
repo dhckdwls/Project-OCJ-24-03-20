@@ -21,8 +21,7 @@ public class Article {
     private int contentTypeId;
     private int contentId;
     
-    private String address1;
-    private String address2;
+    private String address;
     private String mapX;
     private String mapY;
     

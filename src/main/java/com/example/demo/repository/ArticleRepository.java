@@ -213,41 +213,29 @@ public interface ArticleRepository {
 	public int getBadRP(int relId);
 	
 	@Insert("""
-			INSERT INTO
-			article SET
-			regDate = NOW(),
-			updateDate = NOW(),
-			memberId = #{memberId},
-			boardId = #{boardId},
-			title = #{title}, `body` = #{body}
-			""")
-	public void writeArticle(int memberId, String title, String body, int boardId);
-	
-	@Insert("""
-			INSERT INTO APIarticle
+			INSERT INTO article
 			SET regdate = NOW(),
 			updateDate = NOW(),
 			memberId = #{loginedMemberId},
+			boardId = #{boardId},
 			
 			title = #{title},
 			`body` = #{body},
-			areacode = #{areacode},
-			contenttypeid = #{contenttypeid},
-			addr1 = #{addr1},
-			addr2 = #{addr2},
+			areaCode = #{areaCode},
+			contentTypeId = #{contentTypeId},
+			address = #{address},
 			mapx = #{mapx},
 			mapy = #{mapy},
 			firstimage = #{firstimage},
 			firstimage2 = #{firstimage2},
-			mlevel = #{mlevel},
-			tel = #{tel},
-			zipcode = #{zipcode},
+			
+			tag = #{tag},
+			
+			goodReactionPoint = 0,
 			hitcount = 0
 			""")
-	public void writeAPIArticle(int loginedMemberId, String title, String body, String areacode, String contenttypeid,
-			String addr1, String addr2, String mapx, String mapy, String firstimage, String firstimage2, String mlevel,
-			String tel, String zipcode);
-
+	public void writeArticle(int memberId, String title, String body, int boardId);
+	
 	@Select("""
 			SELECT address1 FROM article ORDER BY id DESC
 			""")

@@ -24,8 +24,7 @@ public interface APITestRepository {
 			contentTypeId = #{contentTypeId},
 			contentId = #{contentId},
 			
-			address1 = #{address1},
-			address2 = #{address2},
+			address = #{address},
 			mapX = #{mapX},
 			mapY = #{mapY},
 			firstImage = #{firstImage},
@@ -36,7 +35,7 @@ public interface APITestRepository {
 			hitcount = 0,
 			goodReactionPoint = 0
 			""")
-	public void saveData(String title, int areaCode, int contentTypeId, String address1, String address2, String mapX,
+	public void saveData(String title, int areaCode, int contentTypeId, String address, String mapX,
 			String mapY, String firstImage, String firstImage2, String contentId);
 
 	

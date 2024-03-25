@@ -57,15 +57,14 @@ public class APITestService {
 				String title = node.path("title").asText();
 				int areaCode = node.path("areacode").asInt();
 				int contentTypeId = node.path("contenttypeid").asInt();
-				String address1 = node.path("addr1").asText();
-				String address2 = node.path("addr2").asText();
+				String address = node.path("addr1").asText() + node.path("addr2").asText();
 				String mapX = node.path("mapx").asText();
 				String mapY = node.path("mapy").asText();
 				String firstImage = node.path("firstimage").asText();
 				String firstImage2 = node.path("firstimage2").asText();
 				String contentId = node.path("contentid").asText();
 				
-				apiTestRepository.saveData(title,areaCode,contentTypeId,address1,address2,mapX,mapY,firstImage,firstImage2,contentId);
+				apiTestRepository.saveData(title,areaCode,contentTypeId,address,mapX,mapY,firstImage,firstImage2,contentId);
 				
 			}
 		} catch (Exception e) {
