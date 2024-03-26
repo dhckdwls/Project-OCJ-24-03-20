@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -27,8 +26,15 @@ public class UsrHomeController {
 	}
 
 	@RequestMapping("/usr/home/map")
-	public String showMap() {
-		articleService.getArticleByAddress();
+	public String showMap(Model model) {
+		String[] titles = articleService.getArticlesTitles();
+		String[] addresses = articleService.getArticlesAddress();
+		String[] titleAddress = new String[titles.length];
+		for (int i = 0; i < titles.length; i++) {
+			titleAddress[i] = titles[i] + "/" + addresses[i];
+		}
+
+		model.addAttribute("titleAddress", titleAddress);
 
 		return "/usr/home/map";
 	}

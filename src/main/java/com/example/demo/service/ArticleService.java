@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -159,16 +160,6 @@ public class ArticleService {
 		return articleRepository.getBadRP(relId);
 	}
 	
-	//test
-	public ResultData<Integer> writeAPIArticle(int loginedMemberId, String title, String body, String areacode,
-			String contenttypeid, String addr1, String addr2, String mapx, String mapy, String firstimage,
-			String firstimage2, String mlevel, String tel, String zipcode) {
-		articleRepository.writeAPIArticle(loginedMemberId,title,body,areacode,contenttypeid,addr1,addr2,mapx,mapy,firstimage,firstimage2,mlevel,tel,zipcode);
-		
-		int id = articleRepository.getLastInsertId();
-		return ResultData.from("S-1", Ut.f("%d번 글이 생성되었습니다", id), "id", id);
-	}
-	//test
 	public ResultData<Integer> writeArticle(int memberId, String title, String body, int boardId) {
 		articleRepository.writeArticle(memberId, title, body, boardId);
 		
@@ -177,8 +168,17 @@ public class ArticleService {
 		return ResultData.from("S-1", Ut.f("%d번 글이 생성되었습니다", id), "id", id);
 	}
 
-	public void getArticleByAddress() {
-		articleRepository.getArticleByAddress();
-		
+	public String[] getArticlesAddress() {
+		String[] address = articleRepository.getArticlesAddress();
+		return address;
 	}
+
+	public String[] getArticlesTitles() {
+		String[] titles = articleRepository.getArticlesTitles();
+		return titles;
+	}
+
+
+	
+	
 }

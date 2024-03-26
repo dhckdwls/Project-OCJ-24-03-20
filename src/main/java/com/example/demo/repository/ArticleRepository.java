@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -237,8 +238,15 @@ public interface ArticleRepository {
 	public void writeArticle(int memberId, String title, String body, int boardId);
 	
 	@Select("""
-			SELECT address1 FROM article ORDER BY id DESC
+			SELECT address FROM article
 			""")
-	public void getArticleByAddress();
+	public String[] getArticlesAddress();
+	
+	@Select("""
+			SELECT title FROM article
+			""")
+	public String[] getArticlesTitles();
+	
+	
 
 }

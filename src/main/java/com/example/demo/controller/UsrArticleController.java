@@ -45,7 +45,7 @@ public class UsrArticleController {
 	}
 
 	// 액션 메서드
-
+	//리스트
 	@RequestMapping("/usr/article/list")
 	public String showList(HttpServletRequest req, Model model, @RequestParam(defaultValue = "1") int boardId,
 			@RequestParam(defaultValue = "1") int page,
@@ -84,7 +84,7 @@ public class UsrArticleController {
 		model.addAttribute("articles", articles);
 		return "usr/article/list";
 	}
-
+	//상세보기
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(HttpServletRequest req, Model model, int id) {
 		Rq rq = (Rq) req.getAttribute("rq");
