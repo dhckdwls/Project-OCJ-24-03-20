@@ -28,7 +28,7 @@ public class APITestService {
 		String apiUrl = "http://apis.data.go.kr/B551011/KorService1/areaBasedList1";
 		int pageNo = 1;
 		//int numOfRows = 13040;
-		int numOfRows = 100;
+		int numOfRows = 50;
 		String arrange = "A"; // (A=제목순, C=수정일순, D=생성일순)
 		String areaCode1 = ""; // 필요에 따라 변경하세요
 		int contentTypeId1 = 12; // 관광 명소에 해당하는 contentTypeId

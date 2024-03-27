@@ -206,12 +206,10 @@ public interface ArticleRepository {
 			""")
 	public int getGoodRP(int relId);
 
-	@Select("""
-			SELECT badReactionPoint
-			FROM article
-			WHERE id = #{relId}
-			""")
-	public int getBadRP(int relId);
+	/*
+	 * @Select(""" SELECT badReactionPoint FROM article WHERE id = #{relId} """)
+	 * public int getBadRP(int relId);
+	 */
 	
 	@Insert("""
 			INSERT INTO article

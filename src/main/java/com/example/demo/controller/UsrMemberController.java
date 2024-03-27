@@ -209,11 +209,12 @@ public class UsrMemberController {
 	}
 	
 	@RequestMapping("/usr/member/doDelete")
-	public String doCheckPw(int id) {
+	@ResponseBody
+	public String doDelete(int id) {
 		
-		memberService.delete(id);
+		memberService.doDelete(id);
 
-		return null;
+		return Ut.jsReplace("S-1","회원탈퇴되었습니다.", "/");
 	}
 	
 	

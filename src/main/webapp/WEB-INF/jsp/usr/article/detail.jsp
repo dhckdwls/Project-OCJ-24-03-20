@@ -206,8 +206,10 @@ function toggleModifybtn(replyId) {
 	
 	$('#modify-btn-'+replyId).hide();
 	$('#save-btn-'+replyId).show();
+	$('#cancle-btn-'+replyId).show();
 	$('#reply-'+replyId).hide();
 	$('#modify-form-'+replyId).show();
+	
 }
 
 function doModifyReply(replyId) {
@@ -235,6 +237,7 @@ function doModifyReply(replyId) {
         	$('#reply-'+replyId).show();
         	$('#save-btn-'+replyId).hide();
         	$('#modify-btn-'+replyId).show();
+        	$('#cancle-btn-'+replyId).hide();
         },
         error: function(xhr, status, error) {
             alert('댓글 수정에 실패했습니다: ' + error);
@@ -288,7 +291,8 @@ function doModifyReply(replyId) {
 				</c:if>
 			</c:forEach>
 		</div>
-		<button id="likeCount" class="btn btn-outline" style="width:100px;">좋아요 : ${article.goodReactionPoint }</button>
+		<button id="likeCount" class="btn btn-outline" style="width:100px;">${article.goodReactionPoint }</button>
+		<button id="likeButton" class="btn btn-outline btn-success" onclick="doGoodReaction(${param.id})">좋아요</button>
 		<button class="btn btn-outline article-detail__hit-count" style="width:100px;">조회수 : ${article.hitCount }</button>
 		<div>
 			<c:if test="${article.userCanModify }">
@@ -349,10 +353,19 @@ function doModifyReply(replyId) {
 				<c:forEach var="reply" items="${replies }">
 				<tr>
 					<td>${reply.extra__writer }</td>
-					<td>${reply.body }</td>
+					<td><span id="reply-${reply.id }">${reply.body }</span>
+							<form method="POST" id="modify-form-${reply.id }" style="display: none;" action="/usr/reply/doModify">
+								<input type="text" value="${reply.body }" name="reply-text-${reply.id }" />
+							</form></td>
 					<td>${repls.goodReactionPoint }</td>
 					<c:if test="${reply.userCanModify }">
-					<td><a class="btn btn-outline" href="/usr/reply/doModify?id=${reply.id }" class="edit-btn">수정</a></td>
+					<td><c:if test="${reply.userCanModify }">
+								<button onclick="toggleModifybtn('${reply.id}');" id="modify-btn-${reply.id }" style="white-space: nowrap;"
+									class="btn btn-outline">수정</button>
+								<button onclick="doModifyReply('${reply.id}');" style="white-space: nowrap; display: none;"
+									id="save-btn-${reply.id }" class="btn btn-outline">저장</button>
+									<button class="btn btn-outline" id="cancle-btn-${reply.id }" style="display:none;" onclick="toggleModifybtn('${reply.id}');">수정취소</button>
+							</c:if></td>
 					</c:if>
 					<c:if test="${reply.userCanDelete }">
 					<td><a class="btn btn-outline" href="/usr/reply/doDelete?id=${reply.id }" class="delete-btn">삭제</a></td>
@@ -371,7 +384,7 @@ function doModifyReply(replyId) {
 						<td><form action="/usr/reply/doWrite" method="POST">
 								<input type="hidden" name="relTypeCode" value="article" />
 								<input type="hidden" name="relId" value="${article.id }" />
-								<input style="border: 1px solid black;" type="text" placeholder="내용을 입력해주세요" name="body" />
+								<input style="border: 1px solid black;" type="text" placeholder="내용을 입력해주세요" name="body" autocomplete="off"/>
 								<button type="submit" class="btn btn-sm btn-outline">댓글작성</button>
 							</form></td>
 					</c:if>

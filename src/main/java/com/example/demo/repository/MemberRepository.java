@@ -96,9 +96,9 @@ public interface MemberRepository {
 	public void modifyWithoutPw(int loginedMemberId, String name, String nickname, String cellphoneNum, String email);
 	
 	@Delete("""
-			DELETE `member`
-			
-			""")
+	        DELETE FROM `member`
+	        WHERE id = #{id}
+	        """)
 	public void delete(int id);
 
 }

@@ -156,9 +156,9 @@ public class ArticleService {
 		return articleRepository.getGoodRP(relId);
 	}
 
-	public int getBadRP(int relId) {
-		return articleRepository.getBadRP(relId);
-	}
+	/*
+	 * public int getBadRP(int relId) { return articleRepository.getBadRP(relId); }
+	 */
 	
 	public ResultData<Integer> writeArticle(int memberId, String title, String body, int boardId) {
 		articleRepository.writeArticle(memberId, title, body, boardId);

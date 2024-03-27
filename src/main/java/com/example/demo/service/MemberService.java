@@ -65,7 +65,7 @@ public class MemberService {
 	}
 	
 	
-	public void delete(int id) {
+	public void doDelete(int id) {
 		memberRepository.delete(id);
 		
 	}

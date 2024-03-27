@@ -104,6 +104,9 @@
 			</table>
 		</form>
 	</div>
+	<div>
+	미리보기
+	</div>
 	
 </main>
 
