@@ -201,16 +201,30 @@
 <!-- 댓글 수정 -->
 <script>
 function toggleModifybtn(replyId) {
-	
-	console.log(replyId);
-	
-	$('#modify-btn-'+replyId).hide();
-	$('#save-btn-'+replyId).show();
-	$('#cancle-btn-'+replyId).show();
-	$('#reply-'+replyId).hide();
-	$('#modify-form-'+replyId).show();
-	
+    console.log(replyId);
+    
+    $('#modify-btn-'+replyId).hide();
+    $('#save-btn-'+replyId).show();
+    $('#cancle-btn-'+replyId).show();
+    $('#reply-'+replyId).hide();
+    $('#modify-form-'+replyId).show();
+
+    // Retrieve the current comment content from the span element
+    var currentText = $('#reply-'+replyId).text();
+    // Set the value of the input field with the current comment content
+    $('#modify-form-'+replyId+' input[name="reply-text-'+replyId+'"]').val(currentText);
 }
+
+function toggleModifyHideBtn(replyId) {
+    $('#modify-btn-'+replyId).show();
+    $('#save-btn-'+replyId).hide();
+    $('#cancle-btn-'+replyId).hide();
+    $('#reply-'+replyId).show();
+    $('#modify-form-'+replyId).hide();
+    // Clear the input field value when canceling the edit
+    $('#modify-form-'+replyId+' input[name="reply-text-'+replyId+'"]').val('');
+}
+
 
 function doModifyReply(replyId) {
 	 console.log(replyId); // 디버깅을 위해 replyId를 콘솔에 출력
@@ -222,6 +236,12 @@ function doModifyReply(replyId) {
 	    // form 내의 input 요소의 값을 가져옵니다
 	    var text = form.find('input[name="reply-text-' + replyId + '"]').val();
 	    console.log(text); // 디버깅을 위해 text를 콘솔에 출력
+	    
+	    // 만약 입력된 내용이 3자 미만이라면 경고 메시지를 표시하고 함수를 종료합니다
+	    if (text.length < 3) {
+	        alert('3자 이상의 내용을 입력하세요.');
+	        return;
+	    }
 
 	    // form의 action 속성 값을 가져옵니다
 	    var action = form.attr('action');
@@ -245,6 +265,29 @@ function doModifyReply(replyId) {
 	})
 }
 
+</script>
+
+<!-- 댓글창 엔터 막기 -->
+<script>
+    $(document).ready(function() {
+        // 입력 필드에서 Enter 키 누를 때 줄 바꿈 추가
+        $('.reply-box').on('keypress', 'input[type="text"]', function(event) {
+            if (event.key === "Enter") { // Enter 키를 눌렀을 때
+                // 줄 바꿈 문자("\n") 추가
+                var cursorPosition = this.selectionStart; // 현재 커서 위치 가져오기
+                var currentValue = $(this).val(); // 현재 입력 값 가져오기
+                var newValue = currentValue.substring(0, cursorPosition) + "\n" + currentValue.substring(cursorPosition); // 줄 바꿈 추가
+                $(this).val(newValue); // 새로운 값으로 입력 필드 업데이트
+                
+                // 이벤트 전파 중지
+                event.preventDefault();
+                event.stopPropagation();
+
+                // 커서 위치 조정
+                this.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
+            }
+        });
+    });
 </script>
 
 <!-- 지도 관련 스크립트 -->
@@ -341,6 +384,7 @@ function doModifyReply(replyId) {
 
 	<div class="line"></div>
 	<div class="reply-box" style="font-size: 20px;">
+		
 		<table class="styled-table" style="width: 1300px;">
 			<tbody>
 				<tr>
@@ -354,8 +398,8 @@ function doModifyReply(replyId) {
 				<tr>
 					<td>${reply.extra__writer }</td>
 					<td><span id="reply-${reply.id }">${reply.body }</span>
-							<form method="POST" id="modify-form-${reply.id }" style="display: none;" action="/usr/reply/doModify">
-								<input type="text" value="${reply.body }" name="reply-text-${reply.id }" />
+							<form method="POST" id="modify-form-${reply.id }" style="display: none;" action="">
+								<input class="input input-bordered" type="text" value="${reply.body }" name="reply-text-${reply.id }" />
 							</form></td>
 					<td>${repls.goodReactionPoint }</td>
 					<c:if test="${reply.userCanModify }">
@@ -364,7 +408,7 @@ function doModifyReply(replyId) {
 									class="btn btn-outline">수정</button>
 								<button onclick="doModifyReply('${reply.id}');" style="white-space: nowrap; display: none;"
 									id="save-btn-${reply.id }" class="btn btn-outline">저장</button>
-									<button class="btn btn-outline" id="cancle-btn-${reply.id }" style="display:none;" onclick="toggleModifybtn('${reply.id}');">수정취소</button>
+									<button class="btn btn-outline" id="cancle-btn-${reply.id }" style="display:none;" onclick="toggleModifyHideBtn('${reply.id}');">수정취소</button>
 							</c:if></td>
 					</c:if>
 					<c:if test="${reply.userCanDelete }">
@@ -390,44 +434,26 @@ function doModifyReply(replyId) {
 					</c:if>
 
 					<td></td>
+					<td><div class="badge badge-outline badge-lg" style="font-size: 15px;">${repliesCount }개</div></td>
 					<td></td>
 				</tr>
 			</tbody>
 		</table>
 
-	</div>
-	<div>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline"><i class="fa-solid fa-backward"></i></a>
-		</button>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline"><i class="fa-solid fa-caret-left"></i></a>
-		</button>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline">1</a>
-		</button>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline">2</a>
-		</button>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline">3</a>
-		</button>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline">4</a>
-		</button>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline">5</a>
-		</button>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline"><i class="fa-solid fa-caret-right"></i></a>
-		</button>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline"><i class="fa-solid fa-forward"></i></a>
-		</button>
-	</div>
+	<div class="replyPageBtn" style="margin-bottom: 20px; text-align: center;">
+		<div class="line"></div>
+
+		<div class="btn-group">
+			<c:forEach begin="1" end="${replyPagesCount }" var="i">
+				<button>
+					<a class="btn btn-sm btn-outline ${param.page == i ? 'btn-active' : '' }"
+						href="/usr/article/detail?id=${article.id}&page=${i}">${i }</a>
+				</button>
+			</c:forEach>
+		</div>
 
 
-	<div class="line"></div>
+<%-- 	<div class="line"></div>
 	<div>
 		<form action="">
 			<input type="hidden" name="boardId" value="${param.boardId }" /> <select
@@ -499,6 +525,6 @@ function doModifyReply(replyId) {
 			<a href="#" class="btn btn-sm btn-outline"><i class="fa-solid fa-forward"></i></a>
 		</button>
 	</div>
-	<div class="line"></div>
+	<div class="line"></div> --%>
 </main>
 <%@ include file="../common/foot2.jspf"%>

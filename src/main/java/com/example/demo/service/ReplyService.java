@@ -20,8 +20,12 @@ public class ReplyService {
 		this.replyRepository = replyRepository;
 	}
 
-	public List<Reply> getForPrintReplies(int loginedMemberId, String relTypeCode, int relId) {
-		List<Reply> replies = replyRepository.getForPrintReplies(loginedMemberId, relTypeCode, relId);
+	public List<Reply> getForPrintReplies(int loginedMemberId, String relTypeCode, int relId, int itemsInAPageReply, int page) {
+		
+		int limitFrom = (page - 1) * itemsInAPageReply;
+		int limitTake = itemsInAPageReply;
+		
+		List<Reply> replies = replyRepository.getForPrintReplies(loginedMemberId, relTypeCode, relId,limitFrom,limitTake);
 
 		for (Reply reply : replies) {
 			controlForPrintData(loginedMemberId, reply);
@@ -78,5 +82,9 @@ public class ReplyService {
 
 	public void modifyReply(int id, String body) {
 		replyRepository.modifyReply(id, body);
+	}
+
+	public int getRepliesCount(int relId) {
+		return replyRepository.getRepliesCount(relId);
 	}
 }

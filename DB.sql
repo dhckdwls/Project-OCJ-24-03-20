@@ -155,7 +155,11 @@ ALTER TABLE reply ADD COLUMN goodReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT
 SELECT * FROM article
 ORDER BY id DESC
 
+DROP TABLE IF EXISTS article
+
 SELECT * FROM `member`
+
+DROP TABLE IF EXISTS `member`
 
 SELECT * FROM board
 
@@ -163,18 +167,5 @@ SELECT * FROM reactionPoint
 
 SELECT * FROM reply
 
-SELECT COUNT(*) AS cnt
-FROM article AS A
-WHERE 1
-AND boardId = 1
-ORDER BY id DESC
-
-DELETE FROM article WHERE id = 21
-
-SELECT title,address1,address2 FROM article
-
-SELECT address1 FROM article ORDER BY id DESC
-
-SELECT address1 FROM article
-
+DROP TABLE IF EXISTS reply
 

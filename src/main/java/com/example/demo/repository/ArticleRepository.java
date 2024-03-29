@@ -151,13 +151,13 @@ public interface ArticleRepository {
 						AND A.tag LIKE CONCAT('%',#{searchKeyword},'%')
 					</when>
 					<when test="searchKeywordTypeCode == 'address'">
-						AND A.address1 LIKE CONCAT('%',#{searchKeyword},'%')
+						AND A.address LIKE CONCAT('%',#{searchKeyword},'%')
 					</when>
 					<otherwise>
 						AND A.title LIKE CONCAT('%',#{searchKeyword},'%')
 						OR A.body LIKE CONCAT('%',#{searchKeyword},'%')
 						OR A.tag LIKE CONCAT('%',#{searchKeyword},'%')
-						OR A.address1 LIKE CONCAT('%',#{searchKeyword},'%')
+						OR A.address LIKE CONCAT('%',#{searchKeyword},'%')
 					</otherwise>
 				</choose>
 			</if>

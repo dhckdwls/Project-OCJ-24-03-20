@@ -86,7 +86,7 @@ public class UsrArticleController {
 	}
 	//상세보기
 	@RequestMapping("/usr/article/detail")
-	public String showDetail(HttpServletRequest req, Model model, int id) {
+	public String showDetail(HttpServletRequest req, Model model, int id, @RequestParam(defaultValue = "1") int page) {
 		Rq rq = (Rq) req.getAttribute("rq");
 
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
@@ -95,20 +95,22 @@ public class UsrArticleController {
 		if (usersReactionRd.isSuccess()) {
 			model.addAttribute("userCanMakeReaction", usersReactionRd.isSuccess());
 		}
-
-		List<Reply> replies = replyService.getForPrintReplies(rq.getLoginedMemberId(), "article", id);
-
-		int repliesCount = replies.size();
-		
-		
-		// 상세보기 밑에 리스트
-		
-		//
 		
 		String[] tags = article.getTag().split("#");
 		
+		int repliesCount = replyService.getRepliesCount(id);
+		
+		int itemsInAPageReply = 10;
+		int replyPagesCount = (int) Math.ceil(repliesCount / (double) itemsInAPageReply);
+		
+		List<Reply> replies = replyService.getForPrintReplies(rq.getLoginedMemberId(), "article", id,itemsInAPageReply, page);
+		
+		model.addAttribute("page", page);
+		model.addAttribute("replyPagesCount", replyPagesCount);
+		
+		
+		
 		model.addAttribute("tags", tags);
-
 		model.addAttribute("article", article);
 		model.addAttribute("replies", replies);
 		model.addAttribute("repliesCount", repliesCount);

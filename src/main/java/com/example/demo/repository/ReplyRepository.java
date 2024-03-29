@@ -14,15 +14,20 @@ import com.example.demo.vo.Reply;
 public interface ReplyRepository {
 
 	@Select("""
+				<script>
 				SELECT R.*, M.nickname AS extra__writer
 				FROM reply AS R
 				INNER JOIN `member` AS M
 				ON R.memberId = M.id
 				WHERE relTypeCode = #{relTypeCode}
 				AND relId = #{relId}
-				ORDER BY R.id ASC;
+				ORDER BY R.id ASC
+				<if test="limitFrom >= 0 ">
+					LIMIT #{limitFrom}, #{limitTake}
+				</if>
+				</script>
 			""")
-	List<Reply> getForPrintReplies(int loginedMemberId, String relTypeCode, int relId);
+	List<Reply> getForPrintReplies(int loginedMemberId, String relTypeCode, int relId, int limitFrom, int limitTake);
 
 	@Insert("""
 				INSERT INTO reply
@@ -58,5 +63,12 @@ public interface ReplyRepository {
 			WHERE id = #{id}
 				""")
 	public void modifyReply(int id, String body);
+
+	@Select("""
+			SELECT COUNT(*) AS cnt
+			FROM reply AS R
+			WHERE relId = #{relId}
+			""")
+	int getRepliesCount(int relId);
 
 }
