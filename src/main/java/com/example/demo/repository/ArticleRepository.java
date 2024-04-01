@@ -14,8 +14,6 @@ import com.example.demo.vo.Article;
 @Mapper
 public interface ArticleRepository {
 
-	
-
 	@Select("SELECT LAST_INSERT_ID()")
 	public int getLastInsertId();
 
@@ -210,14 +208,14 @@ public interface ArticleRepository {
 	 * @Select(""" SELECT badReactionPoint FROM article WHERE id = #{relId} """)
 	 * public int getBadRP(int relId);
 	 */
-	
+
 	@Insert("""
 			INSERT INTO article
 			SET regdate = NOW(),
 			updateDate = NOW(),
 			memberId = #{loginedMemberId},
 			boardId = #{boardId},
-			
+
 			title = #{title},
 			`body` = #{body},
 			areaCode = #{areaCode},
@@ -227,24 +225,37 @@ public interface ArticleRepository {
 			mapy = #{mapy},
 			firstimage = #{firstimage},
 			firstimage2 = #{firstimage2},
-			
+
 			tag = #{tag},
-			
+
 			goodReactionPoint = 0,
 			hitcount = 0
 			""")
 	public void writeArticle(int memberId, String title, String body, int boardId);
-	
+
 	@Select("""
 			SELECT address FROM article
 			""")
 	public String[] getArticlesAddress();
-	
+
 	@Select("""
 			SELECT title FROM article
 			""")
 	public String[] getArticlesTitles();
-	
-	
+
+	@Select("""
+			SELECT * FROM article
+			WHERE memberId = #{memberId}
+			""")
+	public List<Article> geyMyArticles(int memberId);
+
+	@Select("""
+			SELECT A.*
+			FROM article AS A
+			INNER JOIN reactionPoint AS R
+			ON A.id = R.relId
+			WHERE R.memberId = #{memberId}
+			""")
+	public List<Article> getLikeArticles(int memberId);
 
 }

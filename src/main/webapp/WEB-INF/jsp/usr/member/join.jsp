@@ -16,6 +16,7 @@
 		form.loginId.value = form.loginId.value.trim();
 		if (form.loginId.value == 0) {
 			alert('아이디를 입력해주세요');
+			form.loginId.focus();
 			return;
 		}
 
@@ -157,6 +158,7 @@
 
 <!-- 비밀번호체크 -->
 <script>
+
 
 </script>
 

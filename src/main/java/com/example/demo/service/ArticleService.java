@@ -178,6 +178,17 @@ public class ArticleService {
 		return titles;
 	}
 
+	public List<Article> getMyArticles(int memberId) {
+		 List<Article> articles = articleRepository.geyMyArticles(memberId);
+		 return articles;
+		
+	}
+
+	public List<Article> getLikeArticles(int memberId) {
+		List<Article> articles = articleRepository.getLikeArticles(memberId);
+		return articles;
+	}
+
 
 	
 	

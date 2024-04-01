@@ -70,5 +70,11 @@ public interface ReplyRepository {
 			WHERE relId = #{relId}
 			""")
 	int getRepliesCount(int relId);
+	
+	@Select("""
+			SELECT * FROM reply
+			WHERE memberId = #{memberId}
+			""")
+	List<Reply> getMyReplies(int memberId);
 
 }

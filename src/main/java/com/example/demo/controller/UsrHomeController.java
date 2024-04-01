@@ -40,6 +40,18 @@ public class UsrHomeController {
 	}
 
 //	 테스트용
+	@RequestMapping("/usr/article/testwrite")
+	public String testwrite() {
+
+		return "/usr/article/testwrite";
+	}
+	
+	@RequestMapping("/usr/home/testmap5")
+	public String testmap5() {
+
+		return "/usr/home/testmap5";
+	}
+	
 	@RequestMapping("/usr/home/APITest")
 	public String APITest() {
 

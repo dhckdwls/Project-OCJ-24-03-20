@@ -1,14 +1,21 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.service.ArticleService;
 import com.example.demo.service.MemberService;
+import com.example.demo.service.ReplyService;
 import com.example.demo.util.Ut;
+import com.example.demo.vo.Article;
 import com.example.demo.vo.Member;
+import com.example.demo.vo.Reply;
 import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Rq;
 
@@ -22,6 +29,12 @@ public class UsrMemberController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private ArticleService articleService;
+	
+	@Autowired
+	private ReplyService replyService;
 
 	@RequestMapping("/usr/member/getLoginIdDup")
 	@ResponseBody
@@ -150,8 +163,28 @@ public class UsrMemberController {
 	}
 
 	@RequestMapping("/usr/member/myPage")
-	public String showMyPage() {
+	public String showMyPage(HttpServletRequest req, Model model) {
+		Rq rq = (Rq) req.getAttribute("rq");
 
+		if (!rq.isLogined()) {
+			return Ut.jsHistoryBack("F-A", "로그인후 이동 가능");
+		}
+		
+		int memberId = rq.getLoginedMemberId();
+		
+		List<Article> articles = articleService.getMyArticles(memberId);
+		
+		List<Reply> replies = replyService.getMyReplies(memberId);
+		
+		List<Article> likeArticles = articleService.getLikeArticles(memberId);
+		
+		
+		model.addAttribute("articles", articles);
+		model.addAttribute("replies", replies);
+		model.addAttribute("likeArticles", likeArticles);
+		
+		
+		
 		return "usr/member/myPage";
 	}
 

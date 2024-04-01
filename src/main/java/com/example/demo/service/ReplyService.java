@@ -87,4 +87,9 @@ public class ReplyService {
 	public int getRepliesCount(int relId) {
 		return replyRepository.getRepliesCount(relId);
 	}
+
+	public List<Reply> getMyReplies(int memberId) {
+		List<Reply> replies = replyRepository.getMyReplies(memberId);
+		return replies;
+	}
 }
