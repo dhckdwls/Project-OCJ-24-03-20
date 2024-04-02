@@ -4,22 +4,22 @@
 <%@ include file="../common/head2.jspf"%>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4e61cb52e3e91adc0353005a87c20fd2"></script>
 <style>
-        #map {
-            width: 100%;
-            height: 400px;
-        }
-    </style>
- <main>
- <h1>카카오 맵 경로 찾기</h1>
+    #map {
+        width: 100%;
+        height: 400px;
+    }
+</style>
+<main>
+    <h1>카카오 맵 경로 찾기</h1>
     <form id="directionForm">
         <label for="startAddress">출발지:</label>
-        <input type="text" id="startAddress" name="startAddress" placeholder="출발지 주소를 입력하세요">
+        <input class="input input-bordered" type="text" id="startAddress" name="startAddress" placeholder="출발지 주소를 입력하세요">
         <br>
         <label for="destinationAddress">도착지:</label>
-        <input type="text" id="destinationAddress" name="destinationAddress" placeholder="도착지 주소를 입력하세요">
+        <input class="input input-bordered" type="text" id="destinationAddress" name="destinationAddress" placeholder="도착지 주소를 입력하세요">
         <br>
         <!-- 버튼을 추가합니다. -->
-        <button type="button" onclick="findRoute()">경로 찾기</button>
+        <button class="btn btn-outline" type="button" onclick="findRoute()">경로 찾기</button>
     </form>
     <div id="map"></div>
 
@@ -51,48 +51,36 @@
                             const destLatLng = new kakao.maps.LatLng(destResult[0].y, destResult[0].x);
 
                             // 경로를 검색합니다.
-                            const ps = new kakao.maps.services.Places();
-                            ps.keywordSearch('길찾기', function (data, status) {
+                            const rt = new kakao.maps.Routes();
+                            rt.keywordSearch('길찾기', startLatLng, destLatLng, function (result, status) {
                                 if (status === kakao.maps.services.Status.OK) {
-                                    const options = {
-                                        start: startLatLng,
-                                        destination: destLatLng,
-                                        path: data[0].place_url
-                                    };
-                                    const rt = new kakao.maps.services.Routes();
-                                    rt.route(options, function (result, status) {
-                                        if (status === kakao.maps.services.Status.OK) {
-                                            // 지도에 경로를 표시합니다.
-                                            const polyline = new kakao.maps.Polyline({
-                                                path: result.path,
-                                                strokeWeight: 6,
-                                                strokeColor: '#FF6A6A',
-                                                strokeOpacity: 0.7,
-                                                strokeStyle: 'solid'
-                                            });
-                                            polyline.setMap(map);
-
-                                            // 출발지, 도착지 마커를 표시합니다.
-                                            const startMarker = new kakao.maps.Marker({
-                                                position: startLatLng,
-                                                map: map
-                                            });
-                                            const destMarker = new kakao.maps.Marker({
-                                                position: destLatLng,
-                                                map: map
-                                            });
-
-                                            // 지도를 출발지와 도착지 중심으로 이동합니다.
-                                            const bounds = new kakao.maps.LatLngBounds();
-                                            bounds.extend(startLatLng);
-                                            bounds.extend(destLatLng);
-                                            map.setBounds(bounds);
-                                        } else {
-                                            alert('길찾기에 실패했습니다.');
-                                        }
+                                    // 지도에 경로를 표시합니다.
+                                    const polyline = new kakao.maps.Polyline({
+                                        path: result[0].path,
+                                        strokeWeight: 6,
+                                        strokeColor: '#FF6A6A',
+                                        strokeOpacity: 0.7,
+                                        strokeStyle: 'solid'
                                     });
+                                    polyline.setMap(map);
+
+                                    // 출발지, 도착지 마커를 표시합니다.
+                                    const startMarker = new kakao.maps.Marker({
+                                        position: startLatLng,
+                                        map: map
+                                    });
+                                    const destMarker = new kakao.maps.Marker({
+                                        position: destLatLng,
+                                        map: map
+                                    });
+
+                                    // 지도를 출발지와 도착지 중심으로 이동합니다.
+                                    const bounds = new kakao.maps.LatLngBounds();
+                                    bounds.extend(startLatLng);
+                                    bounds.extend(destLatLng);
+                                    map.setBounds(bounds);
                                 } else {
-                                    alert('길찾기 검색에 실패했습니다.');
+                                    alert('경로를 찾을 수 없습니다.');
                                 }
                             });
                         } else {
@@ -104,7 +92,7 @@
                 }
             });
         }
-    </script> 
- </main>
+    </script>
+</main>
 
-<%@ include file="../common/foot2.jspf"%>
+<%@ include file="../common/foot2.jspf" %>

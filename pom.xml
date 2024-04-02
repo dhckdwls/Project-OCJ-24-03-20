@@ -123,6 +123,13 @@
 			<version>2.15.4</version>
 		</dependency>
 
+		<!--파일 업로드를 위한 guava-->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>31.1-jre</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
