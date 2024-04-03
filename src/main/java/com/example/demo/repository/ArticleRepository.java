@@ -213,25 +213,25 @@ public interface ArticleRepository {
 			INSERT INTO article
 			SET regdate = NOW(),
 			updateDate = NOW(),
-			memberId = #{loginedMemberId},
+			memberId = #{memberId},
 			boardId = #{boardId},
 
 			title = #{title},
 			`body` = #{body},
-			areaCode = #{areaCode},
-			contentTypeId = #{contentTypeId},
+			areaCode = -10,
+			contentTypeId = 12,
 			address = #{address},
-			mapx = #{mapx},
-			mapy = #{mapy},
-			firstimage = #{firstimage},
-			firstimage2 = #{firstimage2},
+			mapX = #{mapX},
+			mapY = #{mapY},
+			firstImage = #{firstImage},
+			firstImage2 = #{firstImage2},
 
 			tag = #{tag},
 
 			goodReactionPoint = 0,
 			hitcount = 0
 			""")
-	public void writeArticle(int memberId, String title, String body, int boardId);
+	public void writeArticle(int memberId, String title, String body, String tag, String firstImage, String firstImage2, String address, String mapX, String mapY, int boardId);
 
 	@Select("""
 			SELECT address FROM article
@@ -257,5 +257,11 @@ public interface ArticleRepository {
 			WHERE R.memberId = #{memberId}
 			""")
 	public List<Article> getLikeArticles(int memberId);
+
+	@Select("""
+			SELECT MAX(id) + 1
+			FROM article
+			""")
+	public int getCurrentArticleId();
 
 }

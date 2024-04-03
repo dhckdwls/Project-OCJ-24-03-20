@@ -34,13 +34,13 @@ public class UsrArticleController {
 
 	@Autowired
 	private ArticleService articleService;
-	
+
 	@Autowired
 	private BoardService boardService;
 
 	@Autowired
 	private ReplyService replyService;
-	
+
 	@Autowired
 	private GenFileService genFileService;
 
@@ -52,7 +52,7 @@ public class UsrArticleController {
 	}
 
 	// 액션 메서드
-	//리스트
+	// 리스트
 	@RequestMapping("/usr/article/list")
 	public String showList(HttpServletRequest req, Model model, @RequestParam(defaultValue = "1") int boardId,
 			@RequestParam(defaultValue = "1") int page,
@@ -78,9 +78,7 @@ public class UsrArticleController {
 
 		List<Article> articles = articleService.getForPrintArticles(boardId, itemsInAPage, page, searchKeywordTypeCode,
 				searchKeyword);
-		
-		
-		
+
 		model.addAttribute("board", board);
 		model.addAttribute("boardId", boardId);
 		model.addAttribute("page", page);
@@ -91,7 +89,8 @@ public class UsrArticleController {
 		model.addAttribute("articles", articles);
 		return "usr/article/list";
 	}
-	//상세보기
+
+	// 상세보기
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(HttpServletRequest req, Model model, int id, @RequestParam(defaultValue = "1") int page) {
 		Rq rq = (Rq) req.getAttribute("rq");
@@ -102,21 +101,20 @@ public class UsrArticleController {
 		if (usersReactionRd.isSuccess()) {
 			model.addAttribute("userCanMakeReaction", usersReactionRd.isSuccess());
 		}
-		
+
 		String[] tags = article.getTag().split("#");
-		
+
 		int repliesCount = replyService.getRepliesCount(id);
-		
+
 		int itemsInAPageReply = 10;
 		int replyPagesCount = (int) Math.ceil(repliesCount / (double) itemsInAPageReply);
-		
-		List<Reply> replies = replyService.getForPrintReplies(rq.getLoginedMemberId(), "article", id,itemsInAPageReply, page);
-		
+
+		List<Reply> replies = replyService.getForPrintReplies(rq.getLoginedMemberId(), "article", id, itemsInAPageReply,
+				page);
+
 		model.addAttribute("page", page);
 		model.addAttribute("replyPagesCount", replyPagesCount);
-		
-		
-		
+
 		model.addAttribute("tags", tags);
 		model.addAttribute("article", article);
 		model.addAttribute("replies", replies);
@@ -125,7 +123,6 @@ public class UsrArticleController {
 				reactionPointService.isAlreadyAddGoodRp(rq.getLoginedMemberId(), id, "article"));
 		model.addAttribute("isAlreadyAddBadRp",
 				reactionPointService.isAlreadyAddBadRp(rq.getLoginedMemberId(), id, "article"));
-		
 
 		return "usr/article/detail";
 	}
@@ -149,14 +146,18 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/write")
-	public String showJoin(HttpServletRequest req) {
+	public String showJoin(Model model) {
+		int currentId = articleService.getCurrentArticleId();
+
+		model.addAttribute("currentId", currentId);
 
 		return "usr/article/write";
 	}
 
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public String doWrite(HttpServletRequest req, String title, String body, int boardId, String tag, String firstImage, String firstImage2, String address1, String address2, String mapX, String mapY) {
+	public String doWrite(HttpServletRequest req, int boardId, int contentTypeId, String title, String body, String tag,
+			String firstImage, String firstImage2, String address, String mapX, String mapY, String replaceUri, MultipartRequest multipartRequest) {
 
 		Rq rq = (Rq) req.getAttribute("rq");
 
@@ -166,35 +167,44 @@ public class UsrArticleController {
 		if (Ut.isNullOrEmpty(body)) {
 			return Ut.jsHistoryBack("F-2", "내용을 입력해주세요");
 		}
+		if (Ut.isNullOrEmpty(tag)) {
+			return Ut.jsHistoryBack("F-2", "태그를 입력해주세요");
+		}
 		if (Ut.isNullOrEmpty(firstImage)) {
-			return Ut.jsHistoryBack("F-2", "내용을 입력해주세요");
+			return Ut.jsHistoryBack("F-2", "첫번째사진주소를 입력해주세요");
 		}
-		if (Ut.isNullOrEmpty(body)) {
-			return Ut.jsHistoryBack("F-2", "내용을 입력해주세요");
+		if (Ut.isNullOrEmpty(firstImage2)) {
+			return Ut.jsHistoryBack("F-2", "두번쨰사진주소를 입력해주세요");
 		}
-		if (Ut.isNullOrEmpty(body)) {
-			return Ut.jsHistoryBack("F-2", "내용을 입력해주세요");
+		if (Ut.isNullOrEmpty(address)) {
+			return Ut.jsHistoryBack("F-2", "주소를 입력해주세요");
 		}
-		if (Ut.isNullOrEmpty(body)) {
-			return Ut.jsHistoryBack("F-2", "내용을 입력해주세요");
+		if (Ut.isNullOrEmpty(mapX)) {
+			return Ut.jsHistoryBack("F-2", "X좌표를 입력해주세요");
 		}
-		if (Ut.isNullOrEmpty(body)) {
-			return Ut.jsHistoryBack("F-2", "내용을 입력해주세요");
-		}
-		if (Ut.isNullOrEmpty(body)) {
-			return Ut.jsHistoryBack("F-2", "내용을 입력해주세요");
+		if (Ut.isNullOrEmpty(mapY)) {
+			return Ut.jsHistoryBack("F-2", "Y좌표를 입력해주세요");
 		}
 
-		ResultData<Integer> writeArticleRd = articleService.writeArticle(rq.getLoginedMemberId(), title, body, boardId);
+		ResultData<Integer> writeArticleRd = articleService.writeArticle(boardId, rq.getLoginedMemberId(), title, body, tag,firstImage,firstImage2,address,mapX,mapY);
 
 		int id = (int) writeArticleRd.getData1();
 
 		Article article = articleService.getArticle(id);
 
+		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+
+		for (String fileInputName : fileMap.keySet()) {
+			MultipartFile multipartFile = fileMap.get(fileInputName);
+
+			if (multipartFile.isEmpty() == false) {
+				genFileService.save(multipartFile, id);
+			}
+		}
+
 		return Ut.jsReplace(writeArticleRd.getResultCode(), writeArticleRd.getMsg(), "../article/detail?id=" + id);
 
 	}
-
 
 	@RequestMapping("/usr/article/modify")
 	public String showModify(HttpServletRequest req, Model model, int id) {

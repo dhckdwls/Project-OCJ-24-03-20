@@ -10,6 +10,7 @@
 	<div class="write-box" style="text-align:center;">
 		<form class="table-box-type-1" method="POST" action="/usr/article/doWrite"">
 			<input type="hidden" name="boardId" value="1"/>
+			<input type="hidden" name="contentTypeId" value="12"/>
 			<table class="join-box table-box-1" border="1">
 				<tbody>
 					<tr>
@@ -56,34 +57,13 @@
 						</td>
 					</tr>
 					<tr>
-						<th>주소1</th>
+						<th>주소</th>
 						<td>
 							<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="주소1을 입력해주세요" name="address1" />
-						</td>
-					</tr>
-					<tr>
-						<th>주소2</th>
-						<td>
-							<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="주소2를 입력해주세요" name="address2" />
+								placeholder="주소1을 입력해주세요" name="address" />
 						</td>
 					</tr>
 					
-					<tr>
-						<th>컨텐트타입아이디</th>
-						<td>
-							<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="컨텐트타입아이디를 입력해주세요" name="contentTypeId" />
-						</td>
-					</tr>
-					<tr>
-						<th>지역코드</th>
-						<td>
-							<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="지역코드를 입력해주세요" name="areaCode" />
-						</td>
-					</tr>
 					<tr>
 						<th>태그</th>
 						<td>
@@ -91,9 +71,12 @@
 								placeholder="지역코드를 입력해주세요" name="tag" />
 						</td>
 					</tr>
-					
-					
-				
+					<tr>
+						<th>첨부 이미지</th>
+						<td>
+							<input id="fileInput" placeholder="이미지를 선택해주세요" type="file" />
+						</td>
+					</tr>
 					<tr>
 						<th></th>
 						<td>

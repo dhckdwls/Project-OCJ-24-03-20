@@ -2,10 +2,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
- <aside style="width: 15%;">
-	<div style="height:100%; position:relative;">
+ <aside style="width: 15%; min-width:15%;">
+	<div style="height:100%; position:relative; min-width:15%;">
 	<div class="right-menu-box" style="background-color: #afafaf; height:70%;">
-	지역
+	<h6>지역</h6>
+	<ul class="local-box">
+	<li>서울</li>
+	<li>인천</li>
+	<li>대전</li>
+	<li>대구</li>
+	<li>광주</li>
+	<li>부산</li>
+	<li>울산</li>
+	<li>세종</li>
+	<li>경기</li>
+	<li>강원</li>
+	<li>충북</li>
+	<li>충남</li>
+	<li>경북</li>
+	<li>경남</li>
+	<li>전북</li>
+	<li>전남</li>
+	<li>제주</li>
+	</ul>
+	
+	<h6>태그</h6>
+	<ul>
+	<li>테스트1</li>
+	<li>테스트2</li>
+	<li>테스트3</li>
+	<li>테스트4</li>
+	<li>테스트5</li>
+	</ul>
+	               
 	
 	
 	
@@ -17,6 +46,12 @@
 	<a href="#">한국관광데이터랩 , 한국관광공사, tour API, 공공데이터포털, 개발자:오창진</a>
 </footer>
 </div>
+
+<style>
+.local-box>li{
+display:inline;
+}
+</style>
 
 
 

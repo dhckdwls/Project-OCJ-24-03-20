@@ -159,9 +159,9 @@ public class ArticleService {
 	/*
 	 * public int getBadRP(int relId) { return articleRepository.getBadRP(relId); }
 	 */
-	
-	public ResultData<Integer> writeArticle(int memberId, String title, String body, int boardId) {
-		articleRepository.writeArticle(memberId, title, body, boardId);
+//	rq.getLoginedMemberId(), title, body, tag,firstImage,firstImage2,address,mapX,mapY
+	public ResultData<Integer> writeArticle(int memberId, int boardId, String body,String tag, String firstImage, String FirstImage2, String address, String mapX,String mapY, String title) {
+		articleRepository.writeArticle(memberId, title, body, tag,firstImage,FirstImage2,address,mapX,mapY,boardId);
 		
 		int id = articleRepository.getLastInsertId();
 		
@@ -187,6 +187,11 @@ public class ArticleService {
 	public List<Article> getLikeArticles(int memberId) {
 		List<Article> articles = articleRepository.getLikeArticles(memberId);
 		return articles;
+	}
+
+	public int getCurrentArticleId() {
+		return articleRepository.getCurrentArticleId();
+		
 	}
 
 

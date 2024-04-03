@@ -481,9 +481,11 @@ jQuery(document).ready(function ($) {
 					<c:if test="${article.firstImage.trim().length() != 0 }">
 						<li style="background: #aaa;"><img src="${article.firstImage }" alt="" /></li>
 					</c:if>
-					<!-- <li style="background: #aaa;">두번쨰</li>
+					<c:if test="${article.firstImage2.trim().length() != 0 }">
+						<li style="background: #aaa;"><img src="${article.firstImage2 }" alt="" /></li>
+					</c:if>
 					<li>세번째</li>
-					<li style="background: #aaa;">네번째</li> -->
+					<li style="background: #aaa;">네번째</li>
 
 				</ul>
 			</div>

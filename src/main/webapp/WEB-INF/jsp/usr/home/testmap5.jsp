@@ -51,7 +51,11 @@
                             const destLatLng = new kakao.maps.LatLng(destResult[0].y, destResult[0].x);
 
                             // 경로를 검색합니다.
-                            const rt = new kakao.maps.Routes();
+                            const options = {
+                                // 자동차 경로 설정
+                                travelMode: kakao.maps.services.TravelMode.TRANSIT
+                            };
+                            const rt = new kakao.maps.Routes(options);
                             rt.keywordSearch('길찾기', startLatLng, destLatLng, function (result, status) {
                                 if (status === kakao.maps.services.Status.OK) {
                                     // 지도에 경로를 표시합니다.

@@ -155,11 +155,7 @@ ALTER TABLE reply ADD COLUMN goodReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT
 SELECT * FROM article
 ORDER BY id DESC
 
-DROP TABLE IF EXISTS article
-
 SELECT * FROM `member`
-
-DROP TABLE IF EXISTS `member`
 
 SELECT * FROM board
 
@@ -184,26 +180,8 @@ WHERE R.memberId = 1
 
 
 ###########################################
-CREATE TABLE photo (
-  id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  regDate DATETIME DEFAULT NULL,
-  updateDate DATETIME DEFAULT NULL,
-  delDate DATETIME DEFAULT NULL,
-  delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
-  relTypeCode CHAR(50) NOT NULL,
-  relId INT(10) UNSIGNED NOT NULL,
-  originFileName VARCHAR(100) NOT NULL,
-  fileExt CHAR(10) NOT NULL,
-  typeCode CHAR(20) NOT NULL,
-  type2Code CHAR(20) NOT NULL,
-  fileSize INT(10) UNSIGNED NOT NULL,
-  fileExtTypeCode CHAR(10) NOT NULL,
-  fileExtType2Code CHAR(10) NOT NULL,
-  fileNo SMALLINT(2) UNSIGNED NOT NULL,
-  fileDir CHAR(20) NOT NULL,
-  PRIMARY KEY (id),
-  KEY relId (relTypeCode, relId, typeCode, type2Code, fileNo)
-);
+
+
 
 # 파일 테이블 추가
 CREATE TABLE genFile (
