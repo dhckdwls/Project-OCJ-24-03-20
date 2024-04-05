@@ -160,8 +160,8 @@ public class ArticleService {
 	 * public int getBadRP(int relId) { return articleRepository.getBadRP(relId); }
 	 */
 //	rq.getLoginedMemberId(), title, body, tag,firstImage,firstImage2,address,mapX,mapY
-	public ResultData<Integer> writeArticle(int memberId, int boardId, String body,String tag, String firstImage, String FirstImage2, String address, String mapX,String mapY, String title) {
-		articleRepository.writeArticle(memberId, title, body, tag,firstImage,FirstImage2,address,mapX,mapY,boardId);
+	public ResultData<Integer> writeArticle(int boardId, int memberId,int contentTypeId,String title,String body,String tag,String firstImage,String firstImage2,String address,String mapX,String mapY) {
+		articleRepository.writeArticle(boardId, memberId, contentTypeId, title,body,tag,firstImage,firstImage2,address,mapX,mapY);
 		
 		int id = articleRepository.getLastInsertId();
 		

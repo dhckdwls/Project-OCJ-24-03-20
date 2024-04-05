@@ -1,16 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="ARTICLE DETAIL"></c:set>
+<c:set var="pageTitle" value="글쓰기"></c:set>
 <%@ include file="../common/head2.jspf"%>
+
+<script type="text/javascript">
+	let ArticleWrite__submitFormDone = false;
+	function ArticleWrite__submit(form) {
+		if (ArticleWrite__submitFormDone) {
+			return;
+		}
+		form.title.value = form.title.value.trim();
+		if (form.title.value == 0) {
+			alert('제목을 입력해주세요');
+			return;
+		}
+		const editor = $(form).find('.toast-ui-editor').data(
+				'data-toast-editor');
+		const markdown = editor.getMarkdown().trim();
+		if (markdown.length == 0) {
+			alert('내용 써라');
+			editor.focus();
+			return;
+		}
+		
+// 		alert(${currentId});
+
+		$('#fileInput').attr('name', 'file__article__' + ${currentId} + '__extra__Img__1');
+
+		form.body.value = markdown;
+
+		ArticleWrite__submitFormDone = true;
+		form.submit();
+	}
+</script>
+
+
 <main style="text-align:center;">
+	<h1>${currentId }</h1>
 	<div>
 		<h1 style="font-size:3rem;">글쓰기</h1>
 	</div>
 	<div class="line"></div>
 	<div class="write-box" style="text-align:center;">
-		<form class="table-box-type-1" method="POST" action="/usr/article/doWrite"">
+		<form method="POST" action="../article/doWrite" enctype="multipart/form-data" onsubmit="ArticleWrite__submit(this); return false;">
+			
 			<input type="hidden" name="boardId" value="1"/>
 			<input type="hidden" name="contentTypeId" value="12"/>
+			
 			<table class="join-box table-box-1" border="1">
 				<tbody>
 					<tr>
@@ -87,10 +123,6 @@
 			</table>
 		</form>
 	</div>
-	<div>
-	미리보기
-	</div>
-	
 </main>
 
 

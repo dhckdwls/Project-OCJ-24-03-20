@@ -219,7 +219,7 @@ public interface ArticleRepository {
 			title = #{title},
 			`body` = #{body},
 			areaCode = -10,
-			contentTypeId = 12,
+			contentTypeId = #{contentTypeId},
 			address = #{address},
 			mapX = #{mapX},
 			mapY = #{mapY},
@@ -231,7 +231,7 @@ public interface ArticleRepository {
 			goodReactionPoint = 0,
 			hitcount = 0
 			""")
-	public void writeArticle(int memberId, String title, String body, String tag, String firstImage, String firstImage2, String address, String mapX, String mapY, int boardId);
+	public void writeArticle(int boardId,int memberId,int contentTypeId,String title,String body,String tag,String firstImage,String firstImage2,String address,String mapX,String mapY);
 
 	@Select("""
 			SELECT address FROM article

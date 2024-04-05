@@ -148,7 +148,7 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/write")
 	public String showJoin(Model model) {
 		int currentId = articleService.getCurrentArticleId();
-
+		
 		model.addAttribute("currentId", currentId);
 
 		return "usr/article/write";
@@ -186,8 +186,7 @@ public class UsrArticleController {
 			return Ut.jsHistoryBack("F-2", "Y좌표를 입력해주세요");
 		}
 
-		ResultData<Integer> writeArticleRd = articleService.writeArticle(boardId, rq.getLoginedMemberId(), title, body, tag,firstImage,firstImage2,address,mapX,mapY);
-
+		ResultData<Integer> writeArticleRd = articleService.writeArticle(boardId,rq.getLoginedMemberId(),contentTypeId,title,body, tag,firstImage,firstImage2,address,mapX,mapY);
 		int id = (int) writeArticleRd.getData1();
 
 		Article article = articleService.getArticle(id);

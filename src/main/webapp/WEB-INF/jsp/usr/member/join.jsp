@@ -15,13 +15,13 @@
 		}
 		form.loginId.value = form.loginId.value.trim();
 		if (form.loginId.value == 0) {
-			alert('아이디를 입력해주세요');
+			alert('아이디를 입력해주세요 jsp');
 			form.loginId.focus();
 			return;
 		}
 
 		if (form.loginId.value != validLoginId) {
-			alert('사용할 수 없는 아이디야');
+			alert('사용할 수 없는 아이디야 jsp');
 			form.loginId.focus();
 			return;
 		}
@@ -31,37 +31,37 @@
 
 		form.loginPw.value = form.loginPw.value.trim();
 		if (form.loginPw.value == 0) {
-			alert('비밀번호를 입력해주세요');
+			alert('비밀번호를 입력해주세요 jsp');
 			return;
 		}
 		form.loginPwConfirm.value = form.loginPwConfirm.value.trim();
 		if (form.loginPwConfirm.value == 0) {
-			alert('비밀번호 확인을 입력해주세요');
+			alert('비밀번호 확인을 입력해주세요 jsp');
 			return;
 		}
 		if (form.loginPwConfirm.value != form.loginPw.value) {
-			alert('비밀번호가 일치하지 않습니다');
+			alert('비밀번호가 일치하지 않습니다 jsp');
 			form.loginPw.focus();
 			return;
 		}
 		form.name.value = form.name.value.trim();
 		if (form.name.value == 0) {
-			alert('이름을 입력해주세요');
+			alert('이름을 입력해주세요 jsp');
 			return;
 		}
 		form.nickname.value = form.nickname.value.trim();
 		if (form.nickname.value == 0) {
-			alert('닉네임을 입력해주세요');
+			alert('닉네임을 입력해주세요 jsp');
 			return;
 		}
 		form.email.value = form.email.value.trim();
 		if (form.email.value == 0) {
-			alert('이메일을 입력해주세요');
+			alert('이메일을 입력해주세요 jsp');
 			return;
 		}
 		form.cellphoneNum.value = form.cellphoneNum.value.trim();
 		if (form.cellphoneNum.value == 0) {
-			alert('전화번호를 입력해주세요');
+			alert('전화번호를 입력해주세요 jsp');
 			return;
 		}
 		submitJoinFormDone = true;
