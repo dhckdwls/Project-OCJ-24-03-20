@@ -187,6 +187,7 @@ public class UsrArticleController {
 		}
 
 		ResultData<Integer> writeArticleRd = articleService.writeArticle(boardId,rq.getLoginedMemberId(),contentTypeId,title,body, tag,firstImage,firstImage2,address,mapX,mapY);
+		
 		int id = (int) writeArticleRd.getData1();
 
 		Article article = articleService.getArticle(id);

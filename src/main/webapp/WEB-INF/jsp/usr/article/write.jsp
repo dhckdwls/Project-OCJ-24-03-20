@@ -14,20 +14,14 @@
 			alert('제목을 입력해주세요');
 			return;
 		}
-		const editor = $(form).find('.toast-ui-editor').data(
-				'data-toast-editor');
-		const markdown = editor.getMarkdown().trim();
-		if (markdown.length == 0) {
-			alert('내용 써라');
-			editor.focus();
+		
+		form.body.value = form.body.value.trim();
+		if (form.body.value == 0){
+			alert("내용을 입력해주세요");
 			return;
 		}
-		
-// 		alert(${currentId});
 
 		$('#fileInput').attr('name', 'file__article__' + ${currentId} + '__extra__Img__1');
-
-		form.body.value = markdown;
 
 		ArticleWrite__submitFormDone = true;
 		form.submit();
@@ -110,7 +104,7 @@
 					<tr>
 						<th>첨부 이미지</th>
 						<td>
-							<input id="fileInput" placeholder="이미지를 선택해주세요" type="file" />
+							<input id="fileInput" placeholder="이미지를 선택해주세요" type="file" name="multipartFile"/>
 						</td>
 					</tr>
 					<tr>

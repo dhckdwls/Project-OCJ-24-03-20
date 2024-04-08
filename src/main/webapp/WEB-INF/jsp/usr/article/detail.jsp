@@ -472,6 +472,7 @@ jQuery(document).ready(function ($) {
 	<div style="width: 100%; text-align: center;">
 		<div>
 			<h1 style="font-size: 3rem;'">${article.title }</h1>
+			<h1>${rq.getImgUri(article.id)}</h1>
 		</div>
 		<div class="line"></div>
 		<div class="article-image-box">
@@ -484,7 +485,8 @@ jQuery(document).ready(function ($) {
 					<c:if test="${article.firstImage2.trim().length() != 0 }">
 						<li style="background: #aaa;"><img src="${article.firstImage2 }" alt="" /></li>
 					</c:if>
-					<li>세번째</li>
+					<li><img class="w-full rounded-xl" src="${rq.getImgUri(article.id)}" onerror="${rq.profileFallbackImgOnErrorHtml}"
+							alt="" /></li>
 					<li style="background: #aaa;">네번째</li>
 
 				</ul>
