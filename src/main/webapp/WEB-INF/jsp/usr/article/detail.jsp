@@ -485,8 +485,8 @@ jQuery(document).ready(function ($) {
 					<c:if test="${article.firstImage2.trim().length() != 0 }">
 						<li style="background: #aaa;"><img src="${article.firstImage2 }" alt="" /></li>
 					</c:if>
-					<li><img class="w-full rounded-xl" src="${rq.getImgUri(article.id)}" onerror="${rq.profileFallbackImgOnErrorHtml}"
-							alt="" /></li>
+					<li><img class="w-full rounded-xl" src="${rq.getImgUri(article.id)}"
+						onerror="${rq.profileFallbackImgOnErrorHtml}" alt="" /></li>
 					<li style="background: #aaa;">네번째</li>
 
 				</ul>
@@ -563,25 +563,27 @@ jQuery(document).ready(function ($) {
 	</p>
 
 	<div class="line"></div>
-	<div class="reply-box" style="font-size: 20px;">
-
-		<table class="styled-table" style="width: 1300px;">
+	<div class="reply-box" style="font-size: 20px; width: 100%;">
+<div class="badge badge-outline badge-lg" style="font-size: 15px; right:0;">${repliesCount }개</div>
+		<table class="styled-table" style="width: 100%;">
 			<tbody>
 				<tr>
-					<td>작성자</td>
-					<td style="width: 1000px;">내용</td>
-					<td>좋아요</td>
-					<td><a href="#" class="edit-btn">수정</a></td>
-					<td><a href="#" class="delete-btn">삭제</a></td>
+					<td style="width: 10%;">작성자</td>
+					<td style="width: 15%;">마지막 등록날짜</td>
+					<td style="width: 50%;">내용</td>
+					<td style="width: 10%;">좋아요</td>
+					<td style="width: 7%;">수정</td>
+					<td style="width: 7%;">삭제</td>
 				</tr>
 				<c:forEach var="reply" items="${replies }">
 					<tr>
 						<td>${reply.extra__writer }</td>
+						<td>${reply.updateDate }</td>
 						<td><span id="reply-${reply.id }">${reply.body }</span>
 							<form method="POST" id="modify-form-${reply.id }" style="display: none;" action="">
 								<input class="input input-bordered" type="text" value="${reply.body }" name="reply-text-${reply.id }" />
 							</form></td>
-						<td>${repls.goodReactionPoint }</td>
+						<td>${reply.goodReactionPoint }</td>
 						<c:if test="${reply.userCanModify }">
 							<td><c:if test="${reply.userCanModify }">
 									<button onclick="toggleModifybtn('${reply.id}');" id="modify-btn-${reply.id }" style="white-space: nowrap;"
@@ -597,30 +599,25 @@ jQuery(document).ready(function ($) {
 						</c:if>
 					</tr>
 				</c:forEach>
-				<tr>
-					<td></td>
-					<c:if test="${!rq.isLogined() }">
-						<td><form action="">
-								<input style="border: 1px solid black;" type="text" placeholder="로그인 후 댓글작성 이용가능" disabled /> <a
-									href="/usr/member/login" class="btn btn-sm btn-outline">로그인</a>
-							</form></td>
-					</c:if>
-					<c:if test="${rq.isLogined() }">
-						<td><form action="/usr/reply/doWrite" method="POST">
-								<input type="hidden" name="relTypeCode" value="article" /> <input type="hidden" name="relId"
-									value="${article.id }" /> <input style="border: 1px solid black;" type="text" placeholder="내용을 입력해주세요"
-									name="body" autocomplete="off" />
-								<button type="submit" class="btn btn-sm btn-outline">댓글작성</button>
-							</form></td>
-					</c:if>
-
-					<td></td>
-					<td><div class="badge badge-outline badge-lg" style="font-size: 15px;">${repliesCount }개</div></td>
-					<td></td>
-				</tr>
 			</tbody>
 		</table>
+		<div>
+			<c:if test="${!rq.isLogined() }">
+				<form action="">
+					<input style="border: 1px solid black;" type="text" placeholder="로그인 후 댓글작성 이용가능" disabled /> <a
+						href="/usr/member/login" class="btn btn-sm btn-outline">로그인</a>
+				</form>
+			</c:if>
+			<c:if test="${rq.isLogined() }">
+				<form action="/usr/reply/doWrite" method="POST">
+					<input type="hidden" name="relTypeCode" value="article" /> <input type="hidden" name="relId"
+						value="${article.id }" /> <input style="border: 1px solid black;" type="text" placeholder="내용을 입력해주세요"
+						name="body" autocomplete="off" />
+					<button type="submit" class="btn btn-sm btn-outline">댓글작성</button>
+				</form>
+			</c:if>
 
+		</div>
 		<div class="replyPageBtn" style="margin-bottom: 20px; text-align: center;">
 			<div class="line"></div>
 

@@ -185,166 +185,133 @@ jQuery(document).ready(function ($) {
 </script>
 
 
-<main class="flex items-center justify-around">
-	<h1>${currentId }</h1>
-	<div>
-		<h1 style="font-size:3rem;">글쓰기</h1>
-	</div>
-	<div class="line"></div>
-	<div class="write-box" style="text-align:center;">
-		<form method="POST" action="../article/doWrite" enctype="multipart/form-data" onsubmit="ArticleWrite__submit(this); return false;">
-			
-			<input type="hidden" name="boardId" value="1"/>
-			<input type="hidden" name="contentTypeId" value="12"/>
-			
-			<table class="join-box table-box-1" border="1">
-				<tbody>
-					<tr>
-						<th>여행지제목</th>
-						<td>
-							<input name="title"
-								class="input input-bordered input-primary w-full max-w-xs" placeholder="여행지제목을 입력해주세요" autocomplete="off" />
+<main>
+	<section class="flex" style="width: 100%; height: 100vh;">
+		<div style="width: 50%; text-align: center;">
+			<h1>글쓰기</h1>
+			<form method="POST" action="../article/doWrite" enctype="multipart/form-data"
+				onsubmit="ArticleWrite__submit(this); return false;" style="font-size: 25px; margin-top:50px;">
 
-						</td>
-					</tr>
-					<tr>
-						<th>내용</th>
-						<td>
-							<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="내용 입력해주세요" name="body" />
-						</td>
-					</tr>
-					<tr>
-						<th>이미지경로</th>
-						<td>
-							<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="이미지경로를 입력해주세요" name="firstImage" />
-						</td>
-					</tr>
-					<tr>
-						<th>이미지경로2</th>
-						<td>
-							<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="이미지경로2를 입력해주세요" name="firstImage2" />
-						</td>
-					</tr>
-					<tr>
-						<th>x좌표</th>
-						<td>
-							<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="x좌표를 입력해주세요" name="mapX" />
-						</td>
-					</tr>
-					<tr>
-						<th>y좌표</th>
-						<td>
-							<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="y좌표 입력해주세요" name="mapY" />
-						</td>
-					</tr>
-					<tr>
-						<th>주소</th>
-						<td>
-							<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="주소1을 입력해주세요" name="address" />
-						</td>
-					</tr>
-					
-					<tr>
-						<th>태그</th>
-						<td>
-							<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="지역코드를 입력해주세요" name="tag" />
-						</td>
-					</tr>
-					<tr>
-						<th>첨부 이미지</th>
-						<td>
-							<input id="fileInput" placeholder="이미지를 선택해주세요" type="file" name="multipartFile"/>
-						</td>
-					</tr>
-					<tr>
-						<th></th>
-						<td>
-							<input class="btn btn-outline btn-info" type="submit" value="작성하기" />
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</form>
-	</div>
-	<div class="write-preview">
-	<h1>미리보기</h1>
-	<div style="width: 100%; text-align: center;">
-		<div>
-			<h1 style="font-size: 3rem;'">${article.title }</h1>
-			<h1>${rq.getImgUri(article.id)}</h1>
+				<input type="hidden" name="boardId" value="1" /> <input type="hidden" name="contentTypeId" value="12" />
+
+				<table class="join-box table-box-1" border="1">
+					<tbody>
+						<tr>
+							<th>여행지제목</th>
+							<td><input name="title" class="input input-bordered input-primary w-full max-w-xs"
+								placeholder="여행지제목을 입력해주세요" autocomplete="off" /></td>
+						</tr>
+						<tr>
+							<th>내용</th>
+							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
+								placeholder="내용 입력해주세요" name="body" /></td>
+						</tr>
+						<tr>
+							<th>이미지경로</th>
+							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
+								placeholder="이미지경로를 입력해주세요" name="firstImage" /></td>
+						</tr>
+						<tr>
+							<th>이미지경로2</th>
+							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
+								placeholder="이미지경로2를 입력해주세요" name="firstImage2" /></td>
+						</tr>
+						<tr>
+							<th>x좌표</th>
+							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
+								placeholder="x좌표를 입력해주세요" name="mapX" /></td>
+						</tr>
+						<tr>
+							<th>y좌표</th>
+							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
+								placeholder="y좌표 입력해주세요" name="mapY" /></td>
+						</tr>
+						<tr>
+							<th>주소</th>
+							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
+								placeholder="주소1을 입력해주세요" name="address" /></td>
+						</tr>
+
+						<tr>
+							<th>태그</th>
+							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
+								placeholder="지역코드를 입력해주세요" name="tag" /></td>
+						</tr>
+						<tr>
+							<th>첨부 이미지</th>
+							<td><input id="fileInput" placeholder="이미지를 선택해주세요" type="file" name="multipartFile" /></td>
+						</tr>
+						<tr>
+							<th></th>
+							<td><input class="btn btn-outline btn-info" type="submit" value="작성하기" /></td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
 		</div>
-		<div class="line"></div>
-		<div class="article-image-box">
-			<div id="slider">
-				<a href="#" class="control_next">></a> <a href="#" class="control_prev"><</a>
-				<ul>
-					<c:if test="${article.firstImage.trim().length() != 0 }">
-						<li style="background: #aaa;"><img src="${article.firstImage }" alt="" /></li>
+		<div style="width: 50%; text-align: center; overflow-y: auto; height: 100vh;">
+			<h1>미리보기</h1>
+			<div>
+				<div>
+					<h1 style="font-size: 3rem;'">제목: ~~~</h1>
+					<%-- <h1>${rq.getImgUri(article.id)}</h1> --%>
+				</div>
+				<div class="line"></div>
+				<div class="article-image-box">
+					<div id="slider">
+						<a href="#" class="control_next">></a> <a href="#" class="control_prev"><</a>
+						<ul>
+							<li><img class="w-full rounded-xl" src="${rq.getImgUri(article.id)}"
+								onerror="${rq.profileFallbackImgOnErrorHtml}" alt="" /></li>
+						</ul>
+					</div>
+					<div class="slider_option">
+						<input type="checkbox" id="checkbox"> <label for="checkbox">자동 넘기기</label>
+					</div>
+				</div>
+
+				<div>
+					<h1>여행지 정보</h1>
+					<div>주소 : ${article.address}</div>
+
+				</div>
+				<div>
+					<h1>여행지 설명</h1>
+					<div>${article.body }</div>
+				</div>
+				<div>
+					<c:forEach var="tag" items="${tags}">
+						<c:if test="${tag.length() != 0}">
+							<button class="btn btn-sm btn-outline">${tag}</button>
+						</c:if>
+					</c:forEach>
+				</div>
+				<button id="likeCount" class="btn btn-outline" style="width: 100px;">좋아요 수 : 0</button>
+				<button id="likeButton" class="btn btn-outline btn-success" onclick="doGoodReaction(${param.id})">좋아요</button>
+				<button class="btn btn-outline article-detail__hit-count" style="width: 100px;">조회수 : 0</button>
+				<div>
+					<c:if test="${article.userCanModify }">
+						<a class="btn btn-outline btn-sm" href="../article/modify?id=${article.id }">수정</a>
 					</c:if>
-					<c:if test="${article.firstImage2.trim().length() != 0 }">
-						<li style="background: #aaa;"><img src="${article.firstImage2 }" alt="" /></li>
+					<c:if test="${article.userCanDelete }">
+						<a class="btn btn-outline btn-sm" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
+							href="../article/doDelete?id=${article.id }">삭제</a>
 					</c:if>
-					<li><img class="w-full rounded-xl" src="${rq.getImgUri(article.id)}" onerror="${rq.profileFallbackImgOnErrorHtml}"
-							alt="" /></li>
-					<li style="background: #aaa;">네번째</li>
+				</div>
 
-				</ul>
-			</div>
-			<div class="slider_option">
-				<input type="checkbox" id="checkbox"> <label for="checkbox">자동 넘기기</label>
-			</div>
-		</div>
 
-		<div class="line"></div>
 
-		<div>
-			<h1>여행지 정보</h1>
-			<div>주소 : ${article.address}</div>
 
-		</div>
-		<div>
-			<h1>여행지 설명</h1>
-			<div>${article.body }</div>
-		</div>
-		<div>
-			<c:forEach var="tag" items="${tags}">
-				<c:if test="${tag.length() != 0}">
-					<button class="btn btn-sm btn-outline">${tag}</button>
-				</c:if>
-			</c:forEach>
-		</div>
-		<button id="likeCount" class="btn btn-outline" style="width: 100px;">${article.goodReactionPoint }</button>
-		<button id="likeButton" class="btn btn-outline btn-success" onclick="doGoodReaction(${param.id})">좋아요</button>
-		<button class="btn btn-outline article-detail__hit-count" style="width: 100px;">조회수 : ${article.hitCount }</button>
-		<div>
-			<c:if test="${article.userCanModify }">
-				<a class="btn btn-outline btn-sm" href="../article/modify?id=${article.id }">수정</a>
-			</c:if>
-			<c:if test="${article.userCanDelete }">
-				<a class="btn btn-outline btn-sm" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
-					href="../article/doDelete?id=${article.id }">삭제</a>
-			</c:if>
-		</div>
-	</div>
-	<div class="line"></div>
-	<div style="width: 90%; height: 100%; border: 2px solid black;">
-		<!-- 지도를 표시할 div 입니다 -->
-		<div id="map" style="width: 100%; height: 350px;"></div>
-		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4e61cb52e3e91adc0353005a87c20fd2"></script>
-		<script>
-			var mapx = ${article.mapX};
-			var mapy = ${article.mapY};
+				<!-- 지도를 표시할 div 입니다 -->
+				<div id="map" style="width: 100%; height: 350px;"></div>
+				<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4e61cb52e3e91adc0353005a87c20fd2"></script>
+				<script>
+			var mapx = 128.4049220662;
+			var mapy = 35.9368172454;
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			mapOption = {
-				center : new kakao.maps.LatLng(mapy, mapx), // 지도의 중심좌표
-				level : 2
+				center : new kakao.maps.LatLng(35.9368172454, 128.4049220662), // 지도의 중심좌표
+				level : 3
 			// 지도의 확대 레벨
 			};
 			// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
@@ -361,14 +328,8 @@ jQuery(document).ready(function ($) {
 			// 마커가 지도 위에 표시되도록 설정합니다
 			marker.setMap(map);
 		</script>
-
-	</div>
-	<p>
-		<button onclick="setZoomable(false)" class="btn btn-sm btn-outline">지도 확대/축소 끄기</button>
-		<button onclick="setZoomable(true)" class="btn btn-sm btn-outline">지도 확대/축소 켜기</button>
-	</p>
-	
-	</div>
+			</div>
+	</section>
 </main>
 
 
