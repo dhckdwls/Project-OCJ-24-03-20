@@ -472,7 +472,7 @@ jQuery(document).ready(function ($) {
 	<div style="width: 100%; text-align: center;">
 		<div>
 			<h1 style="font-size: 3rem;'">${article.title }</h1>
-			<h1>${rq.getImgUri(article.id)}</h1>
+			<%-- <h1>${rq.getImgUri(article.id)}</h1> --%>
 		</div>
 		<div class="line"></div>
 		<div class="article-image-box">

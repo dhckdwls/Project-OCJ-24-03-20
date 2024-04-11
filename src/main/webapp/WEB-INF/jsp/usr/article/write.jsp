@@ -184,6 +184,66 @@ jQuery(document).ready(function ($) {
 	}
 </script>
 
+<script>
+function copyTitle(input) {
+    var enteredValue = input.value;
+    var titleBox = document.querySelector('.title-box');
+    titleBox.textContent = "제목: " + enteredValue;
+}
+
+function copyBody(input) {
+    var enteredValue = input.value;
+    var bodyBox = document.querySelector('.body-box');
+    bodyBox.textContent = "내용: " + enteredValue;
+}
+
+function copyAddress(input) {
+    var enteredValue = input.value;
+    var addressBox = document.querySelector('.address-box');
+    addressBox.textContent = "주소: " + enteredValue;
+}
+
+/* 태그 */
+function copyTag(input) {
+    var tagDiv = document.querySelector('.tag-div');
+    tagDiv.innerHTML = ""; // Clear previous tags
+    
+    var tags = input.value.split('#').filter(tag => tag.trim() !== ''); // Split input value by '#' and filter out empty tags
+    tags.forEach(function(tag) {
+        var button = document.createElement('button');
+        button.classList.add('btn', 'btn-sm', 'btn-outline');
+        button.textContent = tag;
+        tagDiv.appendChild(button);
+    });
+}
+
+/*사진  */
+ function previewImage(event) {
+    var fileInput = event.target;
+    var fileList = fileInput.files;
+    var previewUl = document.querySelector('.preview-ul');
+    previewUl.innerHTML = ""; // Clear previous previews
+    
+    for (var i = 0; i < fileList.length; i++) {
+        var file = fileList[i];
+        var reader = new FileReader();
+        
+        reader.onload = function(event) {
+            var imageUrl = event.target.result;
+            var listItem = document.createElement('li');
+            var image = document.createElement('img');
+            image.classList.add('w-full', 'rounded-xl');
+            image.src = imageUrl;
+            listItem.appendChild(image);
+            previewUl.appendChild(listItem);
+        };
+        
+        reader.readAsDataURL(file);
+    }
+}
+
+
+</script>
 
 <main>
 	<section class="flex" style="width: 100%; height: 100vh;">
@@ -197,14 +257,14 @@ jQuery(document).ready(function ($) {
 				<table class="join-box table-box-1" border="1">
 					<tbody>
 						<tr>
-							<th>여행지제목</th>
+							<th>여행지</th>
 							<td><input name="title" class="input input-bordered input-primary w-full max-w-xs"
-								placeholder="여행지제목을 입력해주세요" autocomplete="off" /></td>
+								placeholder="여행지를 입력해주세요" autocomplete="off"  onkeyup="copyTitle(this);"/></td>
 						</tr>
 						<tr>
 							<th>내용</th>
 							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="내용 입력해주세요" name="body" /></td>
+								placeholder="내용 입력해주세요" name="body" onkeyup="copyBody(this);"/></td>
 						</tr>
 						<tr>
 							<th>이미지경로</th>
@@ -229,17 +289,18 @@ jQuery(document).ready(function ($) {
 						<tr>
 							<th>주소</th>
 							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="주소1을 입력해주세요" name="address" /></td>
+								placeholder="주소1을 입력해주세요" name="address" onkeyup="copyAddress(this);"/></td>
 						</tr>
 
 						<tr>
 							<th>태그</th>
 							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="지역코드를 입력해주세요" name="tag" /></td>
+								placeholder="지역코드를 입력해주세요" name="tag" onkeyup="copyTag(this);"/></td>
 						</tr>
 						<tr>
 							<th>첨부 이미지</th>
-							<td><input id="fileInput" placeholder="이미지를 선택해주세요" type="file" name="multipartFile" /></td>
+							<td><input id="fileInput" placeholder="이미지를 선택해주세요" type="file" onchange="previewImage(event)" /></td>
+							<!-- name="multipartFile"  -->
 						</tr>
 						<tr>
 							<th></th>
@@ -253,16 +314,14 @@ jQuery(document).ready(function ($) {
 			<h1>미리보기</h1>
 			<div>
 				<div>
-					<h1 style="font-size: 3rem;'">제목: ~~~</h1>
+					<h1 class="title-box" style="font-size: 3rem;'">제목: ~~~</h1>
 					<%-- <h1>${rq.getImgUri(article.id)}</h1> --%>
 				</div>
 				<div class="line"></div>
 				<div class="article-image-box">
 					<div id="slider">
 						<a href="#" class="control_next">></a> <a href="#" class="control_prev"><</a>
-						<ul>
-							<li><img class="w-full rounded-xl" src="${rq.getImgUri(article.id)}"
-								onerror="${rq.profileFallbackImgOnErrorHtml}" alt="" /></li>
+						<ul class="preview-ul">
 						</ul>
 					</div>
 					<div class="slider_option">
@@ -272,19 +331,19 @@ jQuery(document).ready(function ($) {
 
 				<div>
 					<h1>여행지 정보</h1>
-					<div>주소 : ${article.address}</div>
+					<div class="address-box">주소 : ${article.address}</div>
 
 				</div>
 				<div>
 					<h1>여행지 설명</h1>
-					<div>${article.body }</div>
+					<div class="body-box">내용 : ~~~</div>
 				</div>
-				<div>
-					<c:forEach var="tag" items="${tags}">
+				<div class="tag-div">
+					<%-- <c:forEach var="tag" items="${tags}">
 						<c:if test="${tag.length() != 0}">
 							<button class="btn btn-sm btn-outline">${tag}</button>
 						</c:if>
-					</c:forEach>
+					</c:forEach> --%>
 				</div>
 				<button id="likeCount" class="btn btn-outline" style="width: 100px;">좋아요 수 : 0</button>
 				<button id="likeButton" class="btn btn-outline btn-success" onclick="doGoodReaction(${param.id})">좋아요</button>
