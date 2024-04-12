@@ -263,5 +263,12 @@ public class UsrArticleController {
 		return Ut.jsReplace(loginedMemberCanDeleteRd.getResultCode(), loginedMemberCanDeleteRd.getMsg(),
 				"../article/list");
 	}
+	
+	@RequestMapping("/usr/article/random")
+	@ResponseBody
+	public Article random() {
+		Article article  = articleService.getRandomArticle();
+		return article;
+	}
 
 }

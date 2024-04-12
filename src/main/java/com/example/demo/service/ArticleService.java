@@ -194,6 +194,12 @@ public class ArticleService {
 		
 	}
 
+	public Article getRandomArticle() {
+		Article article = articleRepository.getRandomArticle();
+		return article;
+		
+	}
+
 
 	
 	

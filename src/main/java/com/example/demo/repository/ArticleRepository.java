@@ -231,7 +231,8 @@ public interface ArticleRepository {
 			goodReactionPoint = 0,
 			hitcount = 0
 			""")
-	public void writeArticle(int boardId,int memberId,int contentTypeId,String title,String body,String tag,String firstImage,String firstImage2,String address,String mapX,String mapY);
+	public void writeArticle(int boardId, int memberId, int contentTypeId, String title, String body, String tag,
+			String firstImage, String firstImage2, String address, String mapX, String mapY);
 
 	@Select("""
 			SELECT address FROM article
@@ -263,5 +264,12 @@ public interface ArticleRepository {
 			FROM article
 			""")
 	public int getCurrentArticleId();
+
+	@Select("""
+			SELECT * FROM article
+			ORDER BY RAND()
+			LIMIT 1;
+			""")
+	public Article getRandomArticle();
 
 }

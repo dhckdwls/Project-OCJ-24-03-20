@@ -184,6 +184,8 @@ jQuery(document).ready(function ($) {
 	}
 </script>
 
+
+<!-- 입력된 내용 미리보기에 반영해주는 스크립트 -->
 <script>
 function copyTitle(input) {
     var enteredValue = input.value;
