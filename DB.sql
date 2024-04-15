@@ -149,40 +149,6 @@ CREATE TABLE reply (
 # reply 테이블에 좋아요 관련 컬럼 추가
 ALTER TABLE reply ADD COLUMN goodReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
 
-
-###############################################
-
-SELECT * FROM article
-ORDER BY id DESC
-
-SELECT * FROM `member`
-
-SELECT * FROM board
-
-SELECT * FROM reactionPoint
-
-SELECT * FROM reply
-
-DROP TABLE IF EXISTS reply
-
-
-SELECT * FROM article WHERE memberId = 1
-
-SELECT * FROM reply WHERE memberId = 2
-
-SELECT * FROM reactionPoint WHERE memberId = 1 AND relTypeCode = 'article'
-
-SELECT A.*
-FROM article AS A
-INNER JOIN reactionPoint AS R
-ON A.id = R.relId
-WHERE R.memberId = 1
-
-
-###########################################
-
-
-
 # 파일 테이블 추가
 CREATE TABLE genFile (
   id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, # 번호
@@ -205,3 +171,57 @@ CREATE TABLE genFile (
   KEY relId (relTypeCode,relId,typeCode,type2Code,fileNo)
 );
 
+
+###############################################
+
+SELECT * FROM article
+ORDER BY id DESC
+
+SELECT * FROM `member`
+
+SELECT * FROM board
+
+SELECT * FROM reactionPoint
+
+SELECT * FROM reply
+
+SELECT * FROM genFile
+
+
+SELECT * FROM article WHERE memberId = 1
+
+SELECT * FROM reply WHERE memberId = 2
+
+SELECT * FROM reactionPoint WHERE memberId = 1 AND relTypeCode = 'article'
+
+SELECT A.*
+FROM article AS A
+INNER JOIN reactionPoint AS R
+ON A.id = R.relId
+WHERE R.memberId = 1
+
+
+SELECT * FROM article
+ORDER BY RAND()
+LIMIT 1;
+
+
+SELECT A.*
+FROM article AS A
+INNER JOIN reply AS R
+ON A.id = R.relId
+AND R.relTypeCode = 'article'
+ORDER BY RAND()
+LIMIT 1;
+
+SELECT A.*, COUNT(R.id) AS extra__repliesCnt
+FROM article AS A
+INNER JOIN reply AS R ON A.id = R.relId AND R.relTypeCode = 'article'
+ORDER BY RAND()
+LIMIT 1;
+
+SELECT A.*, 
+       (SELECT COUNT(*) FROM reply AS R WHERE R.relId = A.id AND R.relTypeCode = 'article') AS extra__repliesCnt
+FROM article AS A
+ORDER BY RAND()
+LIMIT 1;

@@ -266,7 +266,9 @@ public interface ArticleRepository {
 	public int getCurrentArticleId();
 
 	@Select("""
-			SELECT * FROM article
+			SELECT A.*,
+			(SELECT COUNT(*) FROM reply AS R WHERE R.relId = A.id AND R.relTypeCode = 'article') AS extra__repliesCnt
+			FROM article AS A
 			ORDER BY RAND()
 			LIMIT 1;
 			""")
