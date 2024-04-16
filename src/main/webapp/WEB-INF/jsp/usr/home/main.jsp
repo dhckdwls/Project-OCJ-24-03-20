@@ -184,7 +184,14 @@ img {
 
 	<!-- 랜덤선택 ajax -->
 	<script>
+		var alreadyRandomChoice = false;
+
 		function randomChoice() {
+
+			if (alreadyRandomChoice != false) {
+				return;
+			}
+
 			$('.base-img').css('display', 'none');
 			$('.random-result').css('display', 'block');
 			$('fiter-page').css('display', 'none');
@@ -230,24 +237,35 @@ img {
 								$('.random-repliesCount').text(
 										data.extra__repliesCnt);
 							}, 'json');
+
+			alreadyRandomChoice = true;
+		}
+
+		function tryRandom() {
+			alreadyRandomChoice = false;
+			randomChoice();
+			return;
 		}
 	</script>
-	
+
 	<!-- 필터선택 -->
 	<script>
-	function filterChoice(){
-		$('.random-result').css('display','none');
-		$('.filter-page').css('display','block');
-		
-		$('.base-img').css('display', 'none');
-		$('.random-result').css('display', 'block');
-		$('fiter-page').css('display', 'none');
-		$('fiter-result').css('display', 'none');
+		function filterChoice() {
+			$('.base-img').css('display', 'none');
+			$('.random-result').css('display', 'none');
+			$('.filter-page').css('display', 'block');
+			$('.filter-result').css('display', 'none');
 
-	}
+		}
 	</script>
-	<%-- <i class="fa-solid fa-heart fa-xl"></i>${article.goodReactionPoint } <i class="fa-solid fa-eye fa-xl"></i>${article.hitCount }<i
-							class="fa-solid fa-comment-dots fa-xl"></i>${article.extra__repliesCnt } --%>
+
+	<script>
+		function choose(el) {
+			el.classList.toggle('btn-active');
+		}
+	</script>
+
+
 	<div class="mainPage-top flex items-center justify-end">
 		<a href="/usr/article/list" onClick="confirm('메인으로 이동할래?')"><i class="fa-solid fa-x fa-2xl"></i></a>
 	</div>
@@ -283,13 +301,32 @@ img {
 					</div>
 				</li>
 			</ul>
-			
-			<button class="btn btn-outline">다시뽑기</button>
+
+			<button class="btn btn-outline" onclick="tryRandom();">다시뽑기</button>
 		</div>
-	
+
 
 		<div class="filter-page" style="display: none;">
-		필터예시들
+			<div calss="first">
+				지역선택
+				<button class="btn btn-outline btn-active" onclick="choose(this);">서울</button>
+				<!-- <button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">인천</button>
+				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">대전</button>
+				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">대구</button>
+				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">광주</button>
+				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">부산</button>
+				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">울산</button>
+				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">세종</button>
+				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">경기</button>
+				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">강원</button>
+				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">충북</button>
+				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">충남</button>
+				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">경북</button>
+				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">경남</button>
+				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">전북</button>
+				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">전남</button>
+				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">제주</button> -->
+			</div>
 		</div>
 
 		<div class="filter-result" style="display: none;"></div>

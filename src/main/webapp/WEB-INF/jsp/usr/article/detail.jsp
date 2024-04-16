@@ -301,28 +301,7 @@ function doModifyReply(replyId) {
 
 <!-- 게시물 사진 관련 스타일 -->
 <style>
-@import
-	url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600);
 
-/* html {
-  border-top: 5px solid #fff;
-  background: #58DDAF;
-  color: #2a2a2a;
-}
-
-html, body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Open Sans';
-}
-
-h1 {
-  color: #fff;
-  text-align: center;
-  font-weight: 300;
-} */
-
-/* 여기까지 필요없는거 */
 
 /* 이미지 슬라이더 스타일 */
 #slider {
