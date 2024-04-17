@@ -260,10 +260,19 @@ img {
 	</script>
 
 	<script>
-		function choose(el) {
-			el.classList.toggle('btn-active');
-		}
-	</script>
+    var locations = new Set(); // Using a Set to store unique values
+
+    function choose(el) {
+        el.classList.toggle('btn-active');
+        var location = el.textContent.trim(); // Get the text content of the button
+        if (el.classList.contains('btn-active')) {
+            locations.add(location); // Add the location to the set
+        } else {
+            locations.delete(location); // Remove the location from the set
+        }
+        console.log(locations); // Print the updated set
+    }
+</script>
 
 
 	<div class="mainPage-top flex items-center justify-end">
@@ -309,24 +318,29 @@ img {
 		<div class="filter-page" style="display: none;">
 			<div calss="first">
 				지역선택
-				<button class="btn btn-outline btn-active" onclick="choose(this);">서울</button>
-				<!-- <button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">인천</button>
-				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">대전</button>
-				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">대구</button>
-				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">광주</button>
-				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">부산</button>
-				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">울산</button>
-				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">세종</button>
-				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">경기</button>
-				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">강원</button>
-				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">충북</button>
-				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">충남</button>
-				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">경북</button>
-				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">경남</button>
-				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">전북</button>
-				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">전남</button>
-				<button class="btn btn-outline" onclick="this.classList.toggle('btn-active')">제주</button> -->
+				<button class="btn btn-outline" onclick="choose(this);">서울</button>
+				 <button class="btn btn-outline" onclick="choose(this);">인천</button>
+				<button class="btn btn-outline" onclick="choose(this);">대전</button>
+				<button class="btn btn-outline" onclick="choose(this);">대구</button>
+				<button class="btn btn-outline" onclick="choose(this);">광주</button>
+				<button class="btn btn-outline" onclick="choose(this);">부산</button>
+				<button class="btn btn-outline" onclick="choose(this);">울산</button>
+				<button class="btn btn-outline" onclick="choose(this);">세종</button>
+				<button class="btn btn-outline" onclick="choose(this);">경기</button>
+				<button class="btn btn-outline" onclick="choose(this);">강원</button>
+				<button class="btn btn-outline" onclick="choose(this);">충북</button>
+				<button class="btn btn-outline" onclick="choose(this);">충남</button>
+				<button class="btn btn-outline" onclick="choose(this);">경북</button>
+				<button class="btn btn-outline" onclick="choose(this);">경남</button>
+				<button class="btn btn-outline" onclick="choose(this);">전북</button>
+				<button class="btn btn-outline" onclick="choose(this);">전남</button>
+				<button class="btn btn-outline" onclick="choose(this);">제주</button>
 			</div>
+		</div>
+		<div class="second">
+		태그선택
+		
+		${tags }
 		</div>
 
 		<div class="filter-result" style="display: none;"></div>

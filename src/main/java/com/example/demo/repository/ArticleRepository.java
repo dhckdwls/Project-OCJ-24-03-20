@@ -273,5 +273,10 @@ public interface ArticleRepository {
 			LIMIT 1;
 			""")
 	public Article getRandomArticle();
+	
+	@Select("""
+			SELECT tag FROM article
+			""")
+	public List<String> getArticlesTags();
 
 }

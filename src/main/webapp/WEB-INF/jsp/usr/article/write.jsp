@@ -203,7 +203,10 @@ function copyAddress(input) {
     var enteredValue = input.value;
     var addressBox = document.querySelector('.address-box');
     addressBox.textContent = "주소: " + enteredValue;
+    
 }
+
+
 
 /* 태그 */
 function copyTag(input) {
@@ -252,7 +255,7 @@ function copyTag(input) {
 		<div style="width: 50%; text-align: center;">
 			<h1>글쓰기</h1>
 			<form method="POST" action="../article/doWrite" enctype="multipart/form-data"
-				onsubmit="ArticleWrite__submit(this); return false;" style="font-size: 25px; margin-top:50px;">
+				onsubmit="ArticleWrite__submit(this); return false;" style="font-size: 25px; margin-top: 50px;">
 
 				<input type="hidden" name="boardId" value="1" /> <input type="hidden" name="contentTypeId" value="12" />
 
@@ -260,13 +263,13 @@ function copyTag(input) {
 					<tbody>
 						<tr>
 							<th>여행지</th>
-							<td><input name="title" class="input input-bordered input-primary w-full max-w-xs"
-								placeholder="여행지를 입력해주세요" autocomplete="off"  onkeyup="copyTitle(this);"/></td>
+							<td><input name="title" class="input input-bordered input-primary w-full max-w-xs" placeholder="여행지를 입력해주세요"
+								autocomplete="off" onkeyup="copyTitle(this);" /></td>
 						</tr>
 						<tr>
 							<th>내용</th>
 							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="내용 입력해주세요" name="body" onkeyup="copyBody(this);"/></td>
+								placeholder="내용 입력해주세요" name="body" onkeyup="copyBody(this);" /></td>
 						</tr>
 						<tr>
 							<th>이미지경로</th>
@@ -290,14 +293,14 @@ function copyTag(input) {
 						</tr>
 						<tr>
 							<th>주소</th>
-							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="주소1을 입력해주세요" name="address" onkeyup="copyAddress(this);"/></td>
+							<td><input class="address input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
+								placeholder="주소1을 입력해주세요" name="address" onkeyup="copyAddress(this);" /></td>
 						</tr>
 
 						<tr>
 							<th>태그</th>
 							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="지역코드를 입력해주세요" name="tag" onkeyup="copyTag(this);"/></td>
+								placeholder="지역코드를 입력해주세요" name="tag" onkeyup="copyTag(this);" /></td>
 						</tr>
 						<tr>
 							<th>첨부 이미지</th>
@@ -377,8 +380,11 @@ function copyTag(input) {
 			};
 			// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 			var map = new kakao.maps.Map(mapContainer, mapOption);
+			
+			
+			
 
-			//마커가 표시될 위치입니다 
+			 //마커가 표시될 위치입니다 
 			var markerPosition = new kakao.maps.LatLng(mapy, mapx);
 
 			// 마커를 생성합니다
@@ -387,7 +393,7 @@ function copyTag(input) {
 			});
 
 			// 마커가 지도 위에 표시되도록 설정합니다
-			marker.setMap(map);
+			marker.setMap(map);  
 		</script>
 			</div>
 	</section>

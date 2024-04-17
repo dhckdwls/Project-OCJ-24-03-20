@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +16,11 @@ public class UsrHomeController {
 	private ArticleService articleService;
 
 	@RequestMapping("/usr/home/main")
-	public String showMain() {
+	public String showMain(Model model) {
+		List<String> tags = articleService.getArticlesTags();
+		
+		model.addAttribute("tags", tags);
+		
 
 		return "/usr/home/main";
 	}

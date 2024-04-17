@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -200,6 +202,35 @@ public class ArticleService {
 		
 	}
 
+	/*
+	 * public List<String> getArticlesTags() { List<String> tags =
+	 * articleRepository.getArticlesTags(); Set<String> allTagsSet = new
+	 * HashSet<>(); // 중복을 방지하기 위해 Set을 사용합니다.
+	 * 
+	 * for (String tag : tags) { String[] splitTag = tag.split("#"); for (String
+	 * individualTag : splitTag) { if (!individualTag.isEmpty()) { // 빈 문자열이 아닌 경우에만
+	 * 추가합니다. if (!allTagsSet.contains(individualTag)) { // 이미 존재하는 태그인지 확인합니다.
+	 * allTagsSet.add(individualTag); // 존재하지 않으면 추가합니다. } } } }
+	 * 
+	 * // Set을 다시 List로 변환하여 반환합니다. List<String> allTags = new
+	 * ArrayList<>(allTagsSet); return allTags; }
+	 */
+	
+	public List<String> getArticlesTags() {
+	    List<String> tags = articleRepository.getArticlesTags();
+	    List<String> allTags = new ArrayList<>(); // Using List to store all tags
+
+	    for (String tag : tags) {
+	        String[] splitTag = tag.split("#");
+	        for (String individualTag : splitTag) {
+	            if (!individualTag.isEmpty() && !allTags.contains(individualTag)) {
+	                allTags.add(individualTag);
+	            }
+	        }
+	    }
+
+	    return allTags;
+	}
 
 	
 	
