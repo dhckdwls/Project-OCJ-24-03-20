@@ -4,7 +4,7 @@
 
  <aside style="width: 15%; min-width:15%;">
 	<div style="height:100%; position:relative; min-width:15%;">
-	<div class="right-menu-box" style="background-color: #afafaf; height:70%; position:fixed;">
+	<div class="right-menu-box" style="background-color: #afafaf; height:70%; position:fixed; border-radius : 20px;">
 	<h6>지역</h6>
 	<ul class="local-box">
 	<li>서울</li>

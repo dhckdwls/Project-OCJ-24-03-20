@@ -2,6 +2,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="글쓰기"></c:set>
 <%@ include file="../common/head2.jspf"%>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    function openAddressPopup() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                document.querySelector('.address').value = data.address;
+            }
+        }).open();
+    }
+</script>
+
 
 <script type="text/javascript">
 	let ArticleWrite__submitFormDone = false;
@@ -294,7 +305,9 @@ function copyTag(input) {
 						<tr>
 							<th>주소</th>
 							<td><input class="address input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="주소1을 입력해주세요" name="address" onkeyup="copyAddress(this);" /></td>
+								placeholder="주소1을 입력해주세요" name="address" onkeyup="copyAddress(this);" readonly/>
+								<button class="btn btn-outline" type="button" onclick="openAddressPopup()" style="margin-top: 10px;">주소 검색</button>
+								</td>
 						</tr>
 
 						<tr>

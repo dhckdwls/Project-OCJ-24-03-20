@@ -198,6 +198,7 @@
 		}
 </script>
 
+
 <!-- 댓글 수정 -->
 <script>
 function toggleModifybtn(replyId) {
@@ -301,7 +302,6 @@ function doModifyReply(replyId) {
 
 <!-- 게시물 사진 관련 스타일 -->
 <style>
-
 
 /* 이미지 슬라이더 스타일 */
 #slider {
@@ -458,6 +458,9 @@ jQuery(document).ready(function ($) {
 			<div id="slider">
 				<a href="#" class="control_next">></a> <a href="#" class="control_prev"><</a>
 				<ul>
+
+					<li style="background: #aaa;"><img src="${rq.getImgUri(article.id)}"
+						onerror="${rq.profileFallbackImgOnErrorHtml}" alt="" /></li>
 					<c:if test="${article.firstImage.trim().length() != 0 }">
 						<li style="background: #aaa;"><img src="${article.firstImage }" alt="" /></li>
 					</c:if>
@@ -543,7 +546,7 @@ jQuery(document).ready(function ($) {
 
 	<div class="line"></div>
 	<div class="reply-box" style="font-size: 20px; width: 100%;">
-<div class="badge badge-outline badge-lg" style="font-size: 15px; right:0;">${repliesCount }개</div>
+		<div class="badge badge-outline badge-lg" style="font-size: 15px; right: 0;">${repliesCount }개</div>
 		<table class="styled-table" style="width: 100%;">
 			<tbody>
 				<tr>
@@ -608,80 +611,5 @@ jQuery(document).ready(function ($) {
 					</button>
 				</c:forEach>
 			</div>
-
-
-			<%-- 	<div class="line"></div>
-	<div>
-		<form action="">
-			<input type="hidden" name="boardId" value="${param.boardId }" /> <select
-				data-value="${param.searchKeywordTypeCode }" class="select select-bordered select-sm w-full max-w-xs"
-				name="searchKeywordTypeCode">
-				<option value="title">제목</option>
-				<option value="body">내용</option>
-				<option value="title,body">제목+내용</option>
-			</select> <input value="${param.searchKeyword }" name="searchKeyword" type="text" placeholder="searchKeyword?"
-				class="input-sm input input-bordered w-48 max-w-xs" />
-			<button class="btn btn-sm btn-outline" type="submit">검색</button>
-		</form>
-	</div>
-	<div>
-		<h1>여행지</h1>
-	</div>
-	<div class="line"></div>
-	<div>
-		<button class="btn btn-sm btn-outline">인기순</button>
-		<button class="btn btn-sm btn-outline">최신순</button>
-	</div>
-	<div class="detail_list">
-		<ul class="cards">
-			<c:forEach var="article" items="${articles }">
-				<li class="cards_item">
-					<div class="card">
-						<div class="card_image">
-							<img src="${article.firstImage }">
-						</div>
-						<div class="card_content">
-							<h2 class="card_title">${article.title }</h2>
-							<p class="card_text">
-								<i class="fa-solid fa-heart fa-xl"></i>0 <i class="fa-solid fa-eye fa-xl"></i>0
-							</p>
-							<button class="btn1 card_btn">
-								<a href="/usr/home/testdetail?id=${article.id}">더보기</a>
-							</button>
-						</div>
-					</div>
-				</li>
-			</c:forEach>
-	</div>
-	<div>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline"><i class="fa-solid fa-backward"></i></a>
-		</button>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline"><i class="fa-solid fa-caret-left"></i></a>
-		</button>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline">1</a>
-		</button>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline">2</a>
-		</button>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline">3</a>
-		</button>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline">4</a>
-		</button>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline">5</a>
-		</button>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline"><i class="fa-solid fa-caret-right"></i></a>
-		</button>
-		<button>
-			<a href="#" class="btn btn-sm btn-outline"><i class="fa-solid fa-forward"></i></a>
-		</button>
-	</div>
-	<div class="line"></div> --%>
 </main>
 <%@ include file="../common/foot2.jspf"%>

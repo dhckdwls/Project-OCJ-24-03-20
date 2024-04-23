@@ -52,7 +52,7 @@
 		<section class="content">
 			<nav class="leftside flex items-center" style="min-width: 15%;">
 				<div class="side-menu"
-					style="border-radius: 20px; background-color: skyblue; width: 15%; height: 500px; text-align: center; top: 200px; border: 2px solid red;">
+					style="border-radius: 20px; background-color: #afafaf; width: 15%; height: 500px; text-align: center; top: 200px;">
 					<ul class="flex items-center justify-center flex-col mt-10">
 						<li><a href="/usr/home/testrandom">여행지추천기</a></li>
 						<li><a href="/usr/article/list">여행지</a></li>

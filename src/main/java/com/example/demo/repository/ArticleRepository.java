@@ -61,20 +61,6 @@ public interface ArticleRepository {
 			""")
 	public List<Article> getArticles();
 
-//	@Select("""
-//			<script>
-//			SELECT A.*, M.nickname AS extra__writer
-//			FROM article AS A
-//			INNER JOIN `member` AS M
-//			ON A.memberId = M.id
-//			WHERE 1
-//			<if test="boardId != 0">
-//				AND A.boardId = #{boardId}
-//			</if>
-//			ORDER BY A.id DESC
-//			</script>
-//			""")
-//	public List<Article> getForPrintArticles(int boardId);
 
 	@Select("""
 			<script>
@@ -96,13 +82,13 @@ public interface ArticleRepository {
 						AND A.tag LIKE CONCAT('%',#{searchKeyword},'%')
 					</when>
 					<when test="searchKeywordTypeCode == 'address'">
-						AND A.address1 LIKE CONCAT('%',#{searchKeyword},'%')
+						AND A.address LIKE CONCAT('%',#{searchKeyword},'%')
 					</when>
 					<otherwise>
 						AND A.title LIKE CONCAT('%',#{searchKeyword},'%')
 						OR A.body LIKE CONCAT('%',#{searchKeyword},'%')
 						OR A.tag LIKE CONCAT('%',#{searchKeyword},'%')
-						OR A.address1 LIKE CONCAT('%',#{searchKeyword},'%')
+						OR A.address LIKE CONCAT('%',#{searchKeyword},'%')
 					</otherwise>
 				</choose>
 			</if>
@@ -204,10 +190,7 @@ public interface ArticleRepository {
 			""")
 	public int getGoodRP(int relId);
 
-	/*
-	 * @Select(""" SELECT badReactionPoint FROM article WHERE id = #{relId} """)
-	 * public int getBadRP(int relId);
-	 */
+
 
 	@Insert("""
 			INSERT INTO article

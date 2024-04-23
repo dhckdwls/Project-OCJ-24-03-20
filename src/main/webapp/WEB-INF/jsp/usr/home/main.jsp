@@ -274,9 +274,8 @@ img {
     }
 </script>
 
-
 	<div class="mainPage-top flex items-center justify-end">
-		<a href="/usr/article/list" onClick="confirm('메인으로 이동할래?')"><i class="fa-solid fa-x fa-2xl"></i></a>
+		<a href="/usr/article/list" onClick="if(confirm('메인으로 이동할래?') == false) return false"><i class="fa-solid fa-x fa-2xl"></i></a>
 	</div>
 
 	<div class="mainPage-center">
