@@ -2,69 +2,48 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="TEST MAP3"></c:set>
 <%@ include file="../common/head2.jspf"%>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4e61cb52e3e91adc0353005a87c20fd2"></script>
-
 <main>
+<!-- Daum 우편번호 서비스 스크립트 -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
-<div>
-  <label for="departure">출발지:</label>
-  <input type="text" id="departure" placeholder="출발지를 입력하세요">
-</div>
-<div>
-  <label for="destination">목적지:</label>
-  <input type="text" id="destination" placeholder="목적지를 입력하세요">
-</div>
-<button onclick="getDirections()">길찾기</button>
-
-<div id="map" style="width: 100%; height: 500px;"></div>
+<form action="" method="">
+    <input class="input input-bordered input-primary" type="text" placeholder="출발지 입력" name="startpoint" id="startAddress" readonly />
+    <button class="btn btn-outline" type="button" onclick="openAddressPopup('startAddress')">출발지검색</button>
+    <input class="input input-bordered input-primary" type="text" placeholder="도착지 입력" name="endpoint" id="endAddress" readonly />
+    <button class="btn btn-outline" type="button" onclick="openAddressPopup('endAddress')">도착지검색</button>
+    <button class="btn btn-outline" type="submit">길 찾기</button>
+</form>
 
 <script>
-var mapContainer = document.getElementById('map');
-var mapOptions = {
-    center: new kakao.maps.LatLng(37.566826, 126.9786567), // 서울의 좌표
-    level: 7 // 지도 확대 레벨
-};
-var map = new kakao.maps.Map(mapContainer, mapOptions);
-
-function getDirections() {
-  var departure = document.getElementById('departure').value;
-  var destination = document.getElementById('destination').value;
-  
-  var url = "https://apis-navi.kakaomobility.com/v1/directions?origin=" + encodeURIComponent(departure) + "&destination=" + encodeURIComponent(destination) + "&car_type=1&car_fuel=GASOLINE&alternatives=false&road_details=false";
-
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', url);
-  xhr.setRequestHeader('Authorization', 'KakaoAK c5251b97be72c5363c435074456a8239');
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-      if (xhr.status === 200) {
-        var data = JSON.parse(xhr.responseText);
-        var route = data.routes[0];
-        var sections = route.sections;
-        sections.forEach(function(section) {
-          var roads = section.roads;
-          roads.forEach(function(road) {
-            var vertexes = road.vertexes;
-            var polyline = new kakao.maps.Polyline({
-              path: vertexes.map(function(vert) {
-                return new kakao.maps.LatLng(vert[1], vert[0]);
-              }),
-              strokeWeight: 5,
-              strokeColor: 'blue',
-              strokeOpacity: 0.7,
-              strokeStyle: 'solid'
-            });
-            polyline.setMap(map);
-          });
-        });
-      } else {
-        console.error('Failed to fetch directions:', xhr.status);
-      }
-    }
-  };
-  xhr.send();
+// 주소 검색 팝업 열기
+function openAddressPopup(inputId) {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            var address = data.address; // 선택한 주소
+            document.getElementById(inputId).value = address; // 입력 창에 주소 설정
+        }
+    }).open();
 }
-</script>
-</main>
 
-<%@ include file="../common/foot2.jspf" %>
+</script>
+	
+	<!-- rest_api_key = c5251b97be72c5363c435074456a8239 -->
+    <!-- 지도를 표시할 div -->
+    <div id="map" style="width:100%;height:800px;"></div>
+    <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4e61cb52e3e91adc0353005a87c20fd2&libraries=services"></script>
+     <script>
+     var mapContainer = document.getElementById('map'); // 지도를 표시할 div
+     var mapOption = {
+         center: new kakao.maps.LatLng(36.4329471, 127.4203292), // 지도의 중심좌표
+         level: 3 // 지도의 확대 레벨
+     };
+
+     // 지도를 생성합니다
+     var map = new kakao.maps.Map(mapContainer, mapOption);
+     </script>
+
+    
+
+</main>
+<%@ include file="../common/foot2.jspf"%>
