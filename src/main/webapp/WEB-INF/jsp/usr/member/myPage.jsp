@@ -126,10 +126,16 @@
 	<div>${reply.updateDate }</div>
 	<div>${reply.id }</div>
 	<div>${reply.body }</div>
+	<button class="btn btn-sm btn-outline">수정</button>
+	<button class="btn btn-sm btn-outline" onclick="if(confirm('댓글을 삭제하시겠습니까?') == false) return false; deleteReply(${reply.id})">삭제</button>
 	</c:forEach>
 	</c:if>
 	</div>
 	
+	<script>
+function deleteReply(replyId){	
+}	
+	</script>
 
 
 

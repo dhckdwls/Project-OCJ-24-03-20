@@ -2,43 +2,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
- <aside style="width: 15%; min-width:15%;">
-	<div style="height:100%; position:relative; min-width:15%;">
-	<div class="right-menu-box" style="background-color: #afafaf; height:70%; position:fixed; border-radius : 20px;">
-	<h6>지역</h6>
-	<ul class="local-box">
-	<li>서울</li>
-	<li>인천</li>
-	<li>대전</li>
-	<li>대구</li>
-	<li>광주</li>
-	<li>부산</li>
-	<li>울산</li>
-	<li>세종</li>
-	<li>경기</li>
-	<li>강원</li>
-	<li>충북</li>
-	<li>충남</li>
-	<li>경북</li>
-	<li>경남</li>
-	<li>전북</li>
-	<li>전남</li>
-	<li>제주</li>
-	</ul>
-	
-	<h6>태그</h6>
-	<ul>
-	<li>테스트1</li>
-	<li>테스트2</li>
-	<li>테스트3</li>
-	<li>테스트4</li>
-	<li>테스트5</li>
-	</ul>
-	               
-	
-	
-	
-	</div>
+<aside style="width: 15%; min-width: 15%;">
+	<div style="height: 100%; position: relative; min-width: 15%;">
+		<div class="right-menu-box"
+			style="background-color: #afafaf; height: 70%; position: fixed; border-radius: 20px; top: 150px; text-align: center;">
+			<h1>지역</h1>
+			<ul class="local-box">
+				<li><button class="btn btn-outline btn-sm" onclick="choose(this);">서울</button></li>
+				<li><button class="btn btn-outline btn-sm" onclick="choose(this);">인천</button></li>
+				<li><button class="btn btn-outline btn-sm" onclick="choose(this);">대전</button></li>
+				<li><button class="btn btn-outline btn-sm" onclick="choose(this);">대구</button></li>
+				<li><button class="btn btn-outline btn-sm" onclick="choose(this);">광주</button></li>
+				<li><button class="btn btn-outline btn-sm" onclick="choose(this);">부산</button></li>
+				<li><button class="btn btn-outline btn-sm" onclick="choose(this);">울산</button></li>
+				<li><button class="btn btn-outline btn-sm" onclick="choose(this);">세종</button></li>
+				<li><button class="btn btn-outline btn-sm" onclick="choose(this);">경기</button></li>
+				<li><button class="btn btn-outline btn-sm" onclick="choose(this);">강원</button></li>
+				<li><button class="btn btn-outline btn-sm" onclick="choose(this);">충북</button></li>
+				<li><button class="btn btn-outline btn-sm" onclick="choose(this);">충남</button></li>
+				<li><button class="btn btn-outline btn-sm" onclick="choose(this);">경북</button></li>
+				<li><button class="btn btn-outline btn-sm" onclick="choose(this);">경남</button></li>
+				<li><button class="btn btn-outline btn-sm" onclick="choose(this);">전북</button></li>
+				<li><button class="btn btn-outline btn-sm" onclick="choose(this);">전남</button></li>
+				<li><button class="btn btn-outline btn-sm" onclick="choose(this);">제주</button></li>
+			</ul>
+
+			<h1>태그</h1>
+			<ul>
+				<li><button class="btn btn-outline btn-sm" onclick="choose(this);">테스트1</button></li>
+				<li><button class="btn btn-outline btn-sm" onclick="choose(this);">테스트1</button></li>
+				<li><button class="btn btn-outline btn-sm" onclick="choose(this);">테스트1</button></li>
+				<li><button class="btn btn-outline btn-sm" onclick="choose(this);">테스트1</button></li>
+				<li><button class="btn btn-outline btn-sm" onclick="choose(this);">테스트1</button></li>
+				<li><button class="btn btn-outline btn-sm" onclick="choose(this);">테스트1</button></li>
+			</ul>
+
+		</div>
 	</div>
 </aside>
 </section>
@@ -48,8 +47,8 @@
 </div>
 
 <style>
-.local-box>li{
-display:inline;
+.local-box>li {
+	display: inline;
 }
 </style>
 

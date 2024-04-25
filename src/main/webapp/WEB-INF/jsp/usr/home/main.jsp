@@ -275,7 +275,8 @@ img {
 </script>
 
 	<div class="mainPage-top flex items-center justify-end">
-		<a href="/usr/article/list" onClick="if(confirm('메인으로 이동할래?') == false) return false"><i class="fa-solid fa-x fa-2xl"></i></a>
+		<a href="/usr/article/list" onClick="if(confirm('메인으로 이동할래?') == false) return false"><i
+			class="fa-solid fa-x fa-2xl"></i></a>
 	</div>
 
 	<div class="mainPage-center">
@@ -318,7 +319,7 @@ img {
 			<div calss="first">
 				지역선택
 				<button class="btn btn-outline" onclick="choose(this);">서울</button>
-				 <button class="btn btn-outline" onclick="choose(this);">인천</button>
+				<button class="btn btn-outline" onclick="choose(this);">인천</button>
 				<button class="btn btn-outline" onclick="choose(this);">대전</button>
 				<button class="btn btn-outline" onclick="choose(this);">대구</button>
 				<button class="btn btn-outline" onclick="choose(this);">광주</button>
@@ -336,11 +337,7 @@ img {
 				<button class="btn btn-outline" onclick="choose(this);">제주</button>
 			</div>
 		</div>
-		<div class="second">
-		태그선택
-		
-		${tags }
-		</div>
+		<div class="second">태그선택 ${tags }</div>
 
 		<div class="filter-result" style="display: none;"></div>
 
