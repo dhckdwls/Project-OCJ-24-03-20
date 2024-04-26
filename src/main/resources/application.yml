@@ -5,7 +5,7 @@ spring:
     host: smtp.gmail.com
     port: 587
     username: codetama51@gmail.com
-#    password: 앱 비밀번호
+    password: mcmg eoqq nozj mgkr
     properties:
       mail:
         smtp:
@@ -29,8 +29,8 @@ spring:
 mybatis:
   type-aliases-package: com.example.demo.vo
 custom:
-  siteName: 2024_01_Spring_AM
+  siteName: Spring myProject
   siteMainUri: http://localhost:8081
   emailFrom: no-reply@localhost
-  emailFromName: 2024_01_Spring_AM
+  emailFromName: Spring myProject
   genFileDirPath: C:\work\sts-4.21.0.RELEASE-workspace\myproject\images

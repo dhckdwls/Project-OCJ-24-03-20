@@ -78,6 +78,8 @@ public class UsrArticleController {
 
 		List<Article> articles = articleService.getForPrintArticles(boardId, itemsInAPage, page, searchKeywordTypeCode,
 				searchKeyword);
+		List<String> footTags = articleService.getArticlesTags();
+		model.addAttribute("footTags", footTags);
 
 		model.addAttribute("board", board);
 		model.addAttribute("boardId", boardId);
@@ -103,6 +105,8 @@ public class UsrArticleController {
 		}
 
 		String[] tags = article.getTag().split("#");
+		List<String> footTags = articleService.getArticlesTags();
+		model.addAttribute("footTags", footTags);
 
 		int repliesCount = replyService.getRepliesCount(id);
 
@@ -116,6 +120,7 @@ public class UsrArticleController {
 		model.addAttribute("replyPagesCount", replyPagesCount);
 
 		model.addAttribute("tags", tags);
+		
 		model.addAttribute("article", article);
 		model.addAttribute("replies", replies);
 		model.addAttribute("repliesCount", repliesCount);
@@ -148,6 +153,8 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/write")
 	public String showJoin(Model model) {
 		int currentId = articleService.getCurrentArticleId();
+		List<String> footTags = articleService.getArticlesTags();
+		model.addAttribute("footTags", footTags);
 		
 		model.addAttribute("currentId", currentId);
 
@@ -215,7 +222,9 @@ public class UsrArticleController {
 		if (article == null) {
 			return Ut.jsHistoryBack("F-1", Ut.f("%d번 글은 존재하지 않습니다", id));
 		}
-
+		List<String> footTags = articleService.getArticlesTags();
+		model.addAttribute("footTags", footTags);
+		
 		model.addAttribute("article", article);
 
 		return "usr/article/modify";

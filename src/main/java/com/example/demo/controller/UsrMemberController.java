@@ -178,6 +178,9 @@ public class UsrMemberController {
 		
 		List<Article> likeArticles = articleService.getLikeArticles(memberId);
 		
+		List<String> footTags = articleService.getArticlesTags();
+		model.addAttribute("footTags", footTags);
+		
 		
 		model.addAttribute("articles", articles);
 		model.addAttribute("replies", replies);
@@ -248,6 +251,54 @@ public class UsrMemberController {
 		memberService.doDelete(id);
 
 		return Ut.jsReplace("S-1","회원탈퇴되었습니다.", "/");
+	}
+	
+	@RequestMapping("/usr/member/findLoginId")
+	public String showFindLoginId() {
+
+		return "usr/member/findLoginId";
+	}
+
+	@RequestMapping("/usr/member/doFindLoginId")
+	@ResponseBody
+	public String doFindLoginId(@RequestParam(defaultValue = "/") String afterFindLoginIdUri, String name,
+			String email) {
+
+		Member member = memberService.getMemberByNameAndEmail(name, email);
+
+		if (member == null) {
+			return Ut.jsHistoryBack("F-1", "너는 없는 사람이야");
+		}
+
+		return Ut.jsReplace("S-1", Ut.f("너의 아이디는 [ %s ] 야", member.getLoginId()), afterFindLoginIdUri);
+	}
+	
+	
+	@RequestMapping("/usr/member/findLoginPw")
+	public String showFindLoginPw() {
+
+		return "usr/member/findLoginPw";
+	}
+
+	@RequestMapping("/usr/member/doFindLoginPw")
+	@ResponseBody
+	public String doFindLoginPw(@RequestParam(defaultValue = "/") String afterFindLoginPwUri, String loginId,
+			String email) {
+
+		Member member = memberService.getMemberByLoginId(loginId);
+
+		if (member == null) {
+			return Ut.jsHistoryBack("F-1", "너는 없는 사람이야");
+		}
+
+		if (member.getEmail().equals(email) == false) {
+			return Ut.jsHistoryBack("F-2", "일치하는 이메일이 없는데?");
+		}
+
+		ResultData notifyTempLoginPwByEmailRd = memberService.notifyTempLoginPwByEmail(member);
+
+		return Ut.jsReplace(notifyTempLoginPwByEmailRd.getResultCode(), notifyTempLoginPwByEmailRd.getMsg(),
+				afterFindLoginPwUri);
 	}
 	
 	
