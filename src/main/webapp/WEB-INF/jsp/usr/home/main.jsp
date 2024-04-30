@@ -335,6 +335,7 @@ img {
 				<button class="btn btn-outline" onclick="choose(this);">전북</button>
 				<button class="btn btn-outline" onclick="choose(this);">전남</button>
 				<button class="btn btn-outline" onclick="choose(this);">제주</button>
+				
 			</div>
 		</div>
 		<div class="second">태그선택 ${tags }</div>

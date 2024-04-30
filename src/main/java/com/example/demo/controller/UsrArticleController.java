@@ -279,5 +279,8 @@ public class UsrArticleController {
 		Article article  = articleService.getRandomArticle();
 		return article;
 	}
+	
+	
+	
 
 }
