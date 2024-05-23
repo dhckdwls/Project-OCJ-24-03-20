@@ -184,18 +184,13 @@ img {
 
 	<!-- 랜덤선택 ajax -->
 	<script>
-		var alreadyRandomChoice = false;
+	
 
 		function randomChoice() {
-
-			if (alreadyRandomChoice != false) {
-				return;
-			}
-
 			$('.base-img').css('display', 'none');
 			$('.random-result').css('display', 'block');
-			$('fiter-page').css('display', 'none');
-			$('fiter-result').css('display', 'none');
+			$('.filter-page').css('display', 'none');
+			$('.filter-result').css('display', 'none');
 
 			var action = "/usr/article/random"
 			$
@@ -238,11 +233,10 @@ img {
 										data.extra__repliesCnt);
 							}, 'json');
 
-			alreadyRandomChoice = true;
+
 		}
 
 		function tryRandom() {
-			alreadyRandomChoice = false;
 			randomChoice();
 			return;
 		}
@@ -335,10 +329,11 @@ img {
 				<button class="btn btn-outline" onclick="choose(this);">전북</button>
 				<button class="btn btn-outline" onclick="choose(this);">전남</button>
 				<button class="btn btn-outline" onclick="choose(this);">제주</button>
-				
+
 			</div>
+			<div class="second">태그선택 ${tags }</div>
 		</div>
-		<div class="second">태그선택 ${tags }</div>
+
 
 		<div class="filter-result" style="display: none;"></div>
 

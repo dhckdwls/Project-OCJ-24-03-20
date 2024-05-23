@@ -1,7 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="글쓰기"></c:set>
+<c:set var="pageTitle" value="게시글 수정"></c:set>
 <%@ include file="../common/head2.jspf"%>
+<!-- 다음 우편번호 주소찾기 서비스 -->
+<script>
+    function openAddressPopup() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                document.querySelector('.address').value = data.address;
+                document.querySelector('.address-box').textContent = "주소 : " + data.address; 
+            }
+        }).open();
+    }
+</script>
 
 <script type="text/javascript">
 	let ArticleWrite__submitFormDone = false;
@@ -266,7 +277,7 @@ function copyTag(input) {
 							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
 								placeholder="내용 입력해주세요" name="body" onkeyup="copyBody(this);" value="${article.body }"/></td>
 						</tr>
-						<tr>
+						<%-- <tr>
 							<th>이미지경로</th>
 							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
 								placeholder="이미지경로를 입력해주세요" name="firstImage" value="${article.firstImage }"/></td>
@@ -275,8 +286,8 @@ function copyTag(input) {
 							<th>이미지경로2</th>
 							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
 								placeholder="이미지경로2를 입력해주세요" name="firstImage2" /></td>
-						</tr>
-						<tr>
+						</tr> --%>
+						<!-- <tr>
 							<th>x좌표</th>
 							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
 								placeholder="x좌표를 입력해주세요" name="mapX" /></td>
@@ -285,11 +296,13 @@ function copyTag(input) {
 							<th>y좌표</th>
 							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
 								placeholder="y좌표 입력해주세요" name="mapY" /></td>
-						</tr>
+						</tr> -->
 						<tr>
 							<th>주소</th>
-							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="주소1을 입력해주세요" name="address" onkeyup="copyAddress(this);"/></td>
+							<td><input class="address input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
+								placeholder="주소를 입력해주세요" name="address" onkeyup="copyAddress(this);" readonly/>
+								<button class="btn btn-outline" type="button" onclick="openAddressPopup()" style="margin-top: 10px;">주소 검색</button>
+								</td>
 						</tr>
 
 						<tr>

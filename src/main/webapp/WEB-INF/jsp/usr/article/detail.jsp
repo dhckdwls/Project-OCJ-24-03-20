@@ -14,8 +14,8 @@
 	params.id = parseInt('${param.id}');
 	params.memberId = parseInt('${loginedMemberId}');
 	
-	console.log(params);
-	console.log(params.memberId);
+	/* console.log(params);
+	console.log(params.memberId); */
 	
 	var isAlreadyAddGoodRp = ${isAlreadyAddGoodRp};
 	var isAlreadyAddBadRp = ${isAlreadyAddBadRp};
@@ -454,7 +454,9 @@ jQuery(document).ready(function ($) {
 					</c:if>
 					<li><img class="w-full rounded-xl" src="${rq.getImgUri(article.id)}"
 						onerror="${rq.profileFallbackImgOnErrorHtml}" alt="" /></li>
-					<li style="background: #aaa;">네번째</li>
+					<li style="background: #aaa;"><img
+						src="https://velog.velcdn.com/images/tama51/post/a6819aed-4097-482a-9b58-a25a40a70eb0/image.jpg" alt="" /></li>
+
 
 				</ul>
 			</div>
@@ -498,7 +500,8 @@ jQuery(document).ready(function ($) {
 	<div style="width: 90%; height: 100%; border: 2px solid black;">
 		<!-- 지도를 표시할 div 입니다 -->
 		<div id="map" style="width: 100%; height: 350px;"></div>
-		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4e61cb52e3e91adc0353005a87c20fd2&libraries=services"></script>
+		<script type="text/javascript"
+			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4e61cb52e3e91adc0353005a87c20fd2&libraries=services"></script>
 		<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = {
@@ -536,29 +539,7 @@ jQuery(document).ready(function ($) {
 	        map.setCenter(coords);
 	    } 
 	});    
-			/* var address = "${article.address}";
-			console.log(address);
-			 var mapx = ${article.mapX};
-			var mapy = ${article.mapY};
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-			mapOption = {
-				center : new kakao.maps.LatLng(mapy, mapx), // 지도의 중심좌표
-				level : 2
-			// 지도의 확대 레벨
-			};
-			// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-			var map = new kakao.maps.Map(mapContainer, mapOption);
-
-			//마커가 표시될 위치입니다 
-			var markerPosition = new kakao.maps.LatLng(mapy, mapx);
-
-			// 마커를 생성합니다
-			var marker = new kakao.maps.Marker({
-				position : markerPosition
-			});
-
-			// 마커가 지도 위에 표시되도록 설정합니다
-			marker.setMap(map);  */
+		
 		</script>
 
 	</div>

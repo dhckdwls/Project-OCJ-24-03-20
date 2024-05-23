@@ -216,12 +216,14 @@ public interface ArticleRepository {
 			""")
 	public void writeArticle(int boardId, int memberId, int contentTypeId, String title, String body, String tag,
 			String firstImage, String firstImage2, String address, String mapX, String mapY);
-
+	
+	//게시물의 모든 주소를 가져오기
 	@Select("""
 			SELECT address FROM article
 			""")
 	public String[] getArticlesAddress();
-
+	
+	//게시물의 모든 제목 가져오기
 	@Select("""
 			SELECT title FROM article
 			""")

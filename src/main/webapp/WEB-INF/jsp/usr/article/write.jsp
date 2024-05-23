@@ -3,6 +3,7 @@
 <c:set var="pageTitle" value="글쓰기"></c:set>
 <%@ include file="../common/head2.jspf"%>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- 다음 우편번호 주소찾기 서비스 -->
 <script>
     function openAddressPopup() {
         new daum.Postcode({

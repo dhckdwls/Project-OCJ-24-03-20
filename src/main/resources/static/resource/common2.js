@@ -27,12 +27,8 @@ function toggleSideMenu() {
 // 이벤트 리스너 추가
 $('.menu-button').on('click', toggleSideMenu);
 
-// function a(){
-//   $('.side-menu').toggleClass('appear');
-//   $('.appear').css('left','0');
-//   $('.appear').css('transition','left 0.5s');
-// }
 
-//-----------------------------------------------------------------------캘린더
+
+
 
 

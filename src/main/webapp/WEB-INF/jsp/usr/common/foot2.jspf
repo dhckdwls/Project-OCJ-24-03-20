@@ -65,11 +65,7 @@
 			
 			<input type="submit" value="검색"/>
 			</form>
-			<%-- <form action="/usr/article/list">
-			<input type="hidden" value="${locations}" name="locations"/>
-			<input type="hidden" value="${tags }" name="tags"/>
-			<input class="btn btn-outline" type="submit" value="검색"/>
-			</form> --%>
+			
 
 		</div>
 

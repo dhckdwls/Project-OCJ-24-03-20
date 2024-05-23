@@ -169,12 +169,13 @@ public class ArticleService {
 		
 		return ResultData.from("S-1", Ut.f("%d번 글이 생성되었습니다", id), "id", id);
 	}
-
+	
+	//게시물의 모든 주소를 가져오기
 	public String[] getArticlesAddress() {
 		String[] address = articleRepository.getArticlesAddress();
 		return address;
 	}
-
+	// 게시물의 모든 제목을 가져오기
 	public String[] getArticlesTitles() {
 		String[] titles = articleRepository.getArticlesTitles();
 		return titles;
