@@ -2,8 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="ARTICLE DETAIL"></c:set>
 <%@ include file="../common/head2.jspf"%>
-
-
 <main style="text-align: center;">
 	<div>
 		<h1 style="font-size: 3rem;">로그인</h1>
@@ -24,30 +22,21 @@
 					<span class="ripplesCircle"></span>
 				</div>
 			</button>
-			<div class="select-box" style="font-size:1rem;">
+			<div class="select-box" style="font-size: 1rem;">
 				<a href="/usr/member/findLoginId">아이디찾기</a> <a href="/usr/member/findLoginPw">비밀번호찾기</a> <a href="/usr/member/join">회원가입</a>
 			</div>
 		</form>
-		
 	</div>
-
 </main>
-
-
 <style>
 * {
 	box-sizing: border-box;
 }
 
-/* body {
-   -webkit-font-smoothing: antialiased;
+.select-box>a:hover {
+	text-decoration: underline;
 }
- */
- 
- .select-box > a:hover{
- 	text-decoration: underline;
- }
- 
+
 form {
 	width: 380px;
 	margin: 4em auto;
@@ -146,19 +135,9 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 input:focus ~ .highlight {
 	animation: inputHighlighter 0.3s ease;
 }
-
 /* Animations */
 @
-keyframes inputHighlighter {from { background:#4a89dc;
-	
-}
-
-to {
-	width: 0;
-	background: transparent;
-}
-
-}
+keyframes inputHighlighter {from { background:#4a89dc;}to {width: 0;background: transparent;}}
 
 /* Button */
 .button {
@@ -222,73 +201,13 @@ to {
 .ripples.is-active .ripplesCircle {
 	animation: ripples .4s ease-in;
 }
-
 /* Ripples animation */
-@
-keyframes ripples { 0% {
-	opacity: 0;
-}
-25
-
-
-%
-{
-opacity
-
-
-:
-
-
-1
-;
-
-
-}
-100
-
-
-%
-{
-width
-
-
-:
-
-
-200
-%;
-
-
-padding-bottom
-
-
-:
-
-
-200
-%;
-
-
-opacity
-
-
-:
-
-
-0
-;
-
-
-}
-}
+@keyframes ripples { 0% {opacity: 0;}25%{opacity:1;}100%{width:200%;padding-bottom:200%;opacity:0;}}
 </style>
-
-
 <script>
 	$(window, document, undefined)
 			.ready(
 					function() {
-
 						$('input').blur(function() {
 							var $this = $(this);
 							if ($this.val())
@@ -296,35 +215,24 @@ opacity
 							else
 								$this.removeClass('used');
 						});
-
 						var $ripples = $('.ripples');
-
 						$ripples.on('click.Ripples', function(e) {
-
 							var $this = $(this);
 							var $offset = $this.parent().offset();
 							var $circle = $this.find('.ripplesCircle');
-
 							var x = e.pageX - $offset.left;
 							var y = e.pageY - $offset.top;
-
 							$circle.css({
 								top : y + 'px',
 								left : x + 'px'
 							});
-
 							$this.addClass('is-active');
-
 						});
-
-						$ripples
-								.on(
-										'animationend webkitAnimationEnd mozAnimationEnd oanimationend MSAnimationEnd',
+						$ripples.on('animationend webkitAnimationEnd mozAnimationEnd oanimationend MSAnimationEnd',
 										function(e) {
 											$(this).removeClass('is-active');
 										});
 
 					});
 </script>
-
 <%@ include file="../common/foot2.jspf"%>

@@ -25,7 +25,7 @@
 		<div class="header flex justify-between" style="text-align: center;">
 			<div class="menu-button" style="width: 15%">메뉴 보기</div>
 			<div class="header-center" style="flex-grow: 1;">
-				<a href="/usr/article/list?boardId=1">사이트로고</a>
+				<a href="/usr/article/list?boardId=1">RANDOM TRIP</a>
 			</div>
 			<div class="flex header-right justify-around" style="width: 15%;">
 				<c:if test="${!rq.isLogined() }">
@@ -54,11 +54,11 @@
 				<div class="side-menu"
 					style="border-radius: 20px; background-color: #afafaf; width: 15%; height: 500px; text-align: center; top: 200px;">
 					<ul class="flex items-center justify-center flex-col mt-10">
-						<li><a href="/usr/home/testrandom">여행지추천기</a></li>
+						<li><a href="/usr/home/main">여행지추천기</a></li>
 						<li><a href="/usr/article/list">여행지</a></li>
 						<li><a href="/usr/home/map">지도</a></li>
 					</ul>
 
-					<div>날씨 정보</div>
+					
 				</div>
 			</nav>

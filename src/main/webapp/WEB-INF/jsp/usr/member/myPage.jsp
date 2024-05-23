@@ -47,7 +47,7 @@
 	<div class="line"></div>
 
 	<div>
-		<h1>내가 쓴 글 테스트</h1>
+		<h1>내가 쓴 글</h1>
 		<c:if test="${articles != null }">
 			<div>
 				<ul class="cards">

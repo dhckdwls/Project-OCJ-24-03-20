@@ -9,12 +9,12 @@ import com.example.demo.service.APITestService;
 
 @RestController
 @RequestMapping("/save")
-public class UsrAPITestController {
+public class APIController {
 
 	private final APITestService apiTestService;
 
 	@Autowired
-	public UsrAPITestController(APITestService apiTestService) {
+	public APIController(APITestService apiTestService) {
 		this.apiTestService = apiTestService;
 	}
 

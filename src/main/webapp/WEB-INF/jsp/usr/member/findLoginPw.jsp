@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="LOGIN"></c:set>
 <%@ include file="../common/head2.jspf"%>
-<main>
+<main class="flex justify-center items-center">
 <script type="text/javascript">
 	let MemberFindLoginPw__submitFormDone = false;
 	function MemberFindLoginPw__submit(form) {
@@ -50,7 +50,7 @@
 					<tr>
 						<th></th>
 						<td>
-							<button type="submit">비밀번호 찾기</button>
+							<button class="btn btn-sm btn-outline"type="submit">비밀번호 찾기</button>
 						</td>
 					</tr>
 					<tr>

@@ -3,7 +3,7 @@
 <c:set var="pageTitle" value="LOGIN"></c:set>
 <%@ include file="../common/head2.jspf"%>
 
-<main>
+<main class="flex justify-center items-center">
 <script type="text/javascript">
 	let MemberFindLoginId__submitFormDone = false;
 
@@ -56,7 +56,7 @@
 					<tr>
 						<th></th>
 						<td>
-							<button type="submit">아이디 찾기</button>
+							<button class="btn btn-sm btn-outline" type="submit">아이디 찾기</button>
 						</td>
 					</tr>
 					<tr>

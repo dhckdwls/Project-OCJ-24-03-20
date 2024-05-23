@@ -394,23 +394,8 @@ jQuery(document).ready(function ($) {
 		var slideWidth = $('#slider ul li').width();
 		var slideHeight = $('#slider ul li').height();
 		var sliderUlWidth = slideCount * slideWidth;
-		/*
-	  slideCount = $('#slider ul li').length;: 슬라이더 안에 있는 <ul> 태그 아래의 <li> 태그들의 수를 세어서 slideCount 변수에 저장합니다. 이는 전체 슬라이드의 개수를 나타냅니다.
-
-	slideWidth = $('#slider ul li').width();: 슬라이드의 너비를 구하기 위해 첫 번째 슬라이드의 너비를 가져와서 slideWidth 변수에 저장합니다. 이는 모든 슬라이드의 너비가 같다고 가정합니다.
-
-	slideHeight = $('#slider ul li').height();: 슬라이드의 높이를 구하기 위해 첫 번째 슬라이드의 높이를 가져와서 slideHeight 변수에 저장합니다. 이는 모든 슬라이드의 높이가 같다고 가정합니다.
-
-	sliderUlWidth = slideCount * slideWidth;: 전체 슬라이드 목록의 너비를 계산하여 sliderUlWidth 변수에 저장합니다. 각 슬라이드의 너비에 전체 슬라이드의 수를 곱한 값이 됩니다. 이는 모든 슬라이드가 가로로 나열되어 있을 때 전체 너비를 나타냅니다.
-
-	이렇게 계산된 값들은 이후에 슬라이더의 크기를 설정하거나 슬라이드의 이동에 사용될 수 있습니다.
-	  */
-	  
-	  
 		$('#slider').css({ width: slideWidth, height: slideHeight });
-		
 		$('#slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
-		  
 	  //마지막 슬라이드를 슬라이드 목록의 첫번째로 이동
 	    $('#slider ul li:last-child').prependTo('#slider ul');
 	    
@@ -513,9 +498,47 @@ jQuery(document).ready(function ($) {
 	<div style="width: 90%; height: 100%; border: 2px solid black;">
 		<!-- 지도를 표시할 div 입니다 -->
 		<div id="map" style="width: 100%; height: 350px;"></div>
-		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4e61cb52e3e91adc0353005a87c20fd2"></script>
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4e61cb52e3e91adc0353005a87c20fd2&libraries=services"></script>
 		<script>
-			var mapx = ${article.mapX};
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	    mapOption = {
+	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+	        level: 3 // 지도의 확대 레벨
+	    };  
+
+	// 지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
+
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch('${article.address}', function(result, status) {
+
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === kakao.maps.services.Status.OK) {
+
+	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new kakao.maps.Marker({
+	            map: map,
+	            position: coords
+	        });
+
+	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        var infowindow = new kakao.maps.InfoWindow({
+	            content: '<div style="width:150px;text-align:center;padding:6px 0;">여기요!</div>'
+	        });
+	        infowindow.open(map, marker);
+
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    } 
+	});    
+			/* var address = "${article.address}";
+			console.log(address);
+			 var mapx = ${article.mapX};
 			var mapy = ${article.mapY};
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			mapOption = {
@@ -535,7 +558,7 @@ jQuery(document).ready(function ($) {
 			});
 
 			// 마커가 지도 위에 표시되도록 설정합니다
-			marker.setMap(map);
+			marker.setMap(map);  */
 		</script>
 
 	</div>

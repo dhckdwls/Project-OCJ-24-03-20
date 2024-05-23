@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class ResultData<DT> {
-
+	
 	private String resultCode;
 
 	private String msg;

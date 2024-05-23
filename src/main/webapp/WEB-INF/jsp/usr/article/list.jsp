@@ -28,10 +28,10 @@
 	</div>
 	<div style="text-align: start; margin-left: 50px;">
 		<button class="btn btn-sm btn-outline">
-			<a href="#">최신순</a>
+			최신
 		</button>
 		<button class="btn btn-sm btn-outline">
-			<a href="#">인기순</a>
+			인기
 		</button>
 		<div class="badge badge-outline badge-lg" style="font-size: 15px;">${articlesCount }개</div>
 	</div>

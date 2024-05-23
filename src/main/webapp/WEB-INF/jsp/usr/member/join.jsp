@@ -4,6 +4,76 @@
 <%@ include file="../common/head2.jspf"%>
 <!-- lodash debounce -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+<main style="text-align: center;">
+	<div>
+		<h1 style="font-size: 3rem;">회원가입</h1>
+	</div>
+	<div class="line"></div>
+	<div class="login_box" style="display: inline-block; border: 2px solid black; border-radius: 30px;">
+		<form action="/usr/member/doJoin" method="POST">
+			<div class="group">
+				<input type="text" name="loginId" onkeyup="checkLoginIdDupDebounced(this);"><span class="highlight"
+					autocomplete="off"></span><span class="bar"></span> <label>아이디</label>
+				<div class="checkDup-msg" style="font-size: 20px;"></div>
+			</div>
+
+			<div class="group">
+				<input type="password" name="loginPw" class="password-input"> <span class="highlight" autocomplete="off"></span>
+				<span class="bar"></span> <label>비밀번호</label>
+				<div class="password-toggle">
+					<button type="button" class="toggle-password-visibility" style="">
+						<i class="fa-solid fa-toggle-off"></i>
+					</button>
+				</div>
+				<!-- <div></div> -->
+			</div>
+			
+			<div class="group">
+				<input type="password" name="loginPwConfirm" class="password-input"> <span class="highlight"
+					autocomplete="off"></span> <span class="bar"></span> <label>비밀번호 확인</label>
+				<div class="password-toggle">
+					<button type="button" class="toggle-password-visibility">
+						<i class="fa-solid fa-toggle-off"></i>
+					</button>
+				</div>
+			</div>
+			<!-- <div class="checkPw-msg" style="font-size:20px; margin-bottom:15px;">영어,숫자,!@#$%&* 포함 16글자</div> -->
+
+			<div class="group">
+				<input type="text" name="name"><span class="highlight" autocomplete="off"></span><span class="bar"></span> <label>이름</label>
+				<div></div>
+			</div>
+
+			<div class="group">
+				<input type="text" name="nickname"><span class="highlight" autocomplete="off"></span><span class="bar"></span>
+				<label>닉네임</label>
+				<div></div>
+			</div>
+
+			<div class="group">
+				<input type="text" name="email"><span class="highlight" autocomplete="off"></span><span class="bar"></span>
+				<label>이메일</label>
+				<div></div>
+			</div>
+
+			<div class="group">
+				<input type="text" name="cellphoneNum"><span class="highlight" autocomplete="off"></span><span class="bar"></span>
+				<label>전화번호</label>
+				<div></div>
+			</div>
+			
+			<button type="submit" class="button buttonBlue">
+				회원가입
+				<div class="ripples buttonRipples">
+					<span class="ripplesCircle"></span>
+				</div>
+			</button>
+		</form>
+	</div>
+	<div class="line"></div>
+
+</main>
+
 <script>
 	let submitJoinFormDone = false;
 	let validLoginId = "";
@@ -15,13 +85,13 @@
 		}
 		form.loginId.value = form.loginId.value.trim();
 		if (form.loginId.value == 0) {
-			alert('아이디를 입력해주세요 jsp');
+			alert('아이디를 입력해주세요');
 			form.loginId.focus();
 			return;
 		}
 
 		if (form.loginId.value != validLoginId) {
-			alert('사용할 수 없는 아이디야 jsp');
+			alert('사용할 수 없는 아이디입니다.');
 			form.loginId.focus();
 			return;
 		}
@@ -31,37 +101,37 @@
 
 		form.loginPw.value = form.loginPw.value.trim();
 		if (form.loginPw.value == 0) {
-			alert('비밀번호를 입력해주세요 jsp');
+			alert('비밀번호를 입력해주세요');
 			return;
 		}
 		form.loginPwConfirm.value = form.loginPwConfirm.value.trim();
 		if (form.loginPwConfirm.value == 0) {
-			alert('비밀번호 확인을 입력해주세요 jsp');
+			alert('비밀번호 확인을 입력해주세요');
 			return;
 		}
 		if (form.loginPwConfirm.value != form.loginPw.value) {
-			alert('비밀번호가 일치하지 않습니다 jsp');
+			alert('비밀번호가 일치하지 않습니다');
 			form.loginPw.focus();
 			return;
 		}
 		form.name.value = form.name.value.trim();
 		if (form.name.value == 0) {
-			alert('이름을 입력해주세요 jsp');
+			alert('이름을 입력해주세요');
 			return;
 		}
 		form.nickname.value = form.nickname.value.trim();
 		if (form.nickname.value == 0) {
-			alert('닉네임을 입력해주세요 jsp');
+			alert('닉네임을 입력해주세요');
 			return;
 		}
 		form.email.value = form.email.value.trim();
 		if (form.email.value == 0) {
-			alert('이메일을 입력해주세요 jsp');
+			alert('이메일을 입력해주세요');
 			return;
 		}
 		form.cellphoneNum.value = form.cellphoneNum.value.trim();
 		if (form.cellphoneNum.value == 0) {
-			alert('전화번호를 입력해주세요 jsp');
+			alert('전화번호를 입력해주세요');
 			return;
 		}
 		submitJoinFormDone = true;
@@ -111,36 +181,26 @@
 	const checkLoginIdDupDebounced = _.debounce(checkLoginIdDup, 600);
 </script>
 
+<!-- 비밀번호 표시 온/오프 기능 -->
 <script>
 	$(document)
 			.ready(
 					function() {
-						$('.toggle-password-visibility')
-								.click(
-										function() {
-											var passwordField = $(this)
-													.closest('.group').find(
-															'.password-input');
-											var fieldType = passwordField
-													.attr('type');
-
+						$('.toggle-password-visibility').click(
+								function() {var passwordField = $(this).closest('.group').find('.password-input');
+											var fieldType = passwordField.attr('type');
 											if (fieldType === 'password') {
-												passwordField.attr('type',
-														'text');
-												$(this)
-														.html(
-																'<i class="fa-solid fa-toggle-on"></i>');
+												passwordField.attr('type','text');
+												$(this).html('<i class="fa-solid fa-toggle-on"></i>');
 											} else {
-												passwordField.attr('type',
-														'password');
-												$(this)
-														.html(
-																'<i class="fa-solid fa-toggle-off"></i>');
+												passwordField.attr('type','password');
+												$(this).html('<i class="fa-solid fa-toggle-off"></i>');
 											}
 										});
 					});
 </script>
 
+<!-- 비밀번호 버튼 위치 조정 -->
 <style>
 .group {
 	position: relative;
@@ -150,88 +210,16 @@
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
-	right: 10px; /* 입력 필드 오른쪽에 버튼을 배치할 거에요.*/
+	right: 10px; 
 }
 
 
 </style>
 
-<!-- 비밀번호체크 -->
-<script>
 
 
-</script>
 
-<main style="text-align: center;">
-	<div>
-		<h1 style="font-size: 3rem;">회원가입</h1>
-	</div>
-	<div class="line"></div>
-	<div class="login_box" style="display: inline-block; border: 2px solid black; border-radius: 30px;">
-		<form action="/usr/member/doJoin" method="POST">
-			<div class="group">
-				<input type="text" name="loginId" onkeyup="checkLoginIdDupDebounced(this);"><span class="highlight"
-					autocomplete="off"></span><span class="bar"></span> <label>아이디</label>
-				<div class="checkDup-msg" style="font-size: 20px;"></div>
-			</div>
-
-			<div class="group">
-				<input type="password" name="loginPw" class="password-input"> <span class="highlight" autocomplete="off"></span>
-				<span class="bar"></span> <label>비밀번호</label>
-				<div class="password-toggle">
-					<button type="button" class="toggle-password-visibility" style="">
-						<i class="fa-solid fa-toggle-off"></i>
-					</button>
-				</div>
-				<div></div>
-			</div>
-			
-			<div class="group">
-				<input type="password" name="loginPwConfirm" class="password-input"> <span class="highlight"
-					autocomplete="off"></span> <span class="bar"></span> <label>비밀번호 확인</label>
-				<div class="password-toggle">
-					<button type="button" class="toggle-password-visibility">
-						<i class="fa-solid fa-toggle-off"></i>
-					</button>
-				</div>
-			</div>
-			<div class="checkPw-msg" style="font-size:20px; margin-bottom:15px;">영어,숫자,!@#$%&* 포함 16글자</div>
-
-			<div class="group">
-				<input type="text" name="name"><span class="highlight" autocomplete="off"></span><span class="bar"></span> <label>이름</label>
-				<div></div>
-			</div>
-
-			<div class="group">
-				<input type="text" name="nickname"><span class="highlight" autocomplete="off"></span><span class="bar"></span>
-				<label>닉네임</label>
-				<div></div>
-			</div>
-
-			<div class="group">
-				<input type="text" name="email"><span class="highlight" autocomplete="off"></span><span class="bar"></span>
-				<label>이메일</label>
-				<div></div>
-			</div>
-
-			<div class="group">
-				<input type="text" name="cellphoneNum"><span class="highlight" autocomplete="off"></span><span class="bar"></span>
-				<label>전화번호</label>
-				<div></div>
-			</div>
-			
-			<button type="submit" class="button buttonBlue">
-				회원가입
-				<div class="ripples buttonRipples">
-					<span class="ripplesCircle"></span>
-				</div>
-			</button>
-		</form>
-	</div>
-	<div class="line"></div>
-
-</main>
-
+<!-- ### 페이지 디자인 ###  -->
 
 <style>
 * {

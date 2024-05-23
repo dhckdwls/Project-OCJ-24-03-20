@@ -131,7 +131,7 @@ public class UsrArticleController {
 
 		return "usr/article/detail";
 	}
-
+	//조회수 증가
 	@RequestMapping("/usr/article/doIncreaseHitCountRd")
 	@ResponseBody
 	public ResultData doIncreaseHitCountRd(int id) {
@@ -149,7 +149,7 @@ public class UsrArticleController {
 		return rd;
 
 	}
-
+	//글 작성 페이지로 이동
 	@RequestMapping("/usr/article/write")
 	public String showJoin(Model model) {
 		int currentId = articleService.getCurrentArticleId();
@@ -160,7 +160,7 @@ public class UsrArticleController {
 
 		return "usr/article/write";
 	}
-
+	// 실제로 글을 작성해 주는 메서드
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
 	public String doWrite(HttpServletRequest req, int boardId, int contentTypeId, String title, String body, String tag,
@@ -212,7 +212,7 @@ public class UsrArticleController {
 		return Ut.jsReplace(writeArticleRd.getResultCode(), writeArticleRd.getMsg(), "../article/detail?id=" + id);
 
 	}
-
+	//글 수정페이지로 이동
 	@RequestMapping("/usr/article/modify")
 	public String showModify(HttpServletRequest req, Model model, int id) {
 		Rq rq = (Rq) req.getAttribute("rq");
@@ -229,7 +229,8 @@ public class UsrArticleController {
 
 		return "usr/article/modify";
 	}
-
+	
+	//실제로 글을 수정해주는 메서드
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
 	public String doModify(HttpServletRequest req, int id, String title, String body) {
@@ -250,7 +251,8 @@ public class UsrArticleController {
 		return Ut.jsReplace(loginedMemberCanModifyRd.getResultCode(), loginedMemberCanModifyRd.getMsg(),
 				"../article/detail?id=" + id);
 	}
-
+	
+	//글 삭제
 	// 로그인 체크 -> 유무 체크 -> 권한 체크 -> 삭제
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody

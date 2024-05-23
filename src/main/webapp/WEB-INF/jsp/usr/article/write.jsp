@@ -8,6 +8,7 @@
         new daum.Postcode({
             oncomplete: function(data) {
                 document.querySelector('.address').value = data.address;
+                document.querySelector('.address-box').textContent = "주소 : " + data.address;
             }
         }).open();
     }
@@ -269,6 +270,10 @@ function copyTag(input) {
 				onsubmit="ArticleWrite__submit(this); return false;" style="font-size: 25px; margin-top: 50px;">
 
 				<input type="hidden" name="boardId" value="1" /> <input type="hidden" name="contentTypeId" value="12" />
+				<input type="hidden" name="mapX" value="0"/>
+				<input type="hidden" name="mapY" value="0"/>
+				<input type="hidden" name="firstImage" value="0"/>
+				<input type="hidden" name="firstImage2" value="0"/>
 
 				<table class="join-box table-box-1" border="1">
 					<tbody>
@@ -280,9 +285,9 @@ function copyTag(input) {
 						<tr>
 							<th>내용</th>
 							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="내용 입력해주세요" name="body" onkeyup="copyBody(this);" /></td>
+								placeholder="내용 입력해주세요" name="body" onkeyup="copyBody(this);"/></td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<th>이미지경로</th>
 							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
 								placeholder="이미지경로를 입력해주세요" name="firstImage" /></td>
@@ -291,8 +296,8 @@ function copyTag(input) {
 							<th>이미지경로2</th>
 							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
 								placeholder="이미지경로2를 입력해주세요" name="firstImage2" /></td>
-						</tr>
-						<tr>
+						</tr> -->
+						<!-- <tr>
 							<th>x좌표</th>
 							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
 								placeholder="x좌표를 입력해주세요" name="mapX" /></td>
@@ -301,11 +306,11 @@ function copyTag(input) {
 							<th>y좌표</th>
 							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
 								placeholder="y좌표 입력해주세요" name="mapY" /></td>
-						</tr>
+						</tr> -->
 						<tr>
 							<th>주소</th>
 							<td><input class="address input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="주소1을 입력해주세요" name="address" onkeyup="copyAddress(this);" readonly/>
+								placeholder="주소를 입력해주세요" name="address" onkeyup="copyAddress(this);" readonly/>
 								<button class="btn btn-outline" type="button" onclick="openAddressPopup()" style="margin-top: 10px;">주소 검색</button>
 								</td>
 						</tr>
@@ -313,7 +318,7 @@ function copyTag(input) {
 						<tr>
 							<th>태그</th>
 							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="지역코드를 입력해주세요" name="tag" onkeyup="copyTag(this);" /></td>
+								placeholder="예시 : #안녕#사랑해#가족과 함께" name="tag" onkeyup="copyTag(this);" /></td>
 						</tr>
 						<tr>
 							<th>첨부 이미지</th>
@@ -349,7 +354,7 @@ function copyTag(input) {
 
 				<div>
 					<h1>여행지 정보</h1>
-					<div class="address-box">주소 : ${article.address}</div>
+					<div class="address-box">주소 : ~~~</div>
 
 				</div>
 				<div>
