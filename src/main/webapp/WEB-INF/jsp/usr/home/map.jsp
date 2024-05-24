@@ -55,12 +55,9 @@
 
                         // 마커를 클릭했을 때 인포 윈도우를 열고 닫을 수 있는 이벤트 등록
                         kakao.maps.event.addListener(marker, 'click', function() {
-                            // Check if the info window is currently open
                             if (infowindow.getMap()) {
-                                // Close the info window if it's open
                                 infowindow.close();
                             } else {
-                                // Open the info window if it's closed
                                 infowindow.open(map, marker);
                             }
                         });
