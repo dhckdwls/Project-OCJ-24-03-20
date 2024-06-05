@@ -38,6 +38,6 @@ public interface APITestRepository {
 	public void saveData(String title, int areaCode, int contentTypeId, String address, String mapX,
 			String mapY, String firstImage, String firstImage2, String contentId);
 
-	
+	//service에서 인자로 받은 여행지의 title,지역코드 , 컨텐트타입, 주소, x좌표, y좌표, 사진 url 두개, 컨텐트 아이디를 article에 저장
 
 }

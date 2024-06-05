@@ -10,6 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.opencsv.CSVReader;
+//java 에서 csv 파일을 읽어올수 있는 라이브러리 사용
+//사용 이유 mysql 에서도 csv 파일들을 직접 데이터 불러오기로 넣을수 있었음
+//그러나 그 방법을 몰라서 한파일당 100개 총 25000개의 데이터를 손수 넣어야 하는 상황 발생
+//인터넷에서 찾아본 결과 opencsv라는 라이브러리가 존재 이는 자바 내에서 csv 파일을 읽어들일수 있는 기능이 있다고 해서
+//검색 후 사용하기로 결정
 
 @Service
 public class CSVService {
