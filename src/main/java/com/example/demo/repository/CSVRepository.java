@@ -18,4 +18,5 @@ public interface CSVRepository {
             "</script>"
     })
     void insertCSVList(List<CSV> csvList);
+    //mybatis 문법으로 매개변수를 foreach 반복문을 사용해서 csv의 객체의 필드들의 값을 db에 저장
 }

@@ -13,17 +13,23 @@ import com.example.demo.vo.Article;
 
 @Mapper
 public interface ArticleRepository {
-
+	
+	//마지막으로 등록된 article의 id를 가져온다
 	@Select("SELECT LAST_INSERT_ID()")
 	public int getLastInsertId();
 
+	//id에 맞는 article의 전체 데이터를 가져온다
 	@Select("""
 			SELECT *
 			FROM article
 			WHERE id = #{id}
 			""")
 	public Article getArticle(int id);
-
+	
+	//getforprint 출력하기 위한
+	//article과 member를 join해서 데이터를 가져온다
+	//작성자의 닉네임을 작성자로 해서
+	//article의 정보는 모든것을 가져온다
 	@Select("""
 			<script>
 				SELECT A.*, M.nickname AS extra__writer
@@ -35,10 +41,15 @@ public interface ArticleRepository {
 			</script>
 				""")
 	public Article getForPrintArticle(int id);
-
+	
+	
+	//id에 맞는 article을 삭제
 	@Delete("DELETE FROM article WHERE id = #{id}")
 	public void deleteArticle(int id);
-
+	
+	
+	//id에 맞는 article을 수정하기 위해
+	//공백방지까지 추가
 	@Update("""
 			<script>
 			UPDATE article
@@ -51,7 +62,9 @@ public interface ArticleRepository {
 			</script>
 				""")
 	public void modifyArticle(int id, String title, String body);
-
+	
+	//article에 작성자의 닉네임까지 join해서 가져온다
+	//여러개를 가져와서 반환 
 	@Select("""
 			SELECT A.*, M.nickname AS extra__writer
 			FROM article AS A
@@ -61,7 +74,12 @@ public interface ArticleRepository {
 			""")
 	public List<Article> getArticles();
 
-
+	/*
+	 * Article 테이블에서 게시물 수를 조회하는 MyBatis 매퍼입니다.
+	 * boardId 게시판 ID
+	 * searchKeywordTypeCode 검색 키워드 유형 코드
+	 * searchKeyword 검색 키워드
+	 */
 	@Select("""
 			<script>
 			SELECT COUNT(*) AS cnt
