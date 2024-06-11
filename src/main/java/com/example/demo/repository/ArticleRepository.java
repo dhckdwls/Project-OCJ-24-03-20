@@ -75,7 +75,7 @@ public interface ArticleRepository {
 	public List<Article> getArticles();
 
 	/*
-	 * Article 테이블에서 게시물 수를 조회하는 MyBatis 매퍼입니다.
+	 * Article 테이블에서 게시물 수를 조회하는 MyBatis 매퍼
 	 * boardId 게시판 ID
 	 * searchKeywordTypeCode 검색 키워드 유형 코드
 	 * searchKeyword 검색 키워드
@@ -114,21 +114,40 @@ public interface ArticleRepository {
 			</script>
 			""")
 	public int getArticlesCount(int boardId, String searchKeywordTypeCode, String searchKeyword);
-
+	
+	
+	/*
+	 * Article 테이블에서 특정 게시물의 조회 수(hitCount)를 1 증가시키는 MyBatis 매퍼
+	 * id 조회 수를 증가시킬 게시물의 ID
+	 */
 	@Update("""
 			UPDATE article
 			SET hitCount = hitCount + 1
 			WHERE id = #{id}
 			""")
 	public int increaseHitCount(int id);
-
+	
+	/*
+	 * 특정 게시물의 조회 수(hitCount)를 조회하는 MyBatis 매퍼
+	 * id 조회 수를 조회할 게시물의 ID
+	 * 게시물의 조회 수 (hitCount)
+	 */
 	@Select("""
 			SELECT hitCount
 			FROM article
 			WHERE id = #{id}
 			""")
 	public int getArticleHitCount(int id);
-
+	
+	/*
+	 * 특정 조건에 맞는 게시물 목록을 조회하는 MyBatis 매퍼
+	 * boardId 게시판 ID
+	 * limitFrom 조회할 게시물의 시작 위치 (페이징 처리 시 사용)
+	 * limitTake 조회할 게시물의 개수 (페이징 처리 시 사용)
+	 * searchKeywordTypeCode 검색 키워드 유형 코드 (예: 'title', 'body', 'tag', 'address')
+	 * searchKeyword 검색 키워드
+	 * 조건에 맞는 게시물 목록 (게시물 정보, 작성자 닉네임, 댓글 수 포함)
+	 */
 	@Select("""
 			<script>
 			SELECT A.*, M.nickname AS extra__writer, IFNULL(COUNT(R.id),0) AS extra__repliesCnt
@@ -172,35 +191,56 @@ public interface ArticleRepository {
 			""")
 	public List<Article> getForPrintArticles(int boardId, int limitFrom, int limitTake, String searchKeywordTypeCode,
 			String searchKeyword);
-
+	
+	/*
+	 * 특정 게시물의 호감 반응 점수(goodReactionPoint)를 1 증가시키는 MyBatis 매퍼
+	 * relId 좋아요 수를 증가시킬 게시물의 ID
+	 */
 	@Update("""
 			UPDATE article
 			SET goodReactionPoint = goodReactionPoint + 1
 			WHERE id = #{relId}
 			""")
 	public int increaseGoodReactionPoint(int relId);
-
+	
+	
+	/*
+	 * 특정 게시물의 호감 반응 점수(goodReactionPoint)를 1 감소시키는 MyBatis 매퍼
+	 * relId 좋아요수를 감소시킬 게시물의 ID
+	 */
 	@Update("""
 			UPDATE article
 			SET goodReactionPoint = goodReactionPoint - 1
 			WHERE id = #{relId}
 			""")
 	public int decreaseGoodReactionPoint(int relId);
-
+	
+	/*
+	 * 특정 게시물의 비호감 반응 점수(badReactionPoint)를 1 증가시키는 MyBatis 매퍼
+	 * relId 싫어요 수를 증가시킬 게시물의 ID
+	 */
 	@Update("""
 			UPDATE article
 			SET badReactionPoint = badReactionPoint + 1
 			WHERE id = #{relId}
 			""")
 	public int increaseBadReactionPoint(int relId);
-
+	
+	/*
+	 * 특정 게시물의 비호감 반응 점수(badReactionPoint)를 1 감소시키는 MyBatis 매퍼
+	 * relId 비호감 반응 점수를 감소시킬 게시물의 ID
+	 */
 	@Update("""
 			UPDATE article
 			SET badReactionPoint = badReactionPoint - 1
 			WHERE id = #{relId}
 			""")
 	public int decreaseBadReactionPoint(int relId);
-
+	
+	/*
+	 * 특정 게시물의 호감 반응 점수(goodReactionPoint)를 조회하는 MyBatis 매퍼
+	 * relId 호감 반응 점수를 조회할 게시물의 ID
+	 */
 	@Select("""
 			SELECT goodReactionPoint
 			FROM article
@@ -209,7 +249,20 @@ public interface ArticleRepository {
 	public int getGoodRP(int relId);
 
 
-
+	/*
+	 * 새로운 게시물을 작성하는 MyBatis 매퍼
+	 * boardId 게시판 ID
+	 * memberId 작성자 회원 ID
+	 * contentTypeId 컨텐츠 유형 ID 관광지 유형
+	 * title 게시물 제목
+	 * body 게시물 내용
+	 * tag 게시물 태그
+	 * firstImage 게시물 첫 번째 이미지 URL
+	 * firstImage2 게시물 두 번째 이미지 URL
+	 * address 게시물 주소
+	 * mapX 지도상의 X 좌표
+	 * mapY 지도상의 Y 좌표
+	 */
 	@Insert("""
 			INSERT INTO article
 			SET regdate = NOW(),
@@ -246,13 +299,15 @@ public interface ArticleRepository {
 			SELECT title FROM article
 			""")
 	public String[] getArticlesTitles();
-
+	
+	//본인이 작성한 게시물 가져오기
 	@Select("""
 			SELECT * FROM article
 			WHERE memberId = #{memberId}
 			""")
 	public List<Article> geyMyArticles(int memberId);
-
+	
+	//특정회원이 좋아요를 누른 게시물 가져오기
 	@Select("""
 			SELECT A.*
 			FROM article AS A
@@ -261,13 +316,18 @@ public interface ArticleRepository {
 			WHERE R.memberId = #{memberId}
 			""")
 	public List<Article> getLikeArticles(int memberId);
-
+	
+	/*
+	 * 현재 가장 높은 게시물 ID에 1을 더한 값을 조회하는 MyBatis 매퍼
+	 * 게시물 작성시 다음 게시물의 번호를 정해 놓기 위해서
+	 */
 	@Select("""
 			SELECT MAX(id) + 1
 			FROM article
 			""")
 	public int getCurrentArticleId();
-
+	
+	
 	@Select("""
 			SELECT A.*,
 			(SELECT COUNT(*) FROM reply AS R WHERE R.relId = A.id AND R.relTypeCode = 'article') AS extra__repliesCnt

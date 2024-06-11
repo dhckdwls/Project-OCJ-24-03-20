@@ -2,9 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="ARTICLE DETAIL"></c:set>
 <%@ include file="../common/head2.jspf"%>
-
-
 <main>
+
+<!-- 비밀번호 확인 하는 페이지 -->
 
 <section class="mt-8 text-xl px-4">
 	<div class="mx-auto">
