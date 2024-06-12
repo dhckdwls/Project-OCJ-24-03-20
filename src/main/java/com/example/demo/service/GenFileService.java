@@ -22,12 +22,14 @@ import com.google.common.base.Joiner;
 
 @Service
 public class GenFileService {
+	// 파일이 첨부될 곳의 경로
 	@Value("${custom.genFileDirPath}")
 	private String genFileDirPath;
 
 	@Autowired
 	private GenFileRepository genFileRepository;
 
+	// 파일 정보 저장
 	public ResultData saveMeta(String relTypeCode, int relId, String typeCode, String type2Code, int fileNo,
 			String originFileName, String fileExtTypeCode, String fileExtType2Code, String fileExt, int fileSize,
 			String fileDir) {
@@ -42,6 +44,7 @@ public class GenFileService {
 		return new ResultData("S-1", "성공하였습니다.", "id", id);
 	}
 
+	// MultipartFile을 저장하고, 해당 파일의 메타 정보를 DB에 저장
 	public ResultData save(MultipartFile multipartFile, String relTypeCode, int relId, String typeCode,
 			String type2Code, int fileNo) {
 		String fileInputName = multipartFile.getName();
@@ -105,6 +108,7 @@ public class GenFileService {
 				targetFileName, "fileInputName", fileInputName);
 	}
 
+	// MultipartFile을 받아서 해당 파일의 정보를 추출하여 save 메서드를 호출하여 실행
 	public ResultData save(MultipartFile multipartFile) {
 		String fileInputName = multipartFile.getName();
 		String[] fileInputNameBits = fileInputName.split("__");
@@ -118,27 +122,34 @@ public class GenFileService {
 		return save(multipartFile, relTypeCode, relId, typeCode, type2Code, fileNo);
 	}
 
+	// MultipartFile을 받아서 해당 파일의 정보를 추출하고, 지정된 relId와 함께 save 메서드를 호출하여 실행
 	public ResultData save(MultipartFile multipartFile, int relId) {
 		String fileInputName = multipartFile.getName();
 		System.err.println(fileInputName);
 		String[] fileInputNameBits = fileInputName.split("__");
 
+		// 파일 이름에서 관련 코드 및 유형 코드 등을 추출하여 저장
 		String relTypeCode = fileInputNameBits[1];
 		String typeCode = fileInputNameBits[3];
 		String type2Code = fileInputNameBits[4];
 		int fileNo = Integer.parseInt(fileInputNameBits[5]);
 
+		// 추출된 정보를 이용하여 save 메서드를 호출하여 실행
 		return save(multipartFile, relTypeCode, relId, typeCode, type2Code, fileNo);
 	}
 
+	// 지정된 관련 유형 코드(relTypeCode), 관련 ID(relId), 유형 코드(typeCode), 유형2 코드(type2Code)에
+	// 해당하는 모든 첨부 파일 목록을 반환
 	public List<GenFile> getGenFiles(String relTypeCode, int relId, String typeCode, String type2Code) {
 		return genFileRepository.getGenFiles(relTypeCode, relId, typeCode, type2Code);
 	}
 
+//지정된 관련 유형 코드(relTypeCode), 관련 ID(relId), 유형 코드(typeCode), 유형2 코드(type2Code), 파일 번호(fileNo)에 해당하는 첨부 파일을 반환합니다.
 	public GenFile getGenFile(String relTypeCode, int relId, String typeCode, String type2Code, int fileNo) {
 		return genFileRepository.getGenFile(relTypeCode, relId, typeCode, type2Code, fileNo);
 	}
 
+//지정된 매개변수(param)와 멀티파트 요청(multipartRequest)을 사용하여 파일을 저장하고, 파일을 삭제하는 메서드
 	public ResultData saveFiles(Map<String, Object> param, MultipartRequest multipartRequest) {
 		// 업로드 시작
 		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
@@ -185,11 +196,12 @@ public class GenFileService {
 		return new ResultData("S-1", "파일을 업로드하였습니다.", "filesResultData", filesResultData, "genFileIdsStr",
 				genFileIdsStr, "deleteCount", deleteCount);
 	}
-
+	//파일의 관련 ID를 변경
 	public void changeRelId(int id, int relId) {
 		genFileRepository.changeRelId(id, relId);
 	}
-
+	
+	//지정된 관련 유형 코드(relTypeCode)와 관련 ID(relId)에 해당하는 모든 첨부 파일을 삭제
 	public void deleteGenFiles(String relTypeCode, int relId) {
 		List<GenFile> genFiles = genFileRepository.getGenFilesByRelTypeCodeAndRelId(relTypeCode, relId);
 
@@ -197,18 +209,21 @@ public class GenFileService {
 			deleteGenFile(genFile);
 		}
 	}
-
+	
+	//지정된 파일(genFile)을 삭제
 	private void deleteGenFile(GenFile genFile) {
 		String filePath = genFile.getFilePath(genFileDirPath);
 		Ut.deleteFile(filePath);
 
 		genFileRepository.deleteFile(genFile.getId());
 	}
-
+	
+	//지정된 ID에 해당하는 첨부 파일을 반환
 	public GenFile getGenFile(int id) {
 		return genFileRepository.getGenFileById(id);
 	}
-
+	
+	//지정된 관련 유형 코드(relTypeCode), 관련 ID 목록(relIds), 유형 코드(typeCode), 유형2 코드(type2Code)에 해당하는 첨부 파일들을 관련 ID를 키로 하는 맵으로 반환
 	public Map<Integer, Map<String, GenFile>> getFilesMapKeyRelIdAndFileNo(String relTypeCode, List<Integer> relIds,
 			String typeCode, String type2Code) {
 		List<GenFile> genFiles = genFileRepository.getGenFilesRelTypeCodeAndRelIdsAndTypeCodeAndType2Code(relTypeCode,
@@ -226,7 +241,7 @@ public class GenFileService {
 
 		return rs;
 	}
-
+	//파일의 관련 ID를 변경
 	public void changeInputFileRelIds(Map<String, Object> param, int id) {
 		String genFileIdsStr = Ut.ifEmpty((String) param.get("genFileIdsStr"), null);
 

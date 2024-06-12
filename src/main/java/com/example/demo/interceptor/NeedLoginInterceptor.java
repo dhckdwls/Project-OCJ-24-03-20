@@ -31,3 +31,5 @@ public class NeedLoginInterceptor implements HandlerInterceptor {
 		return HandlerInterceptor.super.preHandle(req, resp, handler);
 	}
 }
+
+//로그인이 전제로 필요한 경우에 interceptor로써 막아준다

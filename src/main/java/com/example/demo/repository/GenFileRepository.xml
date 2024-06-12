@@ -2,7 +2,11 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 이 XML 매퍼 파일은 GenFile 엔터티와 관련된 SQL 쿼리를 정의합니다. 메타데이터 저장, 다양한 기준으로 파일 검색, 
+	파일 메타데이터 업데이트, 파일 삭제에 대한 쿼리가 포함되어 있습니다. -->
 <mapper namespace="com.example.demo.repository.GenFileRepository">
+
+	<!-- 새로운 genFile 레코드를 삽입하고 생성된 키를 검색합니다. -->
 	<insert id="saveMeta" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO genFile
 		SET regDate = NOW(),
@@ -23,6 +27,7 @@
 		fileExt = #{fileExt}
 	</insert>
 
+	<!-- 다양한 기준으로 genFile 레코드를 검색합니다. -->
 	<select id="getGenFile" resultType="GenFile">
 		SELECT *
 		FROM genFile
@@ -44,6 +49,7 @@
 		</if>
 	</select>
 
+	<!-- ID로 genFile 레코드를 검색합니다. -->
 	<select id="getGenFileById" resultType="GenFile">
 		SELECT *
 		FROM genFile
@@ -51,6 +57,7 @@
 		AND id = #{id}
 	</select>
 
+	<!-- 특정 기준으로 genFile 레코드를 검색합니다. -->
 	<select id="getGenFiles" resultType="GenFile">
 		SELECT *
 		FROM genFile
@@ -67,6 +74,7 @@
 		ORDER BY typeCode, type2Code, fileNo
 	</select>
 
+	<!-- 관계 유형 코드와 관계 ID로 genFile 레코드를 검색합니다. -->
 	<select id="getGenFilesByRelTypeCodeAndRelId"
 		resultType="GenFile">
 		SELECT *
@@ -77,6 +85,7 @@
 		ORDER BY typeCode, type2Code, fileNo
 	</select>
 
+	<!-- 관계 유형 코드, 관계 ID, 유형 코드 및 유형 2 코드별로 genFile 레코드를 검색합니다. -->
 	<select
 		id="getGenFilesRelTypeCodeAndRelIdsAndTypeCodeAndType2Code"
 		resultType="GenFile">
@@ -97,6 +106,7 @@
 		ORDER BY relId, fileNo
 	</select>
 
+	<!-- genFile 레코드의 relId를 업데이트합니다. -->
 	<update id="changeRelId">
 		UPDATE genFile
 		<set>
@@ -106,12 +116,14 @@
 		WHERE id = #{id}
 	</update>
 
+	<!-- 관계 유형 코드와 관계 ID로 genFile 레코드를 삭제합니다. -->
 	<delete id="deleteFiles">
 		DELETE FROM genFile
 		WHERE relTypeCode = #{relTypeCode}
 		AND relId = #{relId}
 	</delete>
 
+	<!-- ID로 genFile 레코드를 삭제합니다. -->
 	<delete id="deleteFile">
 		DELETE FROM genFile
 		WHERE id = #{id}

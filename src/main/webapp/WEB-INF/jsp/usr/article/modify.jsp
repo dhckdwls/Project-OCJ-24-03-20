@@ -277,30 +277,11 @@ function copyTag(input) {
 							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
 								placeholder="내용 입력해주세요" name="body" onkeyup="copyBody(this);" value="${article.body }"/></td>
 						</tr>
-						<%-- <tr>
-							<th>이미지경로</th>
-							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="이미지경로를 입력해주세요" name="firstImage" value="${article.firstImage }"/></td>
-						</tr>
-						<tr>
-							<th>이미지경로2</th>
-							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="이미지경로2를 입력해주세요" name="firstImage2" /></td>
-						</tr> --%>
-						<!-- <tr>
-							<th>x좌표</th>
-							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="x좌표를 입력해주세요" name="mapX" /></td>
-						</tr>
-						<tr>
-							<th>y좌표</th>
-							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="y좌표 입력해주세요" name="mapY" /></td>
-						</tr> -->
+						
 						<tr>
 							<th>주소</th>
 							<td><input class="address input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="주소를 입력해주세요" name="address" onkeyup="copyAddress(this);" readonly/>
+								placeholder="주소를 입력해주세요" name="address" onkeyup="copyAddress(this);" value="${article.address }" readonly/>
 								<button class="btn btn-outline" type="button" onclick="openAddressPopup()" style="margin-top: 10px;">주소 검색</button>
 								</td>
 						</tr>
@@ -308,7 +289,7 @@ function copyTag(input) {
 						<tr>
 							<th>태그</th>
 							<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="지역코드를 입력해주세요" name="tag" onkeyup="copyTag(this);"/></td>
+								placeholder="지역코드를 입력해주세요" name="tag" onkeyup="copyTag(this);" value="${article.tag}"/></td>
 						</tr>
 						<tr>
 							<th>첨부 이미지</th>

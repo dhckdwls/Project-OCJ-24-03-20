@@ -30,3 +30,5 @@ public class NeedLogoutInterceptor implements HandlerInterceptor {
 		return HandlerInterceptor.super.preHandle(req, resp, handler);
 	}
 }
+
+//로그아웃이 전제로 필요한 경우에 막아준다

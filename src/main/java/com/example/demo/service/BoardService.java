@@ -22,3 +22,5 @@ public class BoardService {
 	}
 
 }
+
+//boardRepository와 연결

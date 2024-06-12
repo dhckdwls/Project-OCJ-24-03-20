@@ -20,7 +20,7 @@ public class ReactionPointService {
 	}
 
 	
-
+	//로그인 체크 추천 상태 확인
 	public ResultData usersReaction(int loginedMemberId, String relTypeCode, int relId) {
 
 		if (loginedMemberId == 0) {
@@ -36,7 +36,8 @@ public class ReactionPointService {
 
 		return ResultData.from("S-1", "추천 가능", "sumReactionPointByMemberId", sumReactionPointByMemberId);
 	}
-
+	
+	//좋아요 추가
 	public ResultData addGoodReactionPoint(int loginedMemberId, String relTypeCode, int relId) {
 
 		int affectedRow = reactionPointRepository.addGoodReactionPoint(loginedMemberId, relTypeCode, relId);
@@ -55,7 +56,8 @@ public class ReactionPointService {
 
 		return ResultData.from("S-1", "좋아요!");
 	}
-
+	
+	//싫어요 추가
 	public ResultData addBadReactionPoint(int loginedMemberId, String relTypeCode, int relId) {
 		int affectedRow = reactionPointRepository.addBadReactionPoint(loginedMemberId, relTypeCode, relId);
 
@@ -71,7 +73,8 @@ public class ReactionPointService {
 
 		return ResultData.from("S-1", "싫어요!");
 	}
-
+	
+	//좋아요 취소
 	public ResultData deleteGoodReactionPoint(int loginedMemberId, String relTypeCode, int relId) {
 		reactionPointRepository.deleteReactionPoint(loginedMemberId, relTypeCode, relId);
 
@@ -83,7 +86,7 @@ public class ReactionPointService {
 		return ResultData.from("S-1", "좋아요 취소 됨");
 
 	}
-
+	// 싫어요 취소
 	public ResultData deleteBadReactionPoint(int loginedMemberId, String relTypeCode, int relId) {
 		reactionPointRepository.deleteReactionPoint(loginedMemberId, relTypeCode, relId);
 
@@ -94,7 +97,8 @@ public class ReactionPointService {
 		}
 		return ResultData.from("S-1", "싫어요 취소 됨");
 	}
-
+	
+	//이미 좋아요를 한 상태인지 확인
 	public boolean isAlreadyAddGoodRp(int memberId, int relId, String relTypeCode) {
 		int getPointTypeCodeByMemberId = reactionPointRepository.getSumReactionPoint(memberId, relTypeCode, relId);
 
@@ -104,7 +108,8 @@ public class ReactionPointService {
 
 		return false;
 	}
-
+	
+	//이미 싫어요 한 상태인지 확인
 	public boolean isAlreadyAddBadRp(int memberId, int relId, String relTypeCode) {
 		int getPointTypeCodeByMemberId = reactionPointRepository.getSumReactionPoint(memberId, relTypeCode, relId);
 

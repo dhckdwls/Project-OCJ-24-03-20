@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface ReactionPointRepository {
 
+	// 특정 회원이 특정 유형과 ID에 대한 반응 포인트(좋아요, 싫어요)의 총 합을 가져옴
 	@Select("""
 			SELECT IFNULL(SUM(RP.point),0)
 			FROM reactionPoint AS RP
@@ -17,6 +18,7 @@ public interface ReactionPointRepository {
 			""")
 	public int getSumReactionPoint(int memberId, String relTypeCode, int relId);
 
+	// 좋아요 반응 포인트 추가
 	@Insert("""
 			INSERT INTO reactionPoint
 			SET regDate = NOW(),
@@ -28,6 +30,7 @@ public interface ReactionPointRepository {
 			""")
 	public int addGoodReactionPoint(int memberId, String relTypeCode, int relId);
 
+	// 싫어요 반응 포인트 추가
 	@Insert("""
 			INSERT INTO reactionPoint
 			SET regDate = NOW(),
@@ -39,6 +42,7 @@ public interface ReactionPointRepository {
 			""")
 	public int addBadReactionPoint(int memberId, String relTypeCode, int relId);
 
+	// 반응 포인트 삭제
 	@Delete("""
 			DELETE FROM reactionPoint
 			WHERE memberId = #{memberId}
@@ -46,7 +50,5 @@ public interface ReactionPointRepository {
 			AND relId = #{relId}
 			""")
 	public void deleteReactionPoint(int memberId, String relTypeCode, int relId);
-	
-	
 
 }
