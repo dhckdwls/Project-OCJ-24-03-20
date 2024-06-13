@@ -14,10 +14,12 @@
 [오창진_프로젝트.pptx](https://github.com/dhckdwls/Project-OCJ-24-03-20/files/15427356/_.pptx)
 #### 프로젝트 보고서
 [오창진_프로젝트_결과보고서.xlsx](https://github.com/dhckdwls/Project-OCJ-24-03-20/files/15427358/_._.xlsx)
+#### 기술 개발서
+[기술 개발서 링크](https://docs.google.com/document/d/1lD6dnbB_WkZv3yuRcfkpgEzt3Lu9QtLUTtDjI2XJJzg/edit)
 
 #### CSV 파일은 프로젝트에 src/main/resources 에 csv폴더에 다 들어어잇어서 추가 다운로드 필요하지 않습니다.
 #### csv파일을 사용하여 작업한 부분이 없어서 특별하게 실행하지 않아도 됩니다.
-#### 그래도 궁금하시다면 프로젝트 실행후 url 에 localhost:8081/readAndSaveToDB 입력 하시면 됩니다.
+#### 프로젝트 실행후 url 에 localhost:8081/readAndSaveToDB 입력 하시면 됩니다.
 #### 그 후에 sql에서 select * from CSV 하면 확인할수 있습니다.
 
 ## 웹페이지 화면
