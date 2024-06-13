@@ -144,6 +144,7 @@ Random Trip - 국내 여행지에 대해 자유롭게 공유하고 의견을 나
 회원가입시 입력한 이름과 이메일로 아이디를 찾을수 있습니다.
 <br>
 <img src="https://velog.velcdn.com/images/tama51/post/2de96824-b85b-4456-a1da-2a9d99f1bcb6/image.png">
+<br>
 올바른 정보를 입력하면 아이디를 찾을수 있습니다.
 
 비밀번호 찾기
