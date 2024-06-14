@@ -1,4 +1,4 @@
-![image](https://github.com/dhckdwls/Project-OCJ-24-03-20/assets/148337305/e703093e-ea62-4088-97e4-83b476c7af8a)![image](https://github.com/dhckdwls/Project-OCJ-24-03-20/assets/148337305/98bb1e9c-3295-4786-a66d-227b0eaacb4a)## 소스코드
+## 소스코드
 [기초작업](https://github.com/dhckdwls/2024_01_Spring_AM)
 학원에서 배우던 코드들을 기반으로 개인 프로젝트를 진행
 log4JDBC를 사용하던중 log의 용량이 너무 커져서 github에 push 작업이 안돼서 새로운 리포지터리 생성후 작업
