@@ -1,4 +1,4 @@
-## 소스코드
+![image](https://github.com/dhckdwls/Project-OCJ-24-03-20/assets/148337305/b8c313ce-7281-4052-b8f2-281c1c682b55)![image](https://github.com/dhckdwls/Project-OCJ-24-03-20/assets/148337305/9be19707-a1a0-4cd4-8419-8cf836ca38b5)## 소스코드
 <br>
 [기초작업](https://github.com/dhckdwls/2024_01_Spring_AM)
 <br>
@@ -204,7 +204,50 @@ Random Trip - 국내 여행지에 대해 자유롭게 공유하고 의견을 나
 (길찾기 기능 미구현)
 현재는 두 지점간의 직선거리만을 보여주게 됩니다.
 
+## 문제 상황 및 해결
+
+### api 관련 문제
+공공데이터포털 API 호출시 encoding key 로 작업을 했다.
+<img src="https://velog.velcdn.com/images/tama51/post/8f595de3-e713-4c89-873a-0d9d1977dfd6/image.png">
+<br>
+사용 설명서를 보면 2015년 1월 이후부터는 인코딩 불필요 하다고 되어 있어서
+나는 encoding key를 사용해서 작업을 했다 그랬더니 계속 request에 대한  response data가 존재 하지 않았다.
+문제가 뭘까 찾아보다가 공공데이터포털에서 test를 실행해 보았다.
+<br>
+<img src="https://velog.velcdn.com/images/tama51/post/b344f464-e7c8-4895-9296-1cdecb543dd1/image.png">
+<br>
+
+encoding key로 실행을 하게 되니 올바르지 않은 service key라고 한다.
+<br>
+<img src="https://velog.velcdn.com/images/tama51/post/1e52fe2a-2ae0-4edf-ad23-58675a405378/image.png">
+<br>
+그래서 decoding key로 서비스를 호출했더니 이번에는 올바른게 불러올수 있게 되었다
+이 일 때문에 apiservice 에서 return 타입을 responsedata로 바꿔 주었다.
+![api service](https://github.com/dhckdwls/Project-OCJ-24-03-20/assets/148337305/0cd0ea9a-70f9-494b-8820-92c357833607)
+
+return 타입을 responsdata로 줘버려서 이 api가 호출이 잘 되었는지 알 수 있게 만들어놓았다.
 
 
+### CSV 파일 문제
+<br>
+<img src="https://velog.velcdn.com/images/tama51/post/f5f88dc4-1e88-4dcb-920c-bc8bc72dbd43/image.png">
+<br>
 
+지역별 국내 관광지명, 주소, 분류, 방문자수, 순위 의 정보를 가지고 있는 csv 파일이다 100순위 까지 기록되어있다.
+
+도별,구별, 군별 이렇게 나뉘어져서 총 250개의 파일이 존재 
+행으로만 25000개정도 된다 
+근데 나는 이 많은 데이터를 일일이 mysql을 사용해서 dbd에 넣어야 하는데 방법을 알 수 가 없었다.
+
+알고보니까
+<br>
+![image](https://github.com/dhckdwls/Project-OCJ-24-03-20/assets/148337305/a3b73d90-2951-40fd-a227-14d206f638a1)
+<br>
+
+이렇게 해서 csv 파일 데이터를 직접 넣어줄수 있는 방법이 있다고 한다
+근데 나는 검색을 잘못해서 java 에서 csv파일 읽어서 db에 저장하는 방법을 찾게 되었다
+
+그랬더니 라이브러리 중에 openCSV 라는 라이브러리가 있다고 한다
+이는 java에서 csv파일을 읽을수 있게 도와주는데 xml 문법이나 json 형식에 맞는 객체를 사용해서 읽어 올수 있게된다
+나는 이걸 사용해서 데이터를 읽은 후에 repository에서 mybatis를 통해서 db에 저장할 수 있었다.
 
