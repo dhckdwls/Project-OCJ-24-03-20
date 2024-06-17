@@ -1,4 +1,4 @@
-![image](https://github.com/dhckdwls/Project-OCJ-24-03-20/assets/148337305/b8c313ce-7281-4052-b8f2-281c1c682b55)![image](https://github.com/dhckdwls/Project-OCJ-24-03-20/assets/148337305/9be19707-a1a0-4cd4-8419-8cf836ca38b5)## 소스코드
+## 소스코드
 <br>
 [기초작업](https://github.com/dhckdwls/2024_01_Spring_AM)
 <br>
